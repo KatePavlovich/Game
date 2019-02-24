@@ -1,0 +1,4 @@
+.monster__container div {
+    background-repeat: no-repeat;
+    background-size: contain;
+}

@@ -1,0 +1,78 @@
+.map {
+    position: relative;
+    width: 880px;
+    height: 600px;
+    margin: 0 auto;
+    background: url('/tiles/gameTile.png') repeat-x;
+    background-position: -320px 0px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(22, 1fr);
+}
+
+.grass {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -320px 0px;
+}
+
+.tree {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -360px 0px;
+}
+
+.road-top {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: 0px 0px;
+}
+
+.road-bottom {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -40px 0px;
+}
+
+.road-left {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -160px 0px;
+}
+
+.road-right {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -200px 0px;
+}
+
+.road-bottom-right {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -80px 0px;
+}
+
+.road-top-left {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -120px 0px;
+}
+
+.road-right-corner {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -240px 0px;
+}
+
+.road-left-corner {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -280px 0px;
+}
+
+.wall {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -160px -40px;
+}
+
+.prison {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: -200px -40px;
+}
+
+.woods {
+    background: url('/tiles/gameTile.png') no-repeat;
+    background-position: 0px -40px;
+}

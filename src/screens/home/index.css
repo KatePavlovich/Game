@@ -1,0 +1,12 @@
+.home-screen {
+  height: 92vh;
+  background: #eee;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  font-family: "Charm", cursive;
+}
+
+.play-link {
+  font-size: 2rem;
+}

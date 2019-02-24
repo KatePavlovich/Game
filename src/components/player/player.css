@@ -1,0 +1,9 @@
+.player {
+    position: absolute;
+    /*   background: url('/tiles/ada_0.png') no-repeat;
+  width: 40px;
+  height: 40px; */
+    background: url('/tiles/stella_walk2.png') no-repeat;
+    width: 67px;
+    height: 67px;
+}

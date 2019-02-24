@@ -1,0 +1,11 @@
+.animation {
+  position: absolute;
+  width: 128px;
+  height: 52px;
+  /* background: url(/tiles/fire.png) no-repeat; */
+  transition: 2s;
+}
+
+.hideAnimation {
+  visibility: hidden;
+}

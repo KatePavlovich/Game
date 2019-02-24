@@ -1,0 +1,17 @@
+.ant-modal-footer,
+.ant-modal-header {
+    display: none;
+}
+
+.ant-modal-body {
+    background: url(/tiles/paperBackground.png);
+    border: 4px solid transparent;
+    -moz-border-image: url(/tiles/border.png) 5 round round;
+    -webkit-border-image: url(/tiles/border.png) 5 round round;
+    -o-border-image: url(/tiles/border.png) 5 round round;
+    border-image: url(/tiles/border.png) 5 round round;
+}
+
+.spell__img {
+    width: 12rem;
+}
