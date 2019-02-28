@@ -1,19 +1,31 @@
-import React from "react";
+import React, { Component } from "react";
 import Header from "../../components/header";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./index.css";
-
-function Home() {
-  return (
-    <div>
-      <Header />
-      <div className="home-screen">
-        <Link to="/battle" className="nav-link play-link">
-          play game
-        </Link>
+class Home extends Component {
+  render() {
+    const { playerName } = this.props;
+    return (
+      <div>
+        <Header />
+        <div className="home-screen">
+          {playerName === undefined &&
+            <Link to="/Login" className="nav-link play-link">
+              login, please
+            </Link>}
+          {playerName &&
+            <Link to="/battle" className="nav-link play-link">
+              play game
+            </Link>}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  playerName: state.animation.playerName
+});
+
+export default connect(mapStateToProps)(Home);

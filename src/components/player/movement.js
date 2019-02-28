@@ -30,6 +30,8 @@ export default function handleMovement(player) {
   }
 
   function observeBoundaries(oldPos, newPos) {
+    console.log("object", oldPos, newPos);
+
     return newPos[0] >= 0 &&
     newPos[0] <= MAP_WIDTH - SPRITE_SIZE &&
     newPos[1] >= 0 &&
@@ -37,6 +39,16 @@ export default function handleMovement(player) {
       ? newPos
       : oldPos;
   }
+
+  const observeExit = (oldPos, newPos) => {
+    console.log("object", oldPos, newPos);
+    return newPos[0] >= 0 &&
+    newPos[0] <= MAP_WIDTH - SPRITE_SIZE &&
+    newPos[1] >= 0 &&
+    newPos[1] <= MAP_HEIGHT - SPRITE_SIZE
+      ? newPos
+      : oldPos;
+  };
 
   function dispatchMove(direction) {
     const walkIndex = getWalkIndex();

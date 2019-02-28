@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "../../components/header";
+import { Link } from "react-router-dom";
 import { Alert } from "antd";
 import "./index.css";
 import store from "../../store";
@@ -8,7 +9,8 @@ import { getPlayerNameAC } from "../../ac";
 
 class Login extends Component {
   state = {
-    showAlert: false
+    showAlert: false,
+    playerName: ""
   };
 
   putNameToState = e => {
@@ -20,7 +22,8 @@ class Login extends Component {
         });
       } else {
         this.setState({
-          showAlert: false
+          showAlert: false,
+          playerName: newTaskInput.value
         });
         store.dispatch(getPlayerNameAC(newTaskInput.value));
         newTaskInput.value = "";
@@ -30,7 +33,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div class="loginPage__wrapper">
         <Header />
         <div className="loginForm">
           <h2 className="loginForm__title">Enter your name!</h2>
@@ -45,6 +48,10 @@ class Login extends Component {
             autoFocus={true}
           />
         </div>
+        {this.state.playerName &&
+          <Link to="/battle" className="nav-link play-link">
+            play game
+          </Link>}
       </div>
     );
   }
