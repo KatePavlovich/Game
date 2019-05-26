@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Header from "../../components/header";
 import { Link } from "react-router-dom";
 import { Alert } from "antd";
 import "./index.css";
@@ -33,8 +32,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div class="loginPage__wrapper">
-        <Header />
+      <div className="loginPage__wrapper">
         <div className="loginForm">
           <h2 className="loginForm__title">Enter your name!</h2>
           {this.state.showAlert &&

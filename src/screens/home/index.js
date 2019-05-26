@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Header from "../../components/header";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "./index.css";
@@ -8,7 +7,6 @@ class Home extends Component {
     const { playerName } = this.props;
     return (
       <div>
-        <Header />
         <div className="home-screen">
           {playerName === undefined &&
             <Link to="/Login" className="nav-link play-link">
