@@ -12,7 +12,7 @@ const signs = ["+", "-", "*", "/"];
 
 class SimpleMath extends Component {
   state = {
-    number1: getRandomNumberWithoutZero(100),
+    number1: getRandomNumberWithoutZero(10),
     number2: getRandomNumberWithoutZero(10),
     sign: getRandomValueFromArray(signs)
   };
