@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Header from "../../components/header";
 import "./index.css";
 import Player from "../../components/player";
 import Monster from "../../components/monster";
 import Map from "../../components/map/map";
 import TasksScreen from "../tasksScreen/tasksScreen";
-import { makeNewMonster } from "../../ac";
 import {
+  makeNewMonster,
   makeMonsterNameThunk,
   reduceMonsterLife,
-  reducePlayerLife
+  reducePlayerLife,
+  resetPlayerPosition,
+  makeNextLevel
 } from "../../ac";
 import { resetSpell } from "../../ac/spellAC";
 import { resetTasksState } from "../../ac/taskAC";
@@ -21,7 +22,7 @@ import ProgressBar from "../../components/progressBar/progressBar";
 import { addTilesAC, changeTilesThunk } from "../../ac/tilesAC";
 import SimpleMath from "../../components/tasks/simpleMath";
 import Animation from "../../components/Animation/animation";
-import { resolve } from "q";
+//import { resolve } from "q";
 
 class Battle extends Component {
   state = {
@@ -69,13 +70,15 @@ class Battle extends Component {
       }
     }
     if (monsterLife === 0) {
+      this.breakPrison();
+    }
+    if (this.props.nextLevel) {
       this.nextLevel();
     }
   }
 
   makeAnimation = sprite => {
     const { wasAnswerCorrect } = this.props;
-    console.log("my awsome animation");
     this.props.dispatch(moveAnimationThunk(sprite));
     this.playAudio(wasAnswerCorrect);
     this.props.dispatch(resetTasksState());
@@ -87,11 +90,16 @@ class Battle extends Component {
     setTimeout(() => this.props.dispatch(resetAnimation()), 3000);
   };
 
-  nextLevel = () => {
+  breakPrison = () => {
     this.state.bangSound.play();
     this.props.dispatch(changeTilesThunk());
-    //this.props.dispatch(makeMonsterNameThunk());
-    //this.props.dispatch(makeNewMonster());
+  };
+
+  nextLevel = () => {
+    this.props.dispatch(makeNextLevel());
+    this.props.dispatch(makeMonsterNameThunk());
+    this.props.dispatch(makeNewMonster());
+    this.props.dispatch(resetPlayerPosition());
   };
 
   render() {
@@ -102,13 +110,13 @@ class Battle extends Component {
       monsterName,
       playerName,
       wasTaskChoosed
+      //nextLevel
     } = this.props;
     return playerLife === 0
       ? <div>
           <Score />
         </div>
       : <div>
-          <Header />
           <div className="lifes__container">
             <div className="lifes--player">
               <h3 className="lifes__title">
@@ -153,6 +161,7 @@ const mapStateToProps = state => ({
   playerName: state.player.playerName,
   wasTaskChoosed: state.tasks.wasTaskChoosed,
   wasAnswerCorrect: state.tasks.wasAnswerCorrect,
-  wasTaskAnswered: state.tasks.wasTaskAnswered
+  wasTaskAnswered: state.tasks.wasTaskAnswered,
+  nextLevel: state.player.nextLevel
 });
 export default connect(mapStateToProps)(Battle);

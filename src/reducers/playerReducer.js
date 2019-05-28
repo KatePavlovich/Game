@@ -4,11 +4,20 @@ const initialState = {
   position: [0, 0],
   spriteLocation: "0px 0px",
   direction: "east",
-  walkIndex: 0
+  walkIndex: 0,
+  nextLevel: false,
+  killedMonsters: 0,
+  isLoggedIn: false
 };
 
 const playerReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "LOGIN": {
+      return { ...state, isLoggedIn: true };
+    }
+    case "LOGOUT": {
+      return { ...state, isLoggedIn: false };
+    }
     case "GET_PLAYER_NAME": {
       return { ...state, playerName: action.playerName };
     }
@@ -21,6 +30,21 @@ const playerReducer = (state = initialState, action) => {
         position: action.position,
         walkIndex: action.walkIndex,
         spriteLocation: action.spriteLocation
+      };
+    }
+    case "WON_LEVEL": {
+      return {
+        ...state,
+        nextLevel: !action.nextLevel,
+        killedMonsters: state.killedMonsters + 1
+      };
+    }
+    case "RESET_PLAYER_POSITION": {
+      return {
+        ...state,
+        position: [0, 0],
+        walkIndex: 0,
+        spriteLocation: "0px 0px"
       };
     }
 

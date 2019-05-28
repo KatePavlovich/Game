@@ -5,6 +5,8 @@ export const MAKE_NEW_MONSTER = "MAKE_NEW_MONSTER";
 export const REDUCE_PLAYER_LIFE = "REDUCE_PLAYER_LIFE";
 export const ADD_TILES = "ADD_TILES";
 export const CHANGE_TILES = "CHANGE_TILES";
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
 
 export const SPRITE_SIZE = 67;
 export const FIRE_SPRITE_SIZE = 128;
@@ -12,6 +14,7 @@ export const SPRITE_BACKGROUND_SIZE = 40;
 export const MAP_WIDTH = 880;
 export const MAP_HEIGHT = 650;
 export const MOVE_PLAYER = "MOVE_PLAYER";
+export const WON_LEVEL = "WON_LEVEL";
 export const CHOOSE_TASK = "CHOOSE_TASK";
 export const ANSWER_TASK = "ANSWER_TASK";
 export const CHECK_CORRECT_ANSWER = "CHECK_CORRECT_ANSWER";
@@ -19,6 +22,7 @@ export const RESET_TASK_STATE = "RESET_TASK_STATE";
 export const RESET_SPELL = "RESET_SPELL";
 export const MOVE_ANIMATION = "MOVE_ANIMATION";
 export const RESET_ANIMATION = "RESET_ANIMATION";
+export const RESET_PLAYER_POSITION = "RESET_PLAYER_POSITION";
 
 export const CHOOSE_SPELL = "CHOOSE_SPELL";
 export const SHOW_SPELLMODAL = "SHOW_SPELLMODAL";

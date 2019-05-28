@@ -8,16 +8,38 @@ import {
   MAP_WIDTH,
   SPRITE_SIZE,
   MAP_HEIGHT,
-  SPRITE_BACKGROUND_SIZE
+  SPRITE_BACKGROUND_SIZE,
+  WON_LEVEL,
+  RESET_PLAYER_POSITION,
+  LOGIN,
+  LOGOUT
 } from "../constants";
 import { adjective, creature, monsterName } from "../constants";
 import { getRandomValueFromArray } from "../helperFunctions";
 import store from "../store";
 
+export const isLoggedIn = () => {
+  return {
+    type: LOGIN
+  };
+};
+
+export const isLoggedOut = () => {
+  return {
+    type: LOGOUT
+  };
+};
+
 export const getPlayerNameAC = playerName => {
   return {
     type: GET_PLAYER_NAME,
     playerName
+  };
+};
+
+export const resetPlayerPosition = () => {
+  return {
+    type: RESET_PLAYER_POSITION
   };
 };
 
@@ -65,19 +87,44 @@ export const movePlayer = (position, walkIndex, spriteLocation) => {
   };
 };
 
+export const makeNextLevel = (nextLevel, killedMonsters) => {
+  return {
+    type: WON_LEVEL
+    //nextLevel
+    //killedMonsters
+  };
+};
+
 export const movePlayerThunk = direction => dispatch => {
   const walkIndex = getWalkIndex();
   const oldPos = store.getState().player.position;
   const newPos = getNewPosition(oldPos, direction);
   let position = oldPos;
+  let nextLevel = store.getState().player.nextLevel;
   if (observeBoundaries(newPos) && observeImpassable(newPos)) {
     position = getNewPosition(oldPos, direction);
+  }
+  if (observeBoundaries(newPos) && observeExit(newPos)) {
+    //position = getNewPosition(oldPos, direction);
+    //nextLevel = true;
+    dispatch(makeNextLevel());
   }
   let spriteLocation = getSpriteLocation(direction, walkIndex);
 
   let action = movePlayer(position, walkIndex, spriteLocation);
   dispatch(action);
 };
+
+// export const resetPlayerPosition = (
+//   position,
+//   walkIndex,
+//   spriteLocation
+// ) => dispatch => {
+//   let action = movePlayer(position, walkIndex, spriteLocation);
+//   console.log("object", action);
+
+//   dispatch(action);
+// };
 
 function getSpriteLocation(direction, walkIndex) {
   switch (direction) {
@@ -123,6 +170,12 @@ function observeImpassable(newPos) {
   const x = newPos[0] / SPRITE_BACKGROUND_SIZE;
   const nextTile = tiles[y][x];
   return nextTile >= 3 && nextTile <= 10;
+}
+
+function observeExit(newPos) {
+  if (newPos[0] > 600 && newPos[1] === 0) {
+    return true;
+  }
 }
 
 function getWalkIndex() {

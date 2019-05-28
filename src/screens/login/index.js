@@ -4,12 +4,17 @@ import { Link } from "react-router-dom";
 import { Alert } from "antd";
 import "./index.css";
 import store from "../../store";
-import { getPlayerNameAC } from "../../ac";
+import { getPlayerNameAC, isLoggedIn } from "../../ac";
+import history from "../../history";
 
 class Login extends Component {
   state = {
     showAlert: false,
     playerName: ""
+  };
+
+  showBattleScreen = () => {
+    history.push("/Battle");
   };
 
   putNameToState = e => {
@@ -25,7 +30,9 @@ class Login extends Component {
           playerName: newTaskInput.value
         });
         store.dispatch(getPlayerNameAC(newTaskInput.value));
+        store.dispatch(isLoggedIn());
         newTaskInput.value = "";
+        this.showBattleScreen();
       }
     }
   };
@@ -46,10 +53,6 @@ class Login extends Component {
             autoFocus={true}
           />
         </div>
-        {this.state.playerName &&
-          <Link to="/battle" className="nav-link play-link">
-            play game
-          </Link>}
       </div>
     );
   }
