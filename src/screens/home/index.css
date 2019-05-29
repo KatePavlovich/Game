@@ -4,6 +4,7 @@
   display: grid;
   justify-content: center;
   align-content: center;
+  text-align: center;
   font-family: "Charm", cursive;
 }
 

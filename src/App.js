@@ -6,7 +6,7 @@ import { Router, Route } from "react-router-dom";
 import history from "./history";
 import Login from "./screens/login";
 import Score from "./screens/score";
-// import Home from "./screens/home";
+import Home from "./screens/home";
 import Battle from "./screens/battle";
 import SimpleMath from "./components/tasks/simpleMath";
 import "./App.css";
@@ -16,11 +16,10 @@ const App = isLoggedIn =>
     <div>
       <Header />
       <Route
-        exact
         path="/"
         render={() => (isLoggedIn ? <Redirect to="/Login" /> : <Battle />)}
       />
-      {/* <Route exact path="/" component={Home} /> */}
+      <Route exact path="/" component={Home} />
       <Route exact path="/Score" component={Score} />
       <Route exact path="/Login" component={Login} />
       <Route exact path="/Battle" component={Battle} />

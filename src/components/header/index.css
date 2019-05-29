@@ -1,27 +1,49 @@
 .header__ul {
-    display: grid;
-    grid-template-columns: 60% repeat(3, 1fr);
-    padding: 0.2rem;
-    margin-bottom: 0;
-    align-items: center;
-    background: #9e6742;
-    background: -moz-linear-gradient( top, #9e6742 0%, #eedcc6 16%, #eedcc6 34%, #9e6742 99%);
-    background: -webkit-linear-gradient( top, #9e6742 0%, #eedcc6 16%, #eedcc6 34%, #9e6742 99%);
-    background: linear-gradient( to bottom, #9e6742 0%, #eedcc6 16%, #eedcc6 34%, #9e6742 99%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9e6742', endColorstr='#9e6742', GradientType=0);
+  display: grid;
+  grid-template-columns: 60% repeat(3, 1fr);
+  height: 72px;
+  padding: 0.2rem;
+  margin-bottom: 0;
+  align-items: center;
+  background: #9e6742;
+  background: -moz-linear-gradient(
+    top,
+    #9e6742 0%,
+    #eedcc6 16%,
+    #eedcc6 34%,
+    #9e6742 99%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    #9e6742 0%,
+    #eedcc6 16%,
+    #eedcc6 34%,
+    #9e6742 99%
+  );
+  background: linear-gradient(
+    to bottom,
+    #9e6742 0%,
+    #eedcc6 16%,
+    #eedcc6 34%,
+    #9e6742 99%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr='#9e6742',
+      endColorstr='#9e6742',
+      GradientType=0
+    );
 }
-
 .header__ul li {
-    list-style-type: none;
-    font-family: "Charm", cursive;
-    font-size: 1rem;
-    /*     border: 30px solid transparent;
+  margin: 1rem;
+  list-style-type: none;
+  font-family: "Charm", cursive;
+  font-size: 1rem;
+  /*     border: 30px solid transparent;
     -moz-border-image: url(/tiles/border2.png) 0 0 25 0;
     -webkit-border-image: url(/tiles/border2.png) 0 0 25 0;
     -o-border-image: url(/tiles/border2.png) 0 0 25 0;
     border-image: url(/tiles/border2.png) 0 0 25 0; */
 }
-
 .header__ul li:hover {
-    color: #ae003a;
+  color: #ae003a;
 }
