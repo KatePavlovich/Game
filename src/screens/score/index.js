@@ -1,11 +1,9 @@
-import React from "react";
-import Header from "../../components/header";
-import "./index.css";
+import React from 'react';
+import './index.css';
 
 function Score() {
   return (
     <div>
-      <Header />
       <div className="score">
         <h2>Score</h2>
         <div className="score__data">

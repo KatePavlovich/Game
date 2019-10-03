@@ -8,11 +8,25 @@ import {
   MAP_WIDTH,
   SPRITE_SIZE,
   MAP_HEIGHT,
-  SPRITE_BACKGROUND_SIZE
-} from "../constants";
-import { adjective, creature, monsterName } from "../constants";
-import { getRandomValueFromArray } from "../helperFunctions";
-import store from "../store";
+  SPRITE_BACKGROUND_SIZE,
+  LOGIN,
+  LOGOUT
+} from '../constants';
+import { adjective, creature, monsterName } from '../constants';
+import { getRandomValueFromArray } from '../helperFunctions';
+import store from '../store';
+
+export const isLoggedIn = () => {
+  return {
+    type: LOGIN
+  };
+};
+
+export const isLoggedOut = () => {
+  return {
+    type: LOGOUT
+  };
+};
 
 export const getPlayerNameAC = playerName => {
   return {
@@ -81,13 +95,13 @@ export const movePlayerThunk = direction => dispatch => {
 
 function getSpriteLocation(direction, walkIndex) {
   switch (direction) {
-    case "WEST":
+    case 'WEST':
       return `-${SPRITE_SIZE * walkIndex}px ${SPRITE_SIZE * 0}px`;
-    case "EAST":
+    case 'EAST':
       return `-${SPRITE_SIZE * walkIndex}px ${SPRITE_SIZE * -1}px`;
-    case "NORTH":
+    case 'NORTH':
       return `-${SPRITE_SIZE * walkIndex}px ${(SPRITE_SIZE - 2) * -3}px`;
-    case "SOUTH":
+    case 'SOUTH':
       return `-${SPRITE_SIZE * walkIndex}px ${(SPRITE_SIZE - 2) * 0}px`;
     default:
   }
@@ -96,13 +110,13 @@ function getSpriteLocation(direction, walkIndex) {
 function getNewPosition(oldPos, direction) {
   // const oldPos = store.getState().player.position;
   switch (direction) {
-    case "EAST":
+    case 'EAST':
       return [oldPos[0] - SPRITE_BACKGROUND_SIZE, oldPos[1]];
-    case "WEST":
+    case 'WEST':
       return [oldPos[0] + SPRITE_BACKGROUND_SIZE, oldPos[1]];
-    case "NORTH":
+    case 'NORTH':
       return [oldPos[0], oldPos[1] - SPRITE_BACKGROUND_SIZE];
-    case "SOUTH":
+    case 'SOUTH':
       return [oldPos[0], oldPos[1] + SPRITE_BACKGROUND_SIZE];
     default:
   }

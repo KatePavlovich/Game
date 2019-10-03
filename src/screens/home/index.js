@@ -1,19 +1,25 @@
-import React from "react";
-import Header from "../../components/header";
-import { Link } from "react-router-dom";
-import "./index.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import './index.css';
 
-function Home() {
+const Home = isLoggedIn => {
   return (
     <div>
-      <Header />
       <div className="home-screen">
-        <Link to="/battle" className="nav-link play-link">
+        <Link
+          to={!isLoggedIn ? '/battle' : '/login'}
+          className="nav-link play-link"
+        >
           play game
         </Link>
       </div>
     </div>
   );
-}
+};
 
-export default Home;
+const mapStateToProps = state => ({
+  isLoggedIn: state.player.isLoggedIn
+});
+
+export default connect(mapStateToProps)(Home);

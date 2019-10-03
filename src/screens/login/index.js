@@ -1,53 +1,62 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Header from "../../components/header";
-import { Alert } from "antd";
-import "./index.css";
-import store from "../../store";
-import { getPlayerNameAC } from "../../ac";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import './login.css';
+import { getPlayerNameAC, isLoggedIn } from '../../ac';
+import { withRouter } from 'react-router';
 
 class Login extends Component {
   state = {
-    showAlert: false
+    name: ''
   };
 
-  putNameToState = e => {
-    const newTaskInput = e.currentTarget;
-    if (e.key === "Enter") {
-      if (newTaskInput.value.length === 0) {
-        this.setState({
-          showAlert: true
-        });
-      } else {
-        this.setState({
-          showAlert: false
-        });
-        store.dispatch(getPlayerNameAC(newTaskInput.value));
-        newTaskInput.value = "";
-      }
-    }
+  handleChange = e => {
+    this.setState({ name: e.target.value });
+  };
+
+  handleSubmit = () => {
+    const { history } = this.props;
+    const { name } = this.state;
+    this.props.setIsLoggedIn();
+    this.props.getPlayerName(name);
+    this.setState({ name: '' });
+    history.push('/battle');
   };
 
   render() {
+    const { name } = this.state;
+
     return (
       <div>
-        <Header />
-        <div className="loginForm">
+        <form className="loginForm" onSubmit={this.handleSubmit}>
           <h2 className="loginForm__title">Enter your name!</h2>
-          {this.state.showAlert &&
-            <Alert message="Please, enter your name" type="error" />}
           <input
             className="loginForm__input"
             type="text"
             placeholder="name"
-            onKeyPress={this.putNameToState}
+            onChange={this.handleChange}
             required="required"
+            value={name}
             autoFocus={true}
           />
-        </div>
+          <input type="submit" value="Send" />
+        </form>
       </div>
     );
   }
 }
 
-export default connect()(Login);
+const mapDispatchToProps = dispatch => ({
+  getPlayerName: name => {
+    dispatch(getPlayerNameAC(name));
+  },
+  setIsLoggedIn: () => {
+    dispatch(isLoggedIn());
+  }
+});
+
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(Login)
+);
