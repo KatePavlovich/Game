@@ -1,39 +1,43 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import "./index.css";
-import Player from "../../components/player";
-import Monster from "../../components/monster";
-import Map from "../../components/map/map";
-import TasksScreen from "../tasksScreen/tasksScreen";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import './index.css';
+import Player from '../../components/player';
+import Monster from '../../components/monster';
+import Map from '../../components/map/map';
+import TasksScreen from '../tasksScreen/tasksScreen';
 import {
   makeNewMonster,
   makeMonsterNameThunk,
   reduceMonsterLife,
   reducePlayerLife,
-  resetPlayerPosition,
+  resetNextLevel,
   makeNextLevel
-} from "../../ac";
-import { resetSpell } from "../../ac/spellAC";
-import { resetTasksState } from "../../ac/taskAC";
-import { moveAnimationThunk, resetAnimation } from "../../ac/animationAC";
-import Score from "../score";
-import tiles from "../../components/data/tiles.js";
-import ProgressBar from "../../components/progressBar/progressBar";
-import { addTilesAC, changeTilesThunk } from "../../ac/tilesAC";
-import SimpleMath from "../../components/tasks/simpleMath";
-import Animation from "../../components/Animation/animation";
-//import { resolve } from "q";
+} from '../../ac';
+import { dispatchMove } from '../../components/player/movement';
+import { resetSpell } from '../../ac/spellAC';
+import { resetTasksState } from '../../ac/taskAC';
+import { moveAnimationThunk, resetAnimation } from '../../ac/animationAC';
+import Score from '../score';
+import tiles from '../../components/data/tiles.js';
+import ProgressBar from '../../components/progressBar/progressBar';
+import {
+  addTilesAC,
+  changeTilesThunk,
+  restorePrisonThunk
+} from '../../ac/tilesAC';
+import SimpleMath from '../../components/tasks/simpleMath';
+import Animation from '../../components/Animation/animation';
 
 class Battle extends Component {
   state = {
     failureaudio: new Audio(
-      "https://freesound.org/data/previews/131/131891_2398403-lq.mp3"
+      'https://freesound.org/data/previews/131/131891_2398403-lq.mp3'
     ),
     winaudio: new Audio(
-      "https://freesound.org/data/previews/181/181425_1823830-lq.mp3"
+      'https://freesound.org/data/previews/181/181425_1823830-lq.mp3'
     ),
     bangSound: new Audio(
-      "https://freesound.org/data/previews/33/33245_65091-lq.mp3"
+      'https://freesound.org/data/previews/33/33245_65091-lq.mp3'
     )
   };
 
@@ -46,6 +50,9 @@ class Battle extends Component {
 
   componentDidMount() {
     this.props.dispatch(addTilesAC(tiles));
+    if (this.props.nextLevel) {
+      this.nextLevel();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -99,7 +106,10 @@ class Battle extends Component {
     this.props.dispatch(makeNextLevel());
     this.props.dispatch(makeMonsterNameThunk());
     this.props.dispatch(makeNewMonster());
-    this.props.dispatch(resetPlayerPosition());
+    this.props.dispatch(resetAnimation());
+    this.props.dispatch(dispatchMove('WEST'));
+    this.props.dispatch(restorePrisonThunk());
+    this.props.dispatch(resetNextLevel());
   };
 
   render() {
@@ -112,43 +122,37 @@ class Battle extends Component {
       wasTaskChoosed
       //nextLevel
     } = this.props;
-    return playerLife === 0
-      ? <div>
-          <Score />
+    return playerLife === 0 ? (
+      <div>
+        <Score />
+      </div>
+    ) : (
+      <div>
+        <div className="lifes__container">
+          <div className="lifes--player">
+            <h3 className="lifes__title">{playerName}</h3>
+            <span>player life: {playerLife} hp</span>
+            <ProgressBar percentage={playerLife} />
+          </div>
+          <div className="lifes--monster">
+            <h3 className="lifes__title">{monsterName}</h3>
+            <span>monster life: {monsterLife} hp</span>
+            <ProgressBar percentage={monsterLife} />
+          </div>
         </div>
-      : <div>
-          <div className="lifes__container">
-            <div className="lifes--player">
-              <h3 className="lifes__title">
-                {playerName}
-              </h3>
-              <span>
-                player life: {playerLife} hp
-              </span>
-              <ProgressBar percentage={playerLife} />
-            </div>
-            <div className="lifes--monster">
-              <h3 className="lifes__title">
-                {monsterName}
-              </h3>
-              <span>
-                monster life: {monsterLife} hp
-              </span>
-              <ProgressBar percentage={monsterLife} />
-            </div>
+        <div className="gameScreen__container">
+          <div className="map__wrapper">
+            <Map />
+            <Player />
+            <Animation />
+            <Monster />
           </div>
-          <div className="gameScreen__container">
-            <div className="map__wrapper">
-              <Map />
-              <Player />
-              <Animation />
-              <Monster />
-            </div>
-          </div>
-          {isSpellChoosen && <TasksScreen />}
-          {wasTaskChoosed && <SimpleMath />}
-          {monsterLife === 0 && <span className="blink" />}
-        </div>;
+        </div>
+        {isSpellChoosen && <TasksScreen />}
+        {wasTaskChoosed && <SimpleMath />}
+        {monsterLife === 0 && <span className="blink" />}
+      </div>
+    );
   }
 }
 

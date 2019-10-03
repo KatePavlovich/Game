@@ -29,3 +29,18 @@ export const changeTilesThunk = () => dispatch => {
   let action = changeTilesAC(newTiles);
   dispatch(action);
 };
+
+export const restorePrisonThunk = () => dispatch => {
+  const tiles = store.getState().map.tiles;
+  const newTiles = [
+    tiles[0].map(tile => {
+      if (tile === 3) {
+        tile = 2;
+      }
+      return tile;
+    }),
+    ...tiles.slice(1)
+  ];
+  let action = changeTilesAC(newTiles);
+  dispatch(action);
+};

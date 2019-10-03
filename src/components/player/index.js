@@ -26,7 +26,7 @@ class Player extends Component {
   };
 
   render() {
-    const { position, spriteLocation } = this.props;
+    const { position = [0, 0], spriteLocation } = this.props;
     return (
       <div>
         <div

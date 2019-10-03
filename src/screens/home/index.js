@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import "./index.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import './index.css';
 class Home extends Component {
   render() {
     const { isLoggedIn } = this.props;
@@ -10,7 +10,7 @@ class Home extends Component {
         <div className="home-screen">
           some info about game
           <Link
-            to={isLoggedIn ? "/battle" : "/Login"}
+            to={isLoggedIn ? '/battle' : '/login'}
             className="nav-link play-link"
           >
             play game

@@ -35,16 +35,23 @@ const playerReducer = (state = initialState, action) => {
     case "WON_LEVEL": {
       return {
         ...state,
-        nextLevel: !action.nextLevel,
+        nextLevel: true,
         killedMonsters: state.killedMonsters + 1
       };
     }
-    case "RESET_PLAYER_POSITION": {
+    case "RESET_NEXT_LEVEL": {
+      return {
+        ...state,
+        nextLevel: false
+      };
+    }
+    case "RESET_POSITION": {
       return {
         ...state,
         position: [0, 0],
-        walkIndex: 0,
-        spriteLocation: "0px 0px"
+        spriteLocation: "0px 0px",
+        direction: "east",
+        walkIndex: 0
       };
     }
 

@@ -10,7 +10,8 @@ import {
   MAP_HEIGHT,
   SPRITE_BACKGROUND_SIZE,
   WON_LEVEL,
-  RESET_PLAYER_POSITION,
+  RESET_NEXT_LEVEL,
+  RESET_POSITION,
   LOGIN,
   LOGOUT
 } from "../constants";
@@ -37,9 +38,15 @@ export const getPlayerNameAC = playerName => {
   };
 };
 
-export const resetPlayerPosition = () => {
+export const resetNextLevel = () => {
   return {
-    type: RESET_PLAYER_POSITION
+    type: RESET_NEXT_LEVEL
+  };
+};
+
+export const resPos = () => {
+  return {
+    type: RESET_POSITION
   };
 };
 
@@ -97,9 +104,10 @@ export const makeNextLevel = (nextLevel, killedMonsters) => {
 
 export const movePlayerThunk = direction => dispatch => {
   const walkIndex = getWalkIndex();
-  const oldPos = store.getState().player.position;
-  const newPos = getNewPosition(oldPos, direction);
-  let position = oldPos;
+  let oldPos = store.getState().player.position || [0, 0];
+  let newPos = getNewPosition(oldPos, direction) || [0, 0];
+  console.log("oldPos", newPos);
+  let position = oldPos || [0, 0];
   let nextLevel = store.getState().player.nextLevel;
   if (observeBoundaries(newPos) && observeImpassable(newPos)) {
     position = getNewPosition(oldPos, direction);
@@ -114,17 +122,6 @@ export const movePlayerThunk = direction => dispatch => {
   let action = movePlayer(position, walkIndex, spriteLocation);
   dispatch(action);
 };
-
-// export const resetPlayerPosition = (
-//   position,
-//   walkIndex,
-//   spriteLocation
-// ) => dispatch => {
-//   let action = movePlayer(position, walkIndex, spriteLocation);
-//   console.log("object", action);
-
-//   dispatch(action);
-// };
 
 function getSpriteLocation(direction, walkIndex) {
   switch (direction) {

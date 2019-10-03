@@ -1,20 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import store from "../../store";
-import { isLoggedOut} from "../../ac";
-import history from "../../history";
-import { openModalAC } from "../../ac/modalAC";
-import { ActiveMenuLink } from "../activeLink";
-import "./index.css";
-import ModalSpell from "../modalSpell";
-import SpellBook from "../SpellBook/spellBook";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import store from '../../store';
+import { isLoggedOut } from '../../ac';
+import history from '../../history';
+import { openModalAC } from '../../ac/modalAC';
+import { ActiveMenuLink } from '../activeLink';
+import './index.css';
+import ModalSpell from '../modalSpell';
+import SpellBook from '../SpellBook/spellBook';
 
 class Header extends Component {
-
-  handleLogout = ()=> {
+  handleLogout = () => {
     store.dispatch(isLoggedOut());
-    history.push("/");
-  }
+    history.push('/');
+  };
 
   render() {
     const { showSpellModal, showModalSpell, isLoggedIn } = this.props;
@@ -23,21 +22,24 @@ class Header extends Component {
         <li>
           <ActiveMenuLink activeOnlyWhenExact={true} to="/" label="Home" />
         </li>
-        {isLoggedIn &&
-        <>
-        <SpellBook showModalSpell={showModalSpell} />
-        {showSpellModal && <ModalSpell />}
-        </>
-        }
+        {isLoggedIn && (
+          <>
+            <SpellBook showModalSpell={showModalSpell} />
+            {showSpellModal && <ModalSpell />}
+          </>
+        )}
         <li>
           <ActiveMenuLink to="/Score" label="Score" />
         </li>
-        {isLoggedIn ?  <li>
-          <div  onClick={this.handleLogout} >Logout</div>
-        </li> : 
-        <li>
-          <ActiveMenuLink to="/Login" label="Login" />
-        </li>}
+        {isLoggedIn ? (
+          <li>
+            <div onClick={this.handleLogout}>Logout</div>
+          </li>
+        ) : (
+          <li>
+            <ActiveMenuLink to="/login" label="Login" />
+          </li>
+        )}
       </ul>
     );
   }
@@ -54,4 +56,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

@@ -6,16 +6,18 @@ const initialState = {
   spriteIMG: ""
 };
 
-const animationReducer = (state = initialState, action) => {
-  switch (action.type) {
+const animationReducer = (
+  state = initialState,
+  { position, walkIndex, spriteLocation, spriteIMG, type }
+) => {
+  switch (type) {
     case "MOVE_ANIMATION": {
-      console.log(action);
       return {
         ...state,
-        position: action.position,
-        walkIndex: action.walkIndex,
-        spriteLocation: action.spriteLocation,
-        spriteIMG: action.spriteIMG,
+        position,
+        walkIndex,
+        spriteLocation,
+        spriteIMG,
         showAnimation: true
       };
     }

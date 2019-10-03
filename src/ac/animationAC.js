@@ -49,9 +49,8 @@ export const moveAnimationThunk = sprite => dispatch => {
   const walkIndex = getWalkIndex();
   const spriteIMG = getSprite(sprite);
 
-  console.log("sprite", sprite);
-  console.log("spriteIMG", spriteIMG);
   const oldPos = store.getState().animation.position;
+  console.log("i am old position", oldPos);
   let position = oldPos;
   position = [
     oldPos[0] + FIRE_SPRITE_SIZE * 3.5,

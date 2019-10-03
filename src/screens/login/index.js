@@ -1,40 +1,32 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { Alert } from "antd";
-import "./index.css";
-import store from "../../store";
-import { getPlayerNameAC, isLoggedIn } from "../../ac";
-import history from "../../history";
+import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+import './index.css';
+import store from '../../store';
+import { getPlayerNameAC, isLoggedIn } from '../../ac';
+import history from '../../history';
 
 class Login extends Component {
   state = {
-    showAlert: false,
-    playerName: ""
+    playerName: ''
   };
 
   showBattleScreen = () => {
-    history.push("/Battle");
+    history.push('/Battle');
   };
 
-  putNameToState = e => {
-    const newTaskInput = e.currentTarget;
-    if (e.key === "Enter") {
-      if (newTaskInput.value.length === 0) {
-        this.setState({
-          showAlert: true
-        });
-      } else {
-        this.setState({
-          showAlert: false,
-          playerName: newTaskInput.value
-        });
-        store.dispatch(getPlayerNameAC(newTaskInput.value));
-        store.dispatch(isLoggedIn());
-        newTaskInput.value = "";
-        this.showBattleScreen();
-      }
-    }
+  handleChange = e => {
+    console.log('jjj', e);
+    this.setState({ playerName: e.target.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    // const newTaskInput = e.target;
+    const { playerName } = this.state;
+    store.dispatch(getPlayerNameAC(playerName));
+    store.dispatch(isLoggedIn());
+    // newTaskInput.value = '';
+    this.showBattleScreen();
   };
 
   render() {
@@ -42,20 +34,21 @@ class Login extends Component {
       <div className="loginPage__wrapper">
         <div className="loginForm">
           <h2 className="loginForm__title">Enter your name!</h2>
-          {this.state.showAlert &&
-            <Alert message="Please, enter your name" type="error" />}
-          <input
-            className="loginForm__input"
-            type="text"
-            placeholder="name"
-            onKeyPress={this.putNameToState}
-            required="required"
-            autoFocus={true}
-          />
+          <form onSubmit={this.handleSubmit}>
+            <input
+              className="loginForm__input"
+              type="text"
+              placeholder="name"
+              onChange={this.handleChange}
+              required="required"
+              autoFocus={true}
+            />
+            <input type="submit" value="Send" />
+          </form>
         </div>
       </div>
     );
   }
 }
 
-export default connect()(Login);
+export default Login;
