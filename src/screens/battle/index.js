@@ -20,7 +20,7 @@ import ProgressBar from '../../components/progressBar/progressBar';
 import { addTilesAC, changeTilesThunk } from '../../ac/tilesAC';
 import SimpleMath from '../../components/tasks/simpleMath';
 import Animation from '../../components/Animation/animation';
-import { resolve } from 'q';
+import ExitLevelModal from '../../components/ExitLevelModal';
 
 class Battle extends Component {
   state = {
@@ -44,6 +44,10 @@ class Battle extends Component {
 
   componentDidMount() {
     this.props.dispatch(addTilesAC(tiles));
+    if (!this.props.isPlayerOnLevelExit) {
+      this.props.dispatch(makeMonsterNameThunk());
+      this.props.dispatch(makeNewMonster());
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -88,8 +92,6 @@ class Battle extends Component {
   nextLevel = () => {
     this.state.bangSound.play();
     this.props.dispatch(changeTilesThunk());
-    // this.props.dispatch(makeMonsterNameThunk());
-    // this.props.dispatch(makeNewMonster());
   };
 
   render() {
@@ -99,7 +101,8 @@ class Battle extends Component {
       monsterLife,
       monsterName,
       playerName,
-      wasTaskChoosed
+      wasTaskChoosed,
+      isPlayerOnLevelExit
     } = this.props;
     return playerLife === 0 ? (
       <div>
@@ -130,6 +133,7 @@ class Battle extends Component {
         {isSpellChoosen && <TasksScreen />}
         {wasTaskChoosed && <SimpleMath />}
         {monsterLife === 0 && <span className="blink" />}
+        {isPlayerOnLevelExit && <ExitLevelModal />}
       </div>
     );
   }
@@ -144,6 +148,7 @@ const mapStateToProps = state => ({
   playerName: state.player.playerName,
   wasTaskChoosed: state.tasks.wasTaskChoosed,
   wasAnswerCorrect: state.tasks.wasAnswerCorrect,
-  wasTaskAnswered: state.tasks.wasTaskAnswered
+  wasTaskAnswered: state.tasks.wasTaskAnswered,
+  isPlayerOnLevelExit: state.player.isPlayerOnLevelExit
 });
 export default connect(mapStateToProps)(Battle);

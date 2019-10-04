@@ -1,29 +1,46 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 .nav-link {
-    font-size: 1em;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #555555;
+  font-size: 1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #555555;
 }
 
 .nav-link--active {
-    font-weight: 900;
-    text-transform: uppercase;
-    color: #ae003a;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #ae003a;
 }
 
 .nav-link:hover,
 .nav-link--active:hover {
-    color: #ae003a;
+  color: #ae003a;
+}
+
+.ant-modal-footer,
+.ant-modal-header {
+  display: none;
+}
+
+.ant-modal-body {
+  background: url(/tiles/paperBackground.png);
+  border: 4px solid transparent;
+  -moz-border-image: url(/tiles/border.png) 5 round round;
+  -webkit-border-image: url(/tiles/border.png) 5 round round;
+  -o-border-image: url(/tiles/border.png) 5 round round;
+  border-image: url(/tiles/border.png) 5 round round;
 }

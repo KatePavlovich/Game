@@ -1,0 +1,16 @@
+.buttons {
+  padding: 1rem;
+  font-family: 'Charm', Arial, cursive;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #555555;
+  border: 4px solid transparent;
+  -moz-border-image: url(/tiles/border.png) 5 round round;
+  -webkit-border-image: url(/tiles/border.png) 5 round round;
+  -o-border-image: url(/tiles/border.png) 5 round round;
+  border-image: url(/tiles/border.png) 5 round round;
+}
+
+.buttons:hover {
+  color: #ae003a;
+}

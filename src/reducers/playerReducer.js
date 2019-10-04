@@ -5,7 +5,8 @@ const initialState = {
   spriteLocation: '0px 0px',
   direction: 'east',
   walkIndex: 0,
-  isLoggedIn: false
+  isLoggedIn: false,
+  isPlayerOnLevelExit: false
 };
 
 const playerReducer = (state = initialState, action) => {
@@ -28,6 +29,18 @@ const playerReducer = (state = initialState, action) => {
         position: action.position,
         walkIndex: action.walkIndex,
         spriteLocation: action.spriteLocation
+      };
+    }
+    case 'SET_PLAYER_ON_LEVEL_EXIT': {
+      return {
+        ...state,
+        isPlayerOnLevelExit: true
+      };
+    }
+    case 'SET_PLAYER_ON_LEVEL_START': {
+      return {
+        ...state,
+        isPlayerOnLevelExit: false
       };
     }
 

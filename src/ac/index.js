@@ -10,7 +10,9 @@ import {
   MAP_HEIGHT,
   SPRITE_BACKGROUND_SIZE,
   LOGIN,
-  LOGOUT
+  LOGOUT,
+  SET_PLAYER_ON_LEVEL_EXIT,
+  SET_PLAYER_ON_LEVEL_START
 } from '../constants';
 import { adjective, creature, monsterName } from '../constants';
 import { getRandomValueFromArray } from '../helperFunctions';
@@ -70,6 +72,18 @@ export const makeNewMonster = (monsterLife, monsterName) => {
   };
 };
 
+export const setPlayerOnLevelExit = () => {
+  return {
+    type: SET_PLAYER_ON_LEVEL_EXIT
+  };
+};
+
+export const setPlayerOnLevelStart = () => {
+  return {
+    type: SET_PLAYER_ON_LEVEL_START
+  };
+};
+
 export const movePlayer = (position, walkIndex, spriteLocation) => {
   return {
     type: MOVE_PLAYER,
@@ -83,10 +97,21 @@ export const movePlayerThunk = direction => dispatch => {
   const walkIndex = getWalkIndex();
   const oldPos = store.getState().player.position;
   const newPos = getNewPosition(oldPos, direction);
+
+  console.log('newPos', newPos);
   let position = oldPos;
   if (observeBoundaries(newPos) && observeImpassable(newPos)) {
     position = getNewPosition(oldPos, direction);
   }
+  if (observeBoundaries(newPos) && observeExit(newPos)) {
+    console.log('i am on exit');
+    dispatch(setPlayerOnLevelExit());
+
+    //position = getNewPosition(oldPos, direction);
+    //nextLevel = true;
+    // dispatch(makeNextLevel());
+  }
+
   let spriteLocation = getSpriteLocation(direction, walkIndex);
 
   let action = movePlayer(position, walkIndex, spriteLocation);
@@ -137,6 +162,12 @@ function observeImpassable(newPos) {
   const x = newPos[0] / SPRITE_BACKGROUND_SIZE;
   const nextTile = tiles[y][x];
   return nextTile >= 3 && nextTile <= 10;
+}
+
+function observeExit(newPos) {
+  if (newPos[0] > 560 && newPos[1] <= 0) {
+    return true;
+  }
 }
 
 function getWalkIndex() {
