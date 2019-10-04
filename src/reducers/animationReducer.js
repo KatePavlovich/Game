@@ -1,15 +1,14 @@
 const initialState = {
   position: [0, 0],
-  spriteLocation: "0px 0px",
+  spriteLocation: '0px 0px',
   walkIndex: 0,
   showAnimation: false,
-  spriteIMG: ""
+  spriteIMG: ''
 };
 
 const animationReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "MOVE_ANIMATION": {
-      console.log(action);
+    case 'MOVE_ANIMATION': {
       return {
         ...state,
         position: action.position,
@@ -19,11 +18,11 @@ const animationReducer = (state = initialState, action) => {
         showAnimation: true
       };
     }
-    case "RESET_ANIMATION": {
+    case 'RESET_ANIMATION': {
       return {
         ...state,
         position: [0, 0],
-        spriteLocation: "0px 0px",
+        spriteLocation: '0px 0px',
         walkIndex: 0,
         showAnimation: false
       };

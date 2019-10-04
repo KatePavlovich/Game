@@ -1,9 +1,9 @@
-import store from "../store";
+import store from '../store';
 import {
   MOVE_ANIMATION,
   FIRE_SPRITE_SIZE,
   RESET_ANIMATION
-} from "../constants";
+} from '../constants';
 
 export const moveAnimation = (
   position,
@@ -37,10 +37,10 @@ const getWalkIndex = () => {
 
 const getSprite = sprite => {
   switch (sprite) {
-    case "fire":
-      return "/tiles/flame_fire.png";
-    case "leaf":
-      return "/tiles/flame_blueish_flame.png";
+    case 'fire':
+      return '/tiles/flame_fire.png';
+    case 'leaf':
+      return '/tiles/flame_blueish_flame.png';
     default:
   }
 };
@@ -49,8 +49,6 @@ export const moveAnimationThunk = sprite => dispatch => {
   const walkIndex = getWalkIndex();
   const spriteIMG = getSprite(sprite);
 
-  console.log("sprite", sprite);
-  console.log("spriteIMG", spriteIMG);
   const oldPos = store.getState().animation.position;
   let position = oldPos;
   position = [

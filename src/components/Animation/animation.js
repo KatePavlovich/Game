@@ -1,14 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import "./animation.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import './animation.css';
 
 class Animation extends Component {
   render() {
     const { position, spriteLocation, showAnimation, spriteIMG } = this.props;
-    console.log(spriteIMG);
     return (
       <div
-        className={showAnimation === true ? "animation" : "hideAnimation"}
+        className={showAnimation === true ? 'animation' : 'hideAnimation'}
         style={{
           backgroundImage: `url(${spriteIMG})`,
           backgroundPosition: spriteLocation,

@@ -74,7 +74,6 @@ class Battle extends Component {
 
   makeAnimation = sprite => {
     const { wasAnswerCorrect } = this.props;
-    console.log('my awsome animation');
     this.props.dispatch(moveAnimationThunk(sprite));
     this.playAudio(wasAnswerCorrect);
     this.props.dispatch(resetTasksState());
@@ -89,8 +88,8 @@ class Battle extends Component {
   nextLevel = () => {
     this.state.bangSound.play();
     this.props.dispatch(changeTilesThunk());
-    //this.props.dispatch(makeMonsterNameThunk());
-    //this.props.dispatch(makeNewMonster());
+    // this.props.dispatch(makeMonsterNameThunk());
+    // this.props.dispatch(makeNewMonster());
   };
 
   render() {
