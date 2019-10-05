@@ -16,25 +16,27 @@ const Header = ({ showSpellModal, showModalSpell, isLoggedIn, history }) => {
   };
 
   return (
-    <ul className="header__ul">
-      <li>
-        <ActiveMenuLink activeOnlyWhenExact={true} to="/" label="Home" />
-      </li>
-      <SpellBook showModalSpell={showModalSpell} />
-      {showSpellModal && <ModalSpell />}
-      <li>
-        <ActiveMenuLink to="/score" label="Score" />
-      </li>
-      {isLoggedIn === true ? (
-        <li className="nav-link" onClick={handleLogout}>
-          Logout
-        </li>
-      ) : (
+    <header className="header">
+      <ul className="header__ul">
         <li>
-          <ActiveMenuLink to="/login" label="Login" />
+          <ActiveMenuLink activeOnlyWhenExact={true} to="/" label="Home" />
         </li>
-      )}
-    </ul>
+        <SpellBook showModalSpell={showModalSpell} />
+        {showSpellModal && <ModalSpell />}
+        <li>
+          <ActiveMenuLink to="/score" label="Score" />
+        </li>
+        {isLoggedIn === true ? (
+          <li className="nav-link" onClick={handleLogout}>
+            Logout
+          </li>
+        ) : (
+          <li>
+            <ActiveMenuLink to="/login" label="Login" />
+          </li>
+        )}
+      </ul>
+    </header>
   );
 };
 
