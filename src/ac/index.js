@@ -98,18 +98,12 @@ export const movePlayerThunk = direction => dispatch => {
   const oldPos = store.getState().player.position;
   const newPos = getNewPosition(oldPos, direction);
 
-  console.log('newPos', newPos);
   let position = oldPos;
   if (observeBoundaries(newPos) && observeImpassable(newPos)) {
     position = getNewPosition(oldPos, direction);
   }
-  if (observeBoundaries(newPos) && observeExit(newPos)) {
-    console.log('i am on exit');
+  if (observeExit(newPos)) {
     dispatch(setPlayerOnLevelExit());
-
-    //position = getNewPosition(oldPos, direction);
-    //nextLevel = true;
-    // dispatch(makeNextLevel());
   }
 
   let spriteLocation = getSpriteLocation(direction, walkIndex);
@@ -165,7 +159,7 @@ function observeImpassable(newPos) {
 }
 
 function observeExit(newPos) {
-  if (newPos[0] > 560 && newPos[1] <= 0) {
+  if (newPos[0] > 560 && newPos[1] < 0) {
     return true;
   }
 }

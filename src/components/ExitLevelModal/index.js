@@ -1,11 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setPlayerOnLevelStart } from '../../ac';
+import {
+  setPlayerOnLevelStart,
+  makeMonsterNameThunk,
+  makeNewMonster,
+  movePlayer
+} from '../../ac';
+import { addTilesAC } from '../../ac/tilesAC';
+import tiles from '../../components/data/tiles.js';
 import { Modal } from 'antd';
 import { Link } from 'react-router-dom';
 import './exitLevelModal.css';
 
-const ExitLevelModal = (isPlayerOnLevelExit, setPlayerOnLevelStart) => {
+const ExitLevelModal = ({
+  isPlayerOnLevelExit,
+  setPlayerOnLevelStart,
+  addTiles,
+  movePlayer,
+  makeMonsterName,
+  makeNewMonster
+}) => {
+  const startNewBattle = () => {
+    addTiles(tiles);
+    movePlayer([0, 0], 0, '0px 0px');
+    makeMonsterName();
+    makeNewMonster();
+    setPlayerOnLevelStart();
+  };
   return (
     <Modal
       title="Choose"
@@ -25,9 +46,9 @@ const ExitLevelModal = (isPlayerOnLevelExit, setPlayerOnLevelStart) => {
       <Link className="buttons" to="/score" onClick={setPlayerOnLevelStart}>
         Score
       </Link>
-      <Link className="buttons" to="/battle" onClick={setPlayerOnLevelStart}>
+      <div className="buttons" onClick={startNewBattle}>
         Play again
-      </Link>
+      </div>
     </Modal>
   );
 };
@@ -37,7 +58,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setPlayerOnLevelStart: () => dispatch(setPlayerOnLevelStart())
+  setPlayerOnLevelStart: () => dispatch(setPlayerOnLevelStart()),
+  addTiles: tiles => dispatch(addTilesAC(tiles)),
+  movePlayer: (position, walkIndex, spriteLOcation) =>
+    dispatch(movePlayer(position, walkIndex, spriteLOcation)),
+  makeMonsterName: () => dispatch(makeMonsterNameThunk()),
+  makeNewMonster: () => dispatch(makeNewMonster())
 });
 
 export default connect(

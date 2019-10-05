@@ -5,11 +5,12 @@ import Player from '../../components/player';
 import Monster from '../../components/monster';
 import Map from '../../components/map/map';
 import TasksScreen from '../tasksScreen/tasksScreen';
-import { makeNewMonster } from '../../ac';
 import {
   makeMonsterNameThunk,
   reduceMonsterLife,
-  reducePlayerLife
+  reducePlayerLife,
+  makeNewMonster,
+  movePlayer
 } from '../../ac';
 import { resetSpell } from '../../ac/spellAC';
 import { resetTasksState } from '../../ac/taskAC';
@@ -44,6 +45,8 @@ class Battle extends Component {
 
   componentDidMount() {
     this.props.dispatch(addTilesAC(tiles));
+    this.props.dispatch(movePlayer([0, 0], 0, '0px 0px'));
+
     if (!this.props.isPlayerOnLevelExit) {
       this.props.dispatch(makeMonsterNameThunk());
       this.props.dispatch(makeNewMonster());
@@ -135,7 +138,7 @@ class Battle extends Component {
         {isSpellChoosen && <TasksScreen />}
         {wasTaskChoosed && <SimpleMath />}
         {monsterLife === 0 && <span className="blink" />}
-        {isPlayerOnLevelExit && <ExitLevelModal />}
+        {isPlayerOnLevelExit && monsterLife === 0 && <ExitLevelModal />}
       </div>
     );
   }
