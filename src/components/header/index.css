@@ -28,12 +28,13 @@
   max-width: 1140px;
   margin: auto;
   grid-template-columns: 60% repeat(3, 1fr);
-  padding: 0.2rem;
+  padding: 0.2rem 2rem;
   margin-bottom: 0;
   align-items: center;
 }
 
 .header__ul li {
+  justify-self: end;
   list-style-type: none;
   font-family: 'Charm', cursive;
   font-size: 1rem;
@@ -42,6 +43,10 @@
     -webkit-border-image: url(/tiles/border2.png) 0 0 25 0;
     -o-border-image: url(/tiles/border2.png) 0 0 25 0;
     border-image: url(/tiles/border2.png) 0 0 25 0; */
+}
+
+.header__ul li:first-of-type {
+  justify-self: start;
 }
 
 .header__ul li:hover {

@@ -110,18 +110,20 @@ class Battle extends Component {
       </div>
     ) : (
       <div>
-        <div className="lifes__container">
-          <div className="lifes--player">
-            <h3 className="lifes__title">{playerName}</h3>
-            <span>player life: {playerLife} hp</span>
-            <ProgressBar percentage={playerLife} />
+        <header className="header">
+          <div className="lifes__container">
+            <div className="lifes--player">
+              <h3 className="lifes__title">{playerName}</h3>
+              <span>player life: {playerLife} hp</span>
+              <ProgressBar percentage={playerLife} />
+            </div>
+            <div className="lifes--monster">
+              <h3 className="lifes__title">{monsterName}</h3>
+              <span>monster life: {monsterLife} hp</span>
+              <ProgressBar percentage={monsterLife} />
+            </div>
           </div>
-          <div className="lifes--monster">
-            <h3 className="lifes__title">{monsterName}</h3>
-            <span>monster life: {monsterLife} hp</span>
-            <ProgressBar percentage={monsterLife} />
-          </div>
-        </div>
+        </header>
         <div className="gameScreen__container">
           <div className="map__wrapper">
             <Map />
