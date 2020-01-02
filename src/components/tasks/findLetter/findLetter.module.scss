@@ -1,0 +1,39 @@
+@import "variables.scss";
+
+.taskScreen {
+  @include taskScreen;
+}
+
+.questionContainer {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.answerVariants {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+
+.answerVariantContainer {
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid $light-gray;
+  border-radius: 8px;
+
+  &:hover {
+    border-color: $dark-gray;
+  }
+}
+
+.answerVariant {
+  font-size: 10vw;
+}
+
+.correct.correct {
+  border-color: $green;
+}
+
+.error.error {
+  border-color: $red;
+}

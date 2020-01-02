@@ -1,7 +1,7 @@
 .gameScreen__container {
   display: grid;
   justify-content: center;
-  background: url('/tiles/grass.png');
+  background: url("/tiles/grass.png");
 }
 
 .map__wrapper {
@@ -36,34 +36,13 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9e6742', endColorstr='#9e6742', GradientType=0);
 }
 
-.lifes__container {
-  display: grid;
-  max-width: 1140px;
-  margin: auto;
-  padding: 0.3rem 2rem;
-  align-items: end;
-  grid-template-columns: 1fr 1fr;
-  font-family: 'Charm', cursive;
-}
-
-.lifes__title {
-  color: #d4af37;
-}
-
-.lifes--player {
-}
-
-.lifes--monster {
-  justify-self: end;
-}
-
 .blink {
   position: absolute;
   top: 205px;
   right: 25%;
   width: 40px;
   height: 40px;
-  background: url('/tiles/arrow.png') no-repeat;
+  background: url("/tiles/arrow.png") no-repeat;
   animation: blink-animation 1s steps(5, start) infinite;
   -webkit-animation: blink-animation 1s steps(5, start) infinite;
 }

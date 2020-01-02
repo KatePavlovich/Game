@@ -16,3 +16,6 @@ const randomInteger = (min, max) => {
 };
 
 export const getRandomNumberWithoutZero = randomInteger.bind(null, 1);
+
+export const isAnswerCorrect = (correctAnswer, userAnswer) =>
+  correctAnswer === userAnswer;

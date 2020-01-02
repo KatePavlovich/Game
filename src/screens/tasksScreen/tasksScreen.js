@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { chooseTaskAC } from "../../ac/taskAC";
 import { Modal } from "antd";
 import "./tasksScreen.css";
@@ -22,6 +22,9 @@ class TasksScreen extends React.Component {
         <div className="link math" onClick={this.setWasTaskChoosen}>
           Math
         </div>
+        <Link className="link " to="/findLetter">
+          Find letter
+        </Link>
       </Modal>
     );
   }

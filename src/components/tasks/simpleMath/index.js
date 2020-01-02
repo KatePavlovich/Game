@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { wasTaskAnsweredAC, checkCorrectAnswerAC } from '../../../ac/taskAC';
-import { Modal } from 'antd';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { wasTaskAnsweredAC, checkCorrectAnswerAC } from "../../../ac/taskAC";
+import { Modal } from "antd";
 import {
   getRandomNumberWithoutZero,
-  getRandomValueFromArray
-} from '../../../helperFunctions';
-import './index.css';
+  getRandomValueFromArray,
+  isAnswerCorrect
+} from "../../../helperFunctions";
+import "./index.css";
 
-const signs = ['+', '-', '*', '/'];
+const signs = ["+", "-", "*", "/"];
 
 class SimpleMath extends Component {
   state = {
@@ -20,16 +21,17 @@ class SimpleMath extends Component {
   compareAnswers = e => {
     let playerAnswer = e.currentTarget.value;
     const { sign, number1, number2 } = this.state;
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
+      // eslint-disable-next-line no-eval
       let correctAnswer = parseInt(eval(`${number1}${sign}${number2}`));
       let transformedPlayerAnswer = parseInt(playerAnswer, 10);
-      if (transformedPlayerAnswer === correctAnswer) {
-        this.props.dispatch(checkCorrectAnswerAC(true));
-      } else {
-        this.props.dispatch(checkCorrectAnswerAC(false));
-      }
+      this.props.dispatch(
+        checkCorrectAnswerAC(
+          isAnswerCorrect(correctAnswer, transformedPlayerAnswer)
+        )
+      );
       this.props.dispatch(wasTaskAnsweredAC());
-      playerAnswer = '';
+      playerAnswer = "";
     }
   };
 

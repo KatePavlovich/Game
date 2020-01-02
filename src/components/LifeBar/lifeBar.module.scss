@@ -1,0 +1,23 @@
+@import "variables.scss";
+
+.header {
+  @include header;
+}
+
+.container {
+  display: grid;
+  max-width: 1140px;
+  margin: auto;
+  padding: 0.3rem 2rem;
+  align-items: end;
+  grid-template-columns: 1fr 1fr;
+  font-family: "Charm", cursive;
+}
+
+.title {
+  color: $golden;
+}
+
+.monsterLife {
+  justify-self: end;
+}
