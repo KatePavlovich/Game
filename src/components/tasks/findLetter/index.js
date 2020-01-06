@@ -146,13 +146,7 @@ class FindLetter extends Component {
   };
 
   render() {
-    const {
-      wasTaskAnswered,
-      playerLife,
-      monsterLife,
-      monsterName,
-      playerName
-    } = this.props;
+    const { wasTaskAnswered } = this.props;
     const {
       letterToFind,
       proposedLetters,
@@ -161,12 +155,7 @@ class FindLetter extends Component {
     } = this.state;
     return (
       <>
-        <LifeBar
-          playerLife={playerLife}
-          monsterLife={monsterLife}
-          monsterName={monsterName}
-          playerName={playerName}
-        />
+        <LifeBar />
         <div className={styles.taskScreen}>
           <div className={styles.questionContainer}>
             <Letter letter={letterToFind} />
@@ -194,11 +183,7 @@ class FindLetter extends Component {
 }
 
 const mapStateToProps = state => ({
-  wasTaskAnswered: state.tasks.wasTaskAnswered,
-  monsterLife: state.monster.monsterLife,
-  playerLife: state.player.playerLife,
-  monsterName: state.monster.monsterName,
-  playerName: state.player.playerName
+  wasTaskAnswered: state.tasks.wasTaskAnswered
 });
 
 export default connect(mapStateToProps)(withReduceLives(FindLetter));

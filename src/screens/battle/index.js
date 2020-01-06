@@ -102,8 +102,6 @@ class Battle extends Component {
       isSpellChoosen,
       playerLife,
       monsterLife,
-      monsterName,
-      playerName,
       wasTaskChoosed,
       isPlayerOnLevelExit
     } = this.props;
@@ -113,12 +111,7 @@ class Battle extends Component {
       </div>
     ) : (
       <div>
-        <LifeBar
-          playerLife={playerLife}
-          monsterLife={monsterLife}
-          monsterName={monsterName}
-          playerName={playerName}
-        />
+        <LifeBar />
         <div className="gameScreen__container">
           <div className="map__wrapper">
             <Map />
@@ -141,8 +134,6 @@ const mapStateToProps = state => ({
   choosedSpell: state.spell.choosedSpell,
   monsterLife: state.monster.monsterLife,
   playerLife: state.player.playerLife,
-  monsterName: state.monster.monsterName,
-  playerName: state.player.playerName,
   wasTaskChoosed: state.tasks.wasTaskChoosed,
   wasAnswerCorrect: state.tasks.wasAnswerCorrect,
   wasTaskAnswered: state.tasks.wasTaskAnswered,
