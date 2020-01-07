@@ -25,22 +25,9 @@ import ExitLevelModal from "../../components/ExitLevelModal";
 
 class Battle extends Component {
   state = {
-    failureaudio: new Audio(
-      "https://freesound.org/data/previews/131/131891_2398403-lq.mp3"
-    ),
-    winaudio: new Audio(
-      "https://freesound.org/data/previews/181/181425_1823830-lq.mp3"
-    ),
     bangSound: new Audio(
       "https://freesound.org/data/previews/33/33245_65091-lq.mp3"
     )
-  };
-
-  playAudio = audio => {
-    const { failureaudio, winaudio } = this.state;
-    if (audio === false) {
-      failureaudio.play();
-    } else winaudio.play();
   };
 
   componentDidMount() {
@@ -80,9 +67,7 @@ class Battle extends Component {
   }
 
   makeAnimation = sprite => {
-    const { wasAnswerCorrect } = this.props;
     this.props.dispatch(moveAnimationThunk(sprite));
-    this.playAudio(wasAnswerCorrect);
     this.props.dispatch(resetTasksState());
     this.props.dispatch(resetSpell());
     this.stopAnimation();

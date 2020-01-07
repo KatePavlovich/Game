@@ -1,110 +1,48 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { reduceMonsterLife, reducePlayerLife } from "../../../ac";
+import { Redirect } from "react-router-dom";
 import { wasTaskAnsweredAC, checkCorrectAnswerAC } from "../../../ac/taskAC";
-import {
-  getRandomNumberWithoutZero,
-  getRandomValueFromArray
-} from "../../../helperFunctions";
 import { withReduceLives } from "../../../helpers/reduceLivesHoc";
-// import axios from "axios";
 import { Letter } from "./letter/Letter";
 import { LifeBar } from "../../LifeBar/LifeBar";
-import { isAnswerCorrect } from "../../../helperFunctions";
-import * as C from "../../../constants";
+import {
+  isAnswerCorrect,
+  generateProposedLetters,
+  getRandomLetter
+} from "../../../helperFunctions";
 import classNames from "classnames";
 import styles from "./findLetter.module.scss";
-
-const alphabet = [
-  "А",
-  "Б",
-  "В",
-  "Г",
-  "Д",
-  "Е",
-  "Ё",
-  "Ж",
-  "З",
-  "И",
-  "Й",
-  "К",
-  "Л",
-  "М",
-  "Н",
-  "О",
-  "П",
-  "Р",
-  "С",
-  "Т",
-  "У",
-  "Ф",
-  "Х",
-  "Ц",
-  "Ч",
-  "Ш",
-  "Щ",
-  "Ъ",
-  "Ы",
-  "Ь",
-  "Э",
-  "Ю",
-  "Я"
-];
 
 class FindLetter extends Component {
   state = {
     letterToFind: "",
     proposedLetters: [],
     validation: "",
-    selectedValue: ""
-  };
-  componentDidMount = () => {
-    const answerLetter = this.getRandomLetter();
-    this.setState(
-      { letterToFind: answerLetter },
-      this.generateProposedLetters(answerLetter)
-    );
-    if (this.state.letterToFind) {
-      this.setState(this.generateProposedLetters());
-    }
-    // axios
-    //   .get(
-    //     `http://api.pobukvam.org/ru/alphabetInfo?alphabet=int-icao&format=json`,
-    //     {
-    //       headers: {
-    //         AccessControlAllowOrigin: "*"
-    //       }
-    //     }
-    //   )
-    //   .then(res => {
-    //     console.log("results", res);
-    //     const persons = res.data;
-    //     this.setState({ persons });
-    //   });
+    selectedValue: "",
+    redirectToBattleScreen: false
   };
 
-  shuffle = array => {
-    const len = array.length - 1;
-    for (let i = len; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
-
-  generateProposedLetters = answerLetter => {
-    const letters = [];
-    while (letters.length < C.PROPOSED_LETTERS_AMOUNT) {
-      letters.push(this.getRandomLetter());
-    }
-    const swappedLetters = this.shuffle([answerLetter, ...letters]);
+  cleanQuestion = () => {
     this.setState({
-      proposedLetters: swappedLetters
+      letterToFind: "",
+      proposedLetters: [],
+      validation: "",
+      selectedValue: ""
     });
   };
 
-  getRandomLetter = () => {
-    return alphabet[Math.floor(Math.random() * C.ALPHABET_LENGTH)];
+  generateNewQuestion = () => {
+    const answerLetter = getRandomLetter();
+    this.setState({
+      letterToFind: answerLetter,
+      proposedLetters: generateProposedLetters(answerLetter),
+      validation: "",
+      selectedValue: ""
+    });
+  };
+
+  componentDidMount = () => {
+    this.generateNewQuestion();
   };
 
   setIfAnswerWasCorrect = (correctAnswer, userAnswer) => {
@@ -114,7 +52,6 @@ class FindLetter extends Component {
   };
 
   setUserAnswer = e => {
-    console.log({ ...e.currentTarget });
     this.props.dispatch(wasTaskAnsweredAC());
     this.setState(
       {
@@ -126,39 +63,54 @@ class FindLetter extends Component {
 
   showIfAnswerWasCorrect = e => {
     const { letterToFind } = this.state;
-    const { reduceMonsterLife, reducePlayerLife } = this.props;
+    const {
+      reduceMonsterLife,
+      reducePlayerLife,
+      monsterLife,
+      playerLife
+    } = this.props;
     const selectedValue = e.currentTarget.children[0].dataset.letter;
     if (isAnswerCorrect(letterToFind, selectedValue)) {
-      console.log("all right");
       this.setState({
         validation: "correct"
       });
-      e.currentTarget.classList.add("correct");
       reduceMonsterLife();
+      if (monsterLife !== 0) {
+        setTimeout(this.cleanQuestion, 1500);
+        setTimeout(this.generateNewQuestion, 1501);
+      }
     } else {
-      console.log("no no no");
       this.setState({ validation: "error" });
-      e.currentTarget.classList.add("error");
       reducePlayerLife();
+    }
+    if (monsterLife === 0 || playerLife === 0) {
+      this.setState({
+        redirectToBattleScreen: true
+      });
     }
     this.setIfAnswerWasCorrect(letterToFind, selectedValue);
     this.props.dispatch(wasTaskAnsweredAC());
   };
 
   render() {
-    const { wasTaskAnswered } = this.props;
     const {
       letterToFind,
       proposedLetters,
       validation,
-      selectedValue
+      selectedValue,
+      redirectToBattleScreen
     } = this.state;
+
+    if (redirectToBattleScreen) {
+      return <Redirect to={`/battle`} />;
+    }
     return (
       <>
         <LifeBar />
         <div className={styles.taskScreen}>
           <div className={styles.questionContainer}>
-            <Letter letter={letterToFind} />
+            <h2 className={styles.questionTitle}>Найди букву: </h2>
+            <Letter className={styles.questionLetter} letter={letterToFind} />
           </div>
           <div className={styles.answerVariants}>
             {proposedLetters.map(letter => (
@@ -183,7 +135,9 @@ class FindLetter extends Component {
 }
 
 const mapStateToProps = state => ({
-  wasTaskAnswered: state.tasks.wasTaskAnswered
+  wasTaskAnswered: state.tasks.wasTaskAnswered,
+  monsterLife: state.monster.monsterLife,
+  playerLife: state.player.playerLife
 });
 
 export default connect(mapStateToProps)(withReduceLives(FindLetter));

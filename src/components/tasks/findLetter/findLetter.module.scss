@@ -5,18 +5,24 @@
 }
 
 .questionContainer {
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   text-align: center;
+}
+
+.questionTitle {
+  margin: 0 0 2rem 1rem;
 }
 
 .answerVariants {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 1rem;
 }
 
 .answerVariantContainer {
   padding: 1rem;
+  max-width: 150px;
+  max-height: 130px;
   text-align: center;
   border: 1px solid $light-gray;
   border-radius: 8px;
@@ -36,4 +42,8 @@
 
 .error.error {
   border-color: $red;
+}
+
+.questionLetter {
+  line-height: 11.5rem;
 }

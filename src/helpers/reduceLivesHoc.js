@@ -1,33 +1,46 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { reduceMonsterLife, reducePlayerLife } from "../ac";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  REDUCE_MONSTER_LIFE,
+  REDUCE_PLAYER_LIFE,
+  failureAudio,
+  winAudio
+} from "../constants";
 
 const getDisplayName = WrappedComponent =>
   WrappedComponent.displayName || WrappedComponent.name || "Component";
 
 const withReduceLives = WrappedComponent => {
-  class WithReduceLives extends Component {
-    reduceMonsterLife = () => this.props.dispatch(reduceMonsterLife());
-    reducePlayerLife = () => this.props.dispatch(reducePlayerLife());
+  const WithReduceLives = props => {
+    const playerLife = useSelector(state => state.player.playerLife);
+    const monsterLife = useSelector(state => state.monster.monsterLife);
+    const dispatch = useDispatch();
 
-    render() {
-      return (
-        <WrappedComponent
-          {...this.props}
-          reduceMonsterLife={this.reduceMonsterLife}
-          reducePlayerLife={this.reducePlayerLife}
-        />
-      );
-    }
-  }
+    const reduceMonsterLife = () => {
+      if (monsterLife === 0) return;
+      dispatch({ type: REDUCE_MONSTER_LIFE });
+      winAudio.play();
+    };
+
+    const reducePlayerLife = () => {
+      if (playerLife === 0) return;
+      dispatch({ type: REDUCE_PLAYER_LIFE });
+      failureAudio.play();
+    };
+
+    return (
+      <WrappedComponent
+        {...props}
+        reduceMonsterLife={reduceMonsterLife}
+        reducePlayerLife={reducePlayerLife}
+      />
+    );
+  };
   WithReduceLives.displayName = `WithSubscription(${getDisplayName(
     WrappedComponent
-  )})`;
+  )}`;
 
-  const mapDispatchToProps = dispatch =>
-    bindActionCreators({ reduceMonsterLife, reducePlayerLife }, dispatch);
-  return connect(null, mapDispatchToProps)(WithReduceLives);
+  return WithReduceLives;
 };
 
 export { withReduceLives };

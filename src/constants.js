@@ -49,5 +49,50 @@ export const monsterBodies = [
   "https://vignette.wikia.nocookie.net/battlefordreamisland/images/9/9c/Shadow_Bomby_body.png/revision/latest?cb=20171205063143"
 ];
 
+export const failureAudio = new Audio(
+  "https://freesound.org/data/previews/131/131891_2398403-lq.mp3"
+);
+export const winAudio = new Audio(
+  "https://freesound.org/data/previews/181/181425_1823830-lq.mp3"
+);
+export const bangSound = new Audio(
+  "https://freesound.org/data/previews/33/33245_65091-lq.mp3"
+);
+
 export const ALPHABET_LENGTH = 32;
 export const PROPOSED_LETTERS_AMOUNT = 4;
+export const ALPHABET = [
+  "А",
+  "Б",
+  "В",
+  "Г",
+  "Д",
+  "Е",
+  "Ё",
+  "Ж",
+  "З",
+  "И",
+  "Й",
+  "К",
+  "Л",
+  "М",
+  "Н",
+  "О",
+  "П",
+  "Р",
+  "С",
+  "Т",
+  "У",
+  "Ф",
+  "Х",
+  "Ц",
+  "Ч",
+  "Ш",
+  "Щ",
+  "Ъ",
+  "Ы",
+  "Ь",
+  "Э",
+  "Ю",
+  "Я"
+];
