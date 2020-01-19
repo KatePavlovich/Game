@@ -59,6 +59,8 @@ export const bangSound = new Audio(
   "https://freesound.org/data/previews/33/33245_65091-lq.mp3"
 );
 
+export const signs = ["+", "-", "*", "/"];
+
 export const ALPHABET_LENGTH = 32;
 export const PROPOSED_LETTERS_AMOUNT = 4;
 export const ALPHABET = [

@@ -33,6 +33,8 @@ const withReduceLives = WrappedComponent => {
         {...props}
         reduceMonsterLife={reduceMonsterLife}
         reducePlayerLife={reducePlayerLife}
+        monsterLife={monsterLife}
+        playerLife={playerLife}
       />
     );
   };
