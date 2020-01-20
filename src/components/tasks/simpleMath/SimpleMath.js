@@ -10,6 +10,7 @@ import {
 } from "../../../helperFunctions";
 import { chooseTaskAC } from "../../../ac/taskAC";
 import { LifeBar } from "../../LifeBar/LifeBar";
+import { Monster } from "../../monster";
 import { signs } from "../../../constants";
 import "./index.css";
 
@@ -116,6 +117,7 @@ class SimpleMath extends Component {
             onChange={this.handleChange}
           />
         </div>
+        <Monster />
       </>
     );
   }

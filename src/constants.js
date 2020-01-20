@@ -25,6 +25,11 @@ export const RESET_SPELL = "RESET_SPELL";
 export const MOVE_ANIMATION = "MOVE_ANIMATION";
 export const RESET_ANIMATION = "RESET_ANIMATION";
 
+export const BASIC_SPRITE_LOCATION = "0px 0px";
+export const BASIC_WALKINDEX = 0;
+export const MONSTER_SPRITE_WIDTH = 104;
+export const MONSTER_SPRITE_HEIGHT = 130;
+
 export const CHOOSE_SPELL = "CHOOSE_SPELL";
 export const SHOW_SPELLMODAL = "SHOW_SPELLMODAL";
 export const CLOSE_SPELLMODAL = "CLOSE_SPELLMODAL";
@@ -33,16 +38,6 @@ export const adjective = ["ужасный", "злобный", "сопливый"
 export const creature = ["Огр", "Гном", "Гоблин"];
 export const monsterName = ["Том", "Макс", "Дима"];
 
-export const monsterLegs = [
-  "https://b.kisscc0.com/20180716/kcw/kisscc0-human-leg-toe-woman-arm-girl-legs-5b4d4ec2906ea9.1993941115317930905916.jpg",
-  "https://www.clipartmax.com/png/middle/45-457631_boohaha-witchlegs-kd-legs-clip-art-png.png",
-  "http://freesvgdesigns.com/wp-content/uploads/2018/09/00342C.jpg"
-];
-export const monsterHeads = [
-  "https://png.pngtree.com/element_origin_min_pic/17/09/15/7a9dffd84be8ec9fd0357e2c9c62cd4a.jpg",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFC2uzXe7QXBmn407XXK7ubvaJvR_JP3SdQYcpQqfo5hMF8IB_",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuoD5LiuCyrxYGTJhui7Nvgktinugpv_yaRr0RRtXjXk_E2tnY"
-];
 export const monsterBodies = [
   "https://banner2.kisspng.com/20180418/xlw/kisspng-dress-cartoon-clip-art-bodies-5ad7c3ae8b1849.0189824015240897745697.jpg",
   "https://png.pngtree.com/png_detail/18/09/10/pngtree-the-standing-cartoon-body-png-clipart_3521056.jpg",

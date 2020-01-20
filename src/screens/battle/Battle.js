@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./index.css";
 import Player from "../../components/player";
-import Monster from "../../components/monster";
+import { Monster } from "../../components/monster";
 import Map from "../../components/map/map";
 import { TasksScreen } from "../tasksScreen/tasksScreen";
 import {
