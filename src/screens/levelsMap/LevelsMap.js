@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./index.css";
-import Player from "../../components/player";
+import { Player } from "../../components/player";
 import { Monster } from "../../components/monster";
 import Map from "../../components/map/map";
 import { TasksScreen } from "../tasksScreen/tasksScreen";
@@ -19,11 +19,11 @@ import Score from "../score";
 import tiles from "../../components/data/tiles.js";
 import { LifeBar } from "../../components/LifeBar/LifeBar";
 import { addTilesAC, changeTilesThunk } from "../../ac/tilesAC";
-import Animation from "../../components/Animation/animation";
+import { Animation } from "../../components/Animation";
 import ExitLevelModal from "../../components/ExitLevelModal";
 import { chooseTaskAC } from "../../ac/taskAC";
 
-class Battle extends Component {
+class LevelsMap extends Component {
   state = {
     bangSound: new Audio(
       "https://freesound.org/data/previews/33/33245_65091-lq.mp3"
@@ -142,4 +142,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Battle);
+export default connect(mapStateToProps, mapDispatchToProps)(LevelsMap);

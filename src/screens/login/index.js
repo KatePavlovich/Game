@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './login.css';
-import { getPlayerNameAC, isLoggedIn } from '../../ac';
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import "./login.css";
+import { getPlayerNameAC, isLoggedIn } from "../../ac";
+import { withRouter } from "react-router";
 
 class Login extends Component {
   state = {
-    name: ''
+    name: ""
   };
 
   handleChange = e => {
@@ -18,8 +18,8 @@ class Login extends Component {
     const { name } = this.state;
     this.props.setIsLoggedIn();
     this.props.getPlayerName(name);
-    this.setState({ name: '' });
-    history.push('/battle');
+    this.setState({ name: "" });
+    history.push("/levelsMap");
   };
 
   render() {
@@ -54,9 +54,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(Login)
-);
+export default withRouter(connect(null, mapDispatchToProps)(Login));

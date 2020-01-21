@@ -53,6 +53,7 @@ class Monster extends PureComponent {
       clearTimeout(this.timerHandle);
       this.timerHandle = 0;
     }
+    this.setState({ timer: null });
   }
 
   render() {

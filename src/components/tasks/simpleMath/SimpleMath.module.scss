@@ -1,0 +1,19 @@
+@import "variables.scss";
+
+.content {
+  min-height: calc(100vh - 285px);
+  text-align: center;
+}
+
+.question {
+  font-size: 6rem;
+}
+
+.answer {
+  font-family: "Charm", cursive;
+  font-size: 2rem;
+  border: none;
+  border-bottom: 4px solid transparent;
+  border-image: url(/tiles/border.png) 5 round round;
+  outline: $golden;
+}

@@ -112,7 +112,7 @@ class FindLetter extends Component {
     } = this.state;
 
     if (redirectToBattleScreen) {
-      return <Redirect to={`/battle`} />;
+      return <Redirect to={`/levelsMap`} />;
     }
     return (
       <>

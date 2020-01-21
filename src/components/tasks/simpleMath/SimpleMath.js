@@ -10,9 +10,9 @@ import {
 } from "../../../helperFunctions";
 import { chooseTaskAC } from "../../../ac/taskAC";
 import { LifeBar } from "../../LifeBar/LifeBar";
-import { Monster } from "../../monster";
 import { signs } from "../../../constants";
-import "./index.css";
+import styles from "./SimpleMath.module.scss";
+import { Battle } from "../../battle";
 
 class SimpleMath extends Component {
   state = {
@@ -94,22 +94,22 @@ class SimpleMath extends Component {
       userAnswer,
       redirectToBattleScreen
     } = this.state;
-    console.log("redirectToBattleScreen", redirectToBattleScreen);
     if (redirectToBattleScreen) {
-      return <Redirect to={`/battle`} />;
+      return <Redirect to={`/levelsMap`} />;
     }
     return (
       <>
         <LifeBar />
-        <div>
-          <div>
+        <div className={styles.content}>
+          <div className={styles.question}>
             <span>{number1}</span>
             <span>{sign}</span>
             <span>{number2}</span>
             <span>=?</span>
           </div>
           <input
-            type="text"
+            className={styles.answer}
+            type="number"
             placeholder="type answer"
             onKeyPress={this.compareAnswers}
             autoFocus={true}
@@ -117,7 +117,7 @@ class SimpleMath extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <Monster />
+        <Battle />
       </>
     );
   }
