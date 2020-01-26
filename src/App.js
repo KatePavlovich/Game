@@ -8,7 +8,7 @@ import "./App.css";
 import { LevelsMap } from "./screens/levelsMap";
 import { SimpleMath } from "./components/tasks/simpleMath";
 import { FindLetter } from "./components/tasks/findLetter";
-import Header from "./components/header";
+import { Header } from "./components/Header";
 
 class App extends Component {
   render() {

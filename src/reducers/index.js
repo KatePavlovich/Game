@@ -5,6 +5,7 @@ import spellReducer from "./spellReducer";
 import tilesReducer from "./tilesReducer";
 import tasksReducer from "./tasksReducer";
 import animationReducer from "./animationReducer";
+import soundReducer from "./soundReducer";
 
 const rootReducer = combineReducers({
   player: playerReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   spell: spellReducer,
   map: tilesReducer,
   tasks: tasksReducer,
-  animation: animationReducer
+  animation: animationReducer,
+  sound: soundReducer
 });
 
 export default rootReducer;

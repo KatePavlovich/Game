@@ -14,18 +14,19 @@ const withReduceLives = WrappedComponent => {
   const WithReduceLives = props => {
     const playerLife = useSelector(state => state.player.playerLife);
     const monsterLife = useSelector(state => state.monster.monsterLife);
+    const { sound } = useSelector(state => state.sound);
     const dispatch = useDispatch();
 
     const reduceMonsterLife = () => {
       if (monsterLife === 0) return;
       dispatch({ type: REDUCE_MONSTER_LIFE });
-      winAudio.play();
+      sound && winAudio.play();
     };
 
     const reducePlayerLife = () => {
       if (playerLife === 0) return;
       dispatch({ type: REDUCE_PLAYER_LIFE });
-      failureAudio.play();
+      sound && failureAudio.play();
     };
 
     return (

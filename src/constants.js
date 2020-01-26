@@ -8,6 +8,7 @@ export const SET_PLAYER_ON_LEVEL_EXIT = "SET_PLAYER_ON_LEVEL_EXIT";
 export const SET_PLAYER_ON_LEVEL_START = "SET_PLAYER_ON_LEVEL_START";
 export const ADD_TILES = "ADD_TILES";
 export const CHANGE_TILES = "CHANGE_TILES";
+export const TOGGLE_SOUND = "TOGGLE_SOUND";
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";

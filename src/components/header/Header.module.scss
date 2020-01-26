@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 .header {
   background: #9e6742;
   background: -moz-linear-gradient(
@@ -23,20 +25,20 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9e6742', endColorstr='#9e6742', GradientType=0);
 }
-.header__ul {
+.headerUl {
   display: grid;
   max-width: 1140px;
   margin: auto;
-  grid-template-columns: 60% repeat(3, 1fr);
+  grid-template-columns: 60% repeat(4, 1fr);
   padding: 0.2rem 2rem;
   margin-bottom: 0;
   align-items: center;
 }
 
-.header__ul li {
+.headerUl li {
   justify-self: end;
   list-style-type: none;
-  font-family: 'Charm', cursive;
+  font-family: "Charm", cursive;
   font-size: 1rem;
   /*     border: 30px solid transparent;
     -moz-border-image: url(/tiles/border2.png) 0 0 25 0;
@@ -45,10 +47,25 @@
     border-image: url(/tiles/border2.png) 0 0 25 0; */
 }
 
-.header__ul li:first-of-type {
+.headerUl li:first-of-type {
   justify-self: start;
 }
 
-.header__ul li:hover {
+.headerUl li:hover {
   color: #ae003a;
+}
+
+.navLink {
+  @include navLink;
+}
+
+.sound {
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
+  background: url(/tiles/horn.svg) 0 0 no-repeat;
+}
+
+.soundMute {
+  filter: sepia(1);
 }

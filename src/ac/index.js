@@ -160,3 +160,9 @@ function getWalkIndex() {
   const walkIndex = store.getState().player.walkIndex;
   return walkIndex >= 3 ? 0 : walkIndex + 1;
 }
+
+export const toggleSound = () => {
+  return {
+    type: C.TOGGLE_SOUND
+  };
+};

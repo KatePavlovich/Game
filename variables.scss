@@ -4,10 +4,11 @@ $generalFont: "Charm", cursive;
 $xl: 1140px;
 
 $light-gray: #eee;
-$dark-gray: #3d3d3d;
+$dark-gray: #555555;
 $green: #008000;
 $red: #ff0000;
 $golden: #d4af37;
+$purple: #ae003a;
 
 @mixin taskScreen {
   max-width: $xl;
@@ -39,4 +40,21 @@ $golden: #d4af37;
     #9e6742 99%
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9e6742', endColorstr='#9e6742', GradientType=0);
+}
+
+@mixin navLink {
+  font-size: 1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $dark-gray;
+
+  &--active {
+    font-weight: bold;
+    color: $purple;
+  }
+
+  &:hover,
+  &--active:hover {
+    color: $purple;
+  }
 }
