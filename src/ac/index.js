@@ -1,45 +1,30 @@
-import {
-  GET_PLAYER_NAME,
-  GET_MONSTER_NAME,
-  REDUCE_MONSTER_LIFE,
-  REDUCE_PLAYER_LIFE,
-  MAKE_NEW_MONSTER,
-  MOVE_PLAYER,
-  MAP_WIDTH,
-  SPRITE_SIZE,
-  MAP_HEIGHT,
-  SPRITE_BACKGROUND_SIZE,
-  LOGIN,
-  LOGOUT,
-  SET_PLAYER_ON_LEVEL_EXIT,
-  SET_PLAYER_ON_LEVEL_START
-} from '../constants';
-import { adjective, creature, monsterName } from '../constants';
-import { getRandomValueFromArray } from '../helperFunctions';
-import store from '../store';
+import * as C from "../constants";
+import { adjective, creature, monsterName } from "../constants";
+import { getRandomValueFromArray } from "../helperFunctions";
+import store from "../store";
 
 export const isLoggedIn = () => {
   return {
-    type: LOGIN
+    type: C.LOGIN
   };
 };
 
 export const isLoggedOut = () => {
   return {
-    type: LOGOUT
+    type: C.LOGOUT
   };
 };
 
 export const getPlayerNameAC = playerName => {
   return {
-    type: GET_PLAYER_NAME,
+    type: C.GET_PLAYER_NAME,
     playerName
   };
 };
 
 export const getMonsterNameAC = monsterName => {
   return {
-    type: GET_MONSTER_NAME,
+    type: C.GET_MONSTER_NAME,
     monsterName
   };
 };
@@ -54,19 +39,26 @@ export const makeMonsterNameThunk = () => dispatch => {
 
 export const reduceMonsterLife = () => {
   return {
-    type: REDUCE_MONSTER_LIFE
+    type: C.REDUCE_MONSTER_LIFE
+  };
+};
+
+export const getMonsterPosition = position => {
+  return {
+    type: C.GET_MONSTER_POSITION,
+    position
   };
 };
 
 export const reducePlayerLife = () => {
   return {
-    type: REDUCE_PLAYER_LIFE
+    type: C.REDUCE_PLAYER_LIFE
   };
 };
 
 export const makeNewMonster = (monsterLife, monsterName) => {
   return {
-    type: MAKE_NEW_MONSTER,
+    type: C.MAKE_NEW_MONSTER,
     monsterLife,
     monsterName
   };
@@ -74,19 +66,19 @@ export const makeNewMonster = (monsterLife, monsterName) => {
 
 export const setPlayerOnLevelExit = () => {
   return {
-    type: SET_PLAYER_ON_LEVEL_EXIT
+    type: C.SET_PLAYER_ON_LEVEL_EXIT
   };
 };
 
 export const setPlayerOnLevelStart = () => {
   return {
-    type: SET_PLAYER_ON_LEVEL_START
+    type: C.SET_PLAYER_ON_LEVEL_START
   };
 };
 
 export const movePlayer = (position, walkIndex, spriteLocation) => {
   return {
-    type: MOVE_PLAYER,
+    type: C.MOVE_PLAYER,
     position,
     walkIndex,
     spriteLocation
@@ -114,14 +106,14 @@ export const movePlayerThunk = direction => dispatch => {
 
 function getSpriteLocation(direction, walkIndex) {
   switch (direction) {
-    case 'WEST':
-      return `-${SPRITE_SIZE * walkIndex}px ${SPRITE_SIZE * 0}px`;
-    case 'EAST':
-      return `-${SPRITE_SIZE * walkIndex}px ${SPRITE_SIZE * -1}px`;
-    case 'NORTH':
-      return `-${SPRITE_SIZE * walkIndex}px ${(SPRITE_SIZE - 2) * -3}px`;
-    case 'SOUTH':
-      return `-${SPRITE_SIZE * walkIndex}px ${(SPRITE_SIZE - 2) * 0}px`;
+    case C.WEST:
+      return `-${C.SPRITE_SIZE * walkIndex}px ${C.SPRITE_SIZE * 0}px`;
+    case C.EAST:
+      return `-${C.SPRITE_SIZE * walkIndex}px ${C.SPRITE_SIZE * -1}px`;
+    case C.NORTH:
+      return `-${C.SPRITE_SIZE * walkIndex}px ${(C.SPRITE_SIZE - 2) * -3}px`;
+    case C.SOUTH:
+      return `-${C.SPRITE_SIZE * walkIndex}px ${(C.SPRITE_SIZE - 2) * 0}px`;
     default:
   }
 }
@@ -129,14 +121,14 @@ function getSpriteLocation(direction, walkIndex) {
 function getNewPosition(oldPos, direction) {
   // const oldPos = store.getState().player.position;
   switch (direction) {
-    case 'EAST':
-      return [oldPos[0] - SPRITE_BACKGROUND_SIZE, oldPos[1]];
-    case 'WEST':
-      return [oldPos[0] + SPRITE_BACKGROUND_SIZE, oldPos[1]];
-    case 'NORTH':
-      return [oldPos[0], oldPos[1] - SPRITE_BACKGROUND_SIZE];
-    case 'SOUTH':
-      return [oldPos[0], oldPos[1] + SPRITE_BACKGROUND_SIZE];
+    case C.EAST:
+      return [oldPos[0] - C.SPRITE_BACKGROUND_SIZE, oldPos[1]];
+    case C.WEST:
+      return [oldPos[0] + C.SPRITE_BACKGROUND_SIZE, oldPos[1]];
+    case C.NORTH:
+      return [oldPos[0], oldPos[1] - C.SPRITE_BACKGROUND_SIZE];
+    case C.SOUTH:
+      return [oldPos[0], oldPos[1] + C.SPRITE_BACKGROUND_SIZE];
     default:
   }
 }
@@ -144,16 +136,16 @@ function getNewPosition(oldPos, direction) {
 function observeBoundaries(newPos) {
   return (
     newPos[0] >= 0 &&
-    newPos[0] <= MAP_WIDTH - SPRITE_SIZE &&
+    newPos[0] <= C.MAP_WIDTH - C.SPRITE_SIZE &&
     newPos[1] >= 0 &&
-    newPos[1] <= MAP_HEIGHT - SPRITE_SIZE * 1.5
+    newPos[1] <= C.MAP_HEIGHT - C.SPRITE_SIZE * 1.5
   );
 }
 
 function observeImpassable(newPos) {
   const tiles = store.getState().map.tiles;
-  const y = newPos[1] / SPRITE_BACKGROUND_SIZE;
-  const x = newPos[0] / SPRITE_BACKGROUND_SIZE;
+  const y = newPos[1] / C.SPRITE_BACKGROUND_SIZE;
+  const x = newPos[0] / C.SPRITE_BACKGROUND_SIZE;
   const nextTile = tiles[y][x];
   return nextTile >= 3 && nextTile <= 10;
 }

@@ -1,9 +1,9 @@
 .animation {
   position: absolute;
-  width: 128px;
-  height: 52px;
   /* background: url(/tiles/fire.png) no-repeat; */
   transition: 2s;
+  border: 1px solid pink;
+  z-index: 1;
 }
 
 .hideAnimation {

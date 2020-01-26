@@ -1,6 +1,7 @@
 const initialState = {
   monsterName: "",
-  monsterLife: 100
+  monsterLife: 100,
+  position: [100, 10]
 };
 
 const monsterReducer = (state = initialState, action) => {
@@ -16,6 +17,9 @@ const monsterReducer = (state = initialState, action) => {
     }
     case "MAKE_NEW_MONSTER": {
       return { ...state, monsterLife: 100 };
+    }
+    case "GET_MONSTER_POSITION": {
+      return { ...state, position: action.position };
     }
 
     default:

@@ -1,10 +1,15 @@
 import React, { PureComponent } from "react";
 import * as C from "../../constants";
 import { connect } from "react-redux";
-import { makeMonsterNameThunk } from "../../ac";
+import { makeMonsterNameThunk, getMonsterPosition } from "../../ac";
 import styles from "./Monster.module.scss";
 
 class Monster extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.monsterRef = React.createRef();
+  }
+
   state = {
     spriteLocation: C.BASIC_SPRITE_LOCATION,
     walkIndex: C.BASIC_WALKINDEX,
@@ -39,7 +44,11 @@ class Monster extends PureComponent {
   };
 
   componentDidMount() {
+    const { left, top } = this.monsterRef.current.getBoundingClientRect();
+    const position = [Math.round(left), Math.round(top)];
+
     this.props.dispatch(makeMonsterNameThunk());
+    this.props.dispatch(getMonsterPosition(position));
   }
 
   componentDidUpdate(prevProps) {
@@ -64,6 +73,7 @@ class Monster extends PureComponent {
         style={{
           backgroundPosition: spriteLocation
         }}
+        ref={this.monsterRef}
       />
     );
   }

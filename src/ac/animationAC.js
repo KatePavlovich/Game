@@ -1,9 +1,5 @@
-import store from '../store';
-import {
-  MOVE_ANIMATION,
-  FIRE_SPRITE_SIZE,
-  RESET_ANIMATION
-} from '../constants';
+import store from "../store";
+import * as C from "../constants";
 
 export const moveAnimation = (
   position,
@@ -12,7 +8,7 @@ export const moveAnimation = (
   spriteIMG
 ) => {
   return {
-    type: MOVE_ANIMATION,
+    type: C.MOVE_ANIMATION,
     position,
     walkIndex,
     spriteLocation,
@@ -20,14 +16,15 @@ export const moveAnimation = (
   };
 };
 
-export const resetAnimation = () => {
+export const resetAnimation = positionY => {
   return {
-    type: RESET_ANIMATION
+    type: C.RESET_ANIMATION,
+    position: [0, positionY]
   };
 };
 
 const getSpriteLocation = walkIndex => {
-  return `-${FIRE_SPRITE_SIZE * walkIndex}px -${FIRE_SPRITE_SIZE * 2.5}px`;
+  return `-${C.FIRE_SPRITE_WIDTH * walkIndex}px -${C.FIRE_SPRITE_HEIGHT}px`;
 };
 
 const getWalkIndex = () => {
@@ -37,12 +34,19 @@ const getWalkIndex = () => {
 
 const getSprite = sprite => {
   switch (sprite) {
-    case 'fire':
-      return '/tiles/flame_fire.png';
-    case 'leaf':
-      return '/tiles/flame_blueish_flame.png';
+    case C.FIRE:
+      return "/tiles/flame_fire.png";
+    case C.LEAF:
+      return "/tiles/flame_blueish_flame.png";
     default:
   }
+};
+
+export const getAnimationInitialPosition = position => {
+  return {
+    type: C.GET_ANIMATION_INITIAL_POSITION,
+    position
+  };
 };
 
 export const moveAnimationThunk = sprite => dispatch => {
@@ -50,11 +54,8 @@ export const moveAnimationThunk = sprite => dispatch => {
   const spriteIMG = getSprite(sprite);
 
   const oldPos = store.getState().animation.position;
-  let position = oldPos;
-  position = [
-    oldPos[0] + FIRE_SPRITE_SIZE * 3.5,
-    oldPos[1] + FIRE_SPRITE_SIZE * 3
-  ];
+  let position = [...oldPos];
+  position = [oldPos[0] + C.FIRE_SPRITE_WIDTH * 6, oldPos[1]];
 
   let spriteLocation = getSpriteLocation(walkIndex);
   let action = moveAnimation(position, walkIndex, spriteLocation, spriteIMG);

@@ -2,6 +2,7 @@ export const GET_PLAYER_NAME = "GET_PLAYER_NAME";
 export const GET_MONSTER_NAME = "GET_MONSTER_NAME";
 export const REDUCE_MONSTER_LIFE = "REDUCE_MONSTER_LIFE";
 export const MAKE_NEW_MONSTER = "MAKE_NEW_MONSTER";
+export const GET_MONSTER_POSITION = "GET_MONSTER_POSITION";
 export const REDUCE_PLAYER_LIFE = "REDUCE_PLAYER_LIFE";
 export const SET_PLAYER_ON_LEVEL_EXIT = "SET_PLAYER_ON_LEVEL_EXIT";
 export const SET_PLAYER_ON_LEVEL_START = "SET_PLAYER_ON_LEVEL_START";
@@ -12,7 +13,16 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
 export const SPRITE_SIZE = 67;
-export const FIRE_SPRITE_SIZE = 128;
+export const FIRE_SPRITE_WIDTH = 128;
+export const FIRE_SPRITE_HEIGHT = 126;
+export const FIRE = "fire";
+export const LEAF = "leaf";
+
+export const EAST = "EAST";
+export const WEST = "WEST";
+export const NORTH = "NORTH";
+export const SOUTH = "SOUTH";
+
 export const SPRITE_BACKGROUND_SIZE = 40;
 export const MAP_WIDTH = 880;
 export const MAP_HEIGHT = 650;
@@ -24,6 +34,7 @@ export const RESET_TASK_STATE = "RESET_TASK_STATE";
 export const RESET_SPELL = "RESET_SPELL";
 export const MOVE_ANIMATION = "MOVE_ANIMATION";
 export const RESET_ANIMATION = "RESET_ANIMATION";
+export const GET_ANIMATION_INITIAL_POSITION = "GET_ANIMATION_INITIAL_POSITION";
 
 export const BASIC_SPRITE_LOCATION = "0px 0px";
 export const BASIC_WALKINDEX = 0;
