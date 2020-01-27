@@ -4,7 +4,7 @@ import "./index.css";
 import { Player } from "../../components/player";
 import { Monster } from "../../components/monster";
 import Map from "../../components/map/map";
-import { TasksScreen } from "../tasksScreen/tasksScreen";
+import { TasksScreen } from "../TasksScreen";
 import { makeMonsterNameThunk, makeNewMonster, movePlayer } from "../../ac";
 import Score from "../score";
 import tiles from "../../components/data/tiles.js";
