@@ -4,6 +4,8 @@ export const REDUCE_MONSTER_LIFE = "REDUCE_MONSTER_LIFE";
 export const MAKE_NEW_MONSTER = "MAKE_NEW_MONSTER";
 export const GET_MONSTER_POSITION = "GET_MONSTER_POSITION";
 export const REDUCE_PLAYER_LIFE = "REDUCE_PLAYER_LIFE";
+export const RESTORE_PLAYER_LIFE = "RESTORE_PLAYER_LIFE";
+export const SHOULD_PLAY_HEALTH_ANIMATION = "SHOULD_PLAY_HEALTH_ANIMATION";
 export const SET_PLAYER_ON_LEVEL_EXIT = "SET_PLAYER_ON_LEVEL_EXIT";
 export const SET_PLAYER_ON_LEVEL_START = "SET_PLAYER_ON_LEVEL_START";
 export const ADD_TILES = "ADD_TILES";
@@ -18,6 +20,10 @@ export const FIRE_SPRITE_WIDTH = 128;
 export const FIRE_SPRITE_HEIGHT = 126;
 export const FIRE = "fire";
 export const LEAF = "leaf";
+export const HEALTH = "health";
+
+export const FIRE_TOOLTIP = "fire spell";
+export const HEALTH_TOOLTIP = "health spell";
 
 export const EAST = "EAST";
 export const WEST = "WEST";

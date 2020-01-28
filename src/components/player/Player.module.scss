@@ -1,9 +1,24 @@
+.playerContainer {
+  position: relative;
+}
+
 .player {
-    position: absolute;
-    /*   background: url('/tiles/ada_0.png') no-repeat;
+  position: absolute;
+  /*   background: url('/tiles/ada_0.png') no-repeat;
   width: 40px;
   height: 40px; */
-    background: url('/tiles/stella_walk2.png') no-repeat;
-    width: 67px;
-    height: 67px;
+  background: url("/tiles/stella_walk2.png") no-repeat;
+  width: 67px;
+  height: 67px;
+  z-index: 1;
+}
+
+.health {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 104px;
+  height: 126px;
+  background: url("/tiles/monster6.png") no-repeat;
+  border: 1px solid greenyellow;
 }

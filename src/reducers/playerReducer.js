@@ -1,29 +1,39 @@
 const initialState = {
-  playerName: '',
+  playerName: "",
   playerLife: 100,
   position: [0, 0],
-  spriteLocation: '0px 0px',
-  direction: 'east',
+  spriteLocation: "0px 0px",
+  direction: "east",
   walkIndex: 0,
   isLoggedIn: false,
-  isPlayerOnLevelExit: false
+  isPlayerOnLevelExit: false,
+  shouldPlayHealthAnimation: false
 };
 
 const playerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN': {
+    case "LOGIN": {
       return { ...state, isLoggedIn: true };
     }
-    case 'LOGOUT': {
+    case "LOGOUT": {
       return { ...state, isLoggedIn: false };
     }
-    case 'GET_PLAYER_NAME': {
+    case "GET_PLAYER_NAME": {
       return { ...state, playerName: action.playerName };
     }
-    case 'REDUCE_PLAYER_LIFE': {
+    case "REDUCE_PLAYER_LIFE": {
       return { ...state, playerLife: state.playerLife - 20 };
     }
-    case 'MOVE_PLAYER': {
+    case "RESTORE_PLAYER_LIFE": {
+      return { ...state, playerLife: 100 };
+    }
+    case "SHOULD_PLAY_HEALTH_ANIMATION": {
+      return {
+        ...state,
+        shouldPlayHealthAnimation: !state.shouldPlayHealthAnimation
+      };
+    }
+    case "MOVE_PLAYER": {
       return {
         ...state,
         position: action.position,
@@ -31,13 +41,13 @@ const playerReducer = (state = initialState, action) => {
         spriteLocation: action.spriteLocation
       };
     }
-    case 'SET_PLAYER_ON_LEVEL_EXIT': {
+    case "SET_PLAYER_ON_LEVEL_EXIT": {
       return {
         ...state,
         isPlayerOnLevelExit: true
       };
     }
-    case 'SET_PLAYER_ON_LEVEL_START': {
+    case "SET_PLAYER_ON_LEVEL_START": {
       return {
         ...state,
         isPlayerOnLevelExit: false

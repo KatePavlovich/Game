@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { movePlayerThunk } from "../../ac";
+import * as C from "../../constants";
 import styles from "./Player.module.scss";
 
 class Player extends Component {
@@ -8,6 +9,7 @@ class Player extends Component {
     if (this.props.dontMove) return;
     window.addEventListener("keydown", this.handleMove);
   }
+
   componentWillUnmount() {
     window.addEventListener("keydown", this.handleMove);
   }
@@ -29,16 +31,24 @@ class Player extends Component {
   render() {
     const { position, spriteLocation, dontMove } = this.props;
     return (
-      <div
-        className={styles.player}
-        style={{
-          top: `${position[1]}px`,
-          left: `${position[0]}px`,
-          backgroundPosition: spriteLocation
-        }}
-        onKeyDown={!dontMove ? this.handleMove : undefined}
-        tabIndex="0"
-      />
+      <div className={styles.playerContainer}>
+        <div
+          className={styles.player}
+          style={{
+            top: `${position[1]}px`,
+            left: `${position[0]}px`,
+            backgroundPosition: spriteLocation
+          }}
+          onKeyDown={!dontMove ? this.handleMove : undefined}
+          tabIndex="0"
+        />
+        {/* <div
+          className={styles.health}
+          style={{
+            backgroundPosition: AnimationSpriteLocation
+          }}
+        /> */}
+      </div>
     );
   }
 }

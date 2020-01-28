@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { openModalAC } from "../../ac/modalAC";
 import { toggleSound } from "../../ac";
 import { ActiveMenuLink } from "../activeLink";
-import ModalSpell from "../modalSpell";
+import { SpellModal } from "../modalSpell";
 import SpellBook from "../SpellBook/spellBook";
 import store from "../../store";
 import { isLoggedOut } from "../../ac";
@@ -30,7 +30,7 @@ const Header = ({
           <ActiveMenuLink activeOnlyWhenExact={true} to="/" label="Home" />
         </li>
         <SpellBook showModalSpell={showModalSpell} />
-        {showSpellModal && <ModalSpell />}
+        {showSpellModal && <SpellModal />}
         <li>
           <ActiveMenuLink to="/score" label="Score" />
         </li>

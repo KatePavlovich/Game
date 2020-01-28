@@ -56,6 +56,12 @@ export const reducePlayerLife = () => {
   };
 };
 
+export const restorePlayerLife = () => {
+  return {
+    type: C.RESTORE_PLAYER_LIFE
+  };
+};
+
 export const makeNewMonster = (monsterLife, monsterName) => {
   return {
     type: C.MAKE_NEW_MONSTER,

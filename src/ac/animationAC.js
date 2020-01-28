@@ -1,5 +1,6 @@
 import store from "../store";
 import * as C from "../constants";
+import { restorePlayerLife } from "./index";
 
 export const moveAnimation = (
   position,
@@ -49,15 +50,24 @@ export const getAnimationInitialPosition = position => {
   };
 };
 
-export const moveAnimationThunk = sprite => dispatch => {
+const playOneAnimationStep = (sprite, stepsAmount) => {
   const walkIndex = getWalkIndex();
   const spriteIMG = getSprite(sprite);
 
   const oldPos = store.getState().animation.position;
   let position = [...oldPos];
-  position = [oldPos[0] + C.FIRE_SPRITE_WIDTH * 6, oldPos[1]];
+  position = [oldPos[0] + C.FIRE_SPRITE_WIDTH * stepsAmount, oldPos[1]];
 
   let spriteLocation = getSpriteLocation(walkIndex);
-  let action = moveAnimation(position, walkIndex, spriteLocation, spriteIMG);
+  return moveAnimation(position, walkIndex, spriteLocation, spriteIMG);
+};
+
+export const moveAnimationThunk = sprite => dispatch => {
+  if (sprite === C.HEALTH) {
+    dispatch(restorePlayerLife());
+    return;
+  }
+
+  let action = playOneAnimationStep(sprite, 6);
   dispatch(action);
 };
