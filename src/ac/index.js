@@ -37,9 +37,10 @@ export const makeMonsterNameThunk = () => dispatch => {
   dispatch(action);
 };
 
-export const reduceMonsterLife = () => {
+export const reduceMonsterLife = lifeToReduce => {
   return {
-    type: C.REDUCE_MONSTER_LIFE
+    type: C.REDUCE_MONSTER_LIFE,
+    lifeToReduce
   };
 };
 

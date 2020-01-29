@@ -15,6 +15,8 @@ export const TOGGLE_SOUND = "TOGGLE_SOUND";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
+export const LIFE_TO_REDUCE_WITH_SPELL = 20;
+export const LIFE_TO_REDUCE_WITHOUT_SPELL = 10;
 export const SPRITE_SIZE = 67;
 export const FIRE_SPRITE_WIDTH = 128;
 export const FIRE_SPRITE_HEIGHT = 126;

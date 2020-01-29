@@ -13,7 +13,7 @@ const monsterReducer = (state = initialState, action) => {
       };
     }
     case "REDUCE_MONSTER_LIFE": {
-      return { ...state, monsterLife: state.monsterLife - 20 };
+      return { ...state, monsterLife: state.monsterLife - action.lifeToReduce };
     }
     case "MAKE_NEW_MONSTER": {
       return { ...state, monsterLife: 100 };
