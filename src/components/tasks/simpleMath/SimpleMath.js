@@ -10,7 +10,8 @@ import {
 } from "../../../helperFunctions";
 import { chooseTaskAC } from "../../../ac/taskAC";
 import { LifeBar } from "../../LifeBar/LifeBar";
-import { signs } from "../../../constants";
+import * as C from "../../../constants";
+import * as S from "../../../constants/stringValues";
 import styles from "./SimpleMath.module.scss";
 import { Battle } from "../../battle";
 
@@ -29,14 +30,41 @@ class SimpleMath extends Component {
     this.generateNewQuestion();
   };
 
-  generateNewQuestion = () => {
-    const number1 = getRandomNumberWithoutZero(10);
-    const number2 = getRandomNumberWithoutZero(10);
-    const sign = getRandomValueFromArray(signs);
+  setAnswer = (number1, number2, sign) => {
     // eslint-disable-next-line no-eval
     const answer = parseInt(eval(`${number1}${sign}${number2}`));
     this.setState({
-      answer,
+      answer
+    });
+  };
+
+  setValuesForSimpleLevel = (number1, number2) => {
+    if (number1 < number2) {
+      [number1, number2] = [number2, number1];
+    }
+    const sign = getRandomValueFromArray(C.simpleSigns);
+    this.setAnswer(number1, number2, sign);
+    this.setState({
+      number1,
+      number2,
+      sign
+    });
+  };
+
+  generateNewQuestion = () => {
+    let number1 = getRandomNumberWithoutZero(10);
+    let number2 = getRandomNumberWithoutZero(10);
+    const { level } = this.props;
+
+    if (level === S.SIMPLE) {
+      this.setValuesForSimpleLevel(number1, number2);
+      return;
+    }
+
+    const sign = getRandomValueFromArray(C.signs);
+    this.setAnswer(number1, number2, sign);
+
+    this.setState({
       number1,
       number2,
       sign
@@ -124,7 +152,8 @@ class SimpleMath extends Component {
 }
 
 const mapStateToProps = state => ({
-  wasTaskAnswered: state.tasks.wasTaskAnswered
+  wasTaskAnswered: state.tasks.wasTaskAnswered,
+  level: state.tasks.level
 });
 
 const mapDispatchToProps = dispatch => ({

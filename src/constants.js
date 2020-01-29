@@ -40,6 +40,8 @@ export const CHOOSE_TASK = "CHOOSE_TASK";
 export const ANSWER_TASK = "ANSWER_TASK";
 export const CHECK_CORRECT_ANSWER = "CHECK_CORRECT_ANSWER";
 export const RESET_TASK_STATE = "RESET_TASK_STATE";
+export const SET_TASK_LEVEL = "SET_TASK_LEVEL";
+
 export const RESET_SPELL = "RESET_SPELL";
 export const MOVE_ANIMATION = "MOVE_ANIMATION";
 export const RESET_ANIMATION = "RESET_ANIMATION";
@@ -74,6 +76,7 @@ export const bangSound = new Audio(
   "https://freesound.org/data/previews/33/33245_65091-lq.mp3"
 );
 
+export const simpleSigns = ["+", "-"];
 export const signs = ["+", "-", "*", "/"];
 
 export const ALPHABET_LENGTH = 32;

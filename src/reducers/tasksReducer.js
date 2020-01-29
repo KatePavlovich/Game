@@ -1,7 +1,8 @@
 const initialState = {
   wasTaskAnswered: false,
   wasTaskChoosed: false,
-  wasAnswerCorrect: false
+  wasAnswerCorrect: false,
+  level: ""
 };
 
 const tasksReducer = (state = initialState, action) => {
@@ -30,6 +31,12 @@ const tasksReducer = (state = initialState, action) => {
         wasTaskAnswered: false,
         wasTaskChoosed: false,
         wasAnswerCorrect: false
+      };
+    }
+    case "SET_TASK_LEVEL": {
+      return {
+        ...state,
+        level: action.level
       };
     }
 

@@ -1,31 +1,33 @@
-import {
-  CHOOSE_TASK,
-  ANSWER_TASK,
-  CHECK_CORRECT_ANSWER,
-  RESET_TASK_STATE
-} from "../constants";
+import * as C from "../constants";
 
 export const chooseTaskAC = () => {
   return {
-    type: CHOOSE_TASK
+    type: C.CHOOSE_TASK
   };
 };
 
 export const wasTaskAnsweredAC = () => {
   return {
-    type: ANSWER_TASK
+    type: C.ANSWER_TASK
   };
 };
 
 export const checkCorrectAnswerAC = wasAnswerCorrect => {
   return {
-    type: CHECK_CORRECT_ANSWER,
+    type: C.CHECK_CORRECT_ANSWER,
     wasAnswerCorrect
   };
 };
 
 export const resetTasksState = () => {
   return {
-    type: RESET_TASK_STATE
+    type: C.RESET_TASK_STATE
+  };
+};
+
+export const setTaskLevelAC = level => {
+  return {
+    type: C.SET_TASK_LEVEL,
+    level
   };
 };
