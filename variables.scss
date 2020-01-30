@@ -58,3 +58,12 @@ $purple: #ae003a;
     color: $purple;
   }
 }
+
+@mixin levelImg {
+  position: absolute;
+  top: -15px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  z-index: 1;
+}

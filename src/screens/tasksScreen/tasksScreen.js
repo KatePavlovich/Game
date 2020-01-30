@@ -10,8 +10,8 @@ import styles from "./TasksScreen.module.scss";
 const TasksScreen = ({ wasTaskChoosed }) => {
   const dispatch = useDispatch();
 
-  const handleClick = () => {
-    dispatch(setTaskLevelAC(S.SIMPLE));
+  const handleClick = level => {
+    dispatch(setTaskLevelAC(level));
   };
   return (
     <Modal
@@ -20,7 +20,32 @@ const TasksScreen = ({ wasTaskChoosed }) => {
       closable={false}
       maskClosable={false}
     >
-      <Link className={styles.link} onClick={handleClick} to="/simpleMath">
+      <Link
+        className={styles.link}
+        onClick={() => handleClick(S.SIMPLE)}
+        to="/simpleMath"
+      >
+        <div className={styles.simple}></div>
+        <div
+          className={classNames(styles.imgContainer, styles.math, styles.level)}
+        ></div>
+        <span className={styles.title}>Math</span>
+      </Link>
+      <Link
+        className={styles.link}
+        onClick={() => handleClick(S.MIDDLE)}
+        to="/simpleMath"
+      >
+        <div className={styles.middle}></div>
+        <div className={classNames(styles.imgContainer, styles.math)}></div>
+        <span className={styles.title}>Math</span>
+      </Link>
+      <Link
+        className={styles.link}
+        onClick={() => handleClick(S.HARD)}
+        to="/simpleMath"
+      >
+        <div className={styles.hard}></div>
         <div className={classNames(styles.imgContainer, styles.math)}></div>
         <span className={styles.title}>Math</span>
       </Link>

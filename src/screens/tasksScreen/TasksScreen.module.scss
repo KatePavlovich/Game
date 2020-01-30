@@ -24,7 +24,28 @@
 }
 
 .math {
+  position: relative;
   background: url(/tiles/calculator.svg) 50% 50% no-repeat;
+}
+
+.simple {
+  @include levelImg;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+  background: url(/tiles/feather.svg) 0 0 no-repeat;
+}
+
+.middle {
+  @include levelImg;
+  background: url(/tiles/gym.svg) 0 0 no-repeat;
+}
+
+.hard {
+  @include levelImg;
+  right: -6px;
+  background: url(/tiles/weight.svg) 0 0 no-repeat;
 }
 
 .alphabet {

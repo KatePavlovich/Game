@@ -30,11 +30,14 @@ class SimpleMath extends Component {
     this.generateNewQuestion();
   };
 
-  setAnswer = (number1, number2, sign) => {
+  setValues = (number1, number2, sign) => {
     // eslint-disable-next-line no-eval
     const answer = parseInt(eval(`${number1}${sign}${number2}`));
     this.setState({
-      answer
+      answer,
+      number1,
+      number2,
+      sign
     });
   };
 
@@ -42,13 +45,13 @@ class SimpleMath extends Component {
     if (number1 < number2) {
       [number1, number2] = [number2, number1];
     }
-    const sign = getRandomValueFromArray(C.simpleSigns);
-    this.setAnswer(number1, number2, sign);
-    this.setState({
-      number1,
-      number2,
-      sign
-    });
+    const sign = getRandomValueFromArray(C.SIMPLE_SIGNS);
+    this.setValues(number1, number2, sign);
+  };
+
+  setValuesForMiddleLevel = (number1, number2) => {
+    const sign = getRandomValueFromArray(C.MIDDLE_SIGNS);
+    this.setValues(number1, number2, sign);
   };
 
   generateNewQuestion = () => {
@@ -61,14 +64,13 @@ class SimpleMath extends Component {
       return;
     }
 
-    const sign = getRandomValueFromArray(C.signs);
-    this.setAnswer(number1, number2, sign);
+    if (level === S.MIDDLE) {
+      this.setValuesForSimpleLevel(number1, number2);
+      return;
+    }
 
-    this.setState({
-      number1,
-      number2,
-      sign
-    });
+    const sign = getRandomValueFromArray(C.SIGNS);
+    this.setValues(number1, number2, sign);
   };
 
   handleChange = e => {
