@@ -7,6 +7,7 @@ import styles from "./SpellModal.module.scss";
 import leaf from "./img/leaf-acid-3.png";
 import wind from "./img/wind-blue-3.png";
 import health from "./img/heal-royal-3.png";
+import armor from "./img/protect-royal-3.png";
 import * as C from "../../constants";
 
 class SpellModal extends Component {
@@ -58,6 +59,14 @@ class SpellModal extends Component {
           alt="health-spell"
           data-spell={C.HEALTH}
           title={C.HEALTH_TOOLTIP}
+        />
+        <img
+          className={styles.spellImg}
+          src={armor}
+          onClick={this.setSpellToStore}
+          alt="armor-spell"
+          data-spell={C.ARMOR}
+          title={C.ARMOR_TOOLTIP}
         />
       </Modal>
     );

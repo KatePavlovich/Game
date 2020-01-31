@@ -23,9 +23,11 @@ export const FIRE_SPRITE_HEIGHT = 126;
 export const FIRE = "fire";
 export const LEAF = "leaf";
 export const HEALTH = "health";
+export const ARMOR = "armor";
 
 export const FIRE_TOOLTIP = "fire spell";
 export const HEALTH_TOOLTIP = "health spell";
+export const ARMOR_TOOLTIP = "armor spell";
 
 export const EAST = "EAST";
 export const WEST = "WEST";

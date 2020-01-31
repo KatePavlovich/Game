@@ -12,6 +12,7 @@ const withReduceLives = WrappedComponent => {
     const monsterLife = useSelector(state => state.monster.monsterLife);
     const { sound } = useSelector(state => state.sound);
     const isSpellChoosen = useSelector(state => state.spell.isSpellChoosen);
+    const choosenSpell = useSelector(state => state.spell.choosedSpell);
 
     const dispatch = useDispatch();
 
@@ -26,6 +27,7 @@ const withReduceLives = WrappedComponent => {
 
     const reducePlayerLife = () => {
       if (playerLife === 0) return;
+      if (choosenSpell === C.ARMOR) return;
       dispatch({ type: C.REDUCE_PLAYER_LIFE });
       sound && C.failureAudio.play();
     };
