@@ -51,14 +51,6 @@
   justify-self: start;
 }
 
-.headerUl li:hover {
-  color: #ae003a;
-}
-
-.navLink {
-  @include navLink;
-}
-
 .sound {
   margin-left: auto;
   width: 30px;

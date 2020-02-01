@@ -16,32 +16,7 @@ code {
 }
 
 .navLink {
-  font-size: 1em;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #555555;
-}
-
-.navLink--active {
-  font-weight: 900;
-  text-transform: uppercase;
-  color: #ae003a;
-}
-
-.navLink:hover,
-.navLink--active:hover {
-  color: #ae003a;
-}
-
-.ant-modal-footer,
-.ant-modal-header {
-  display: none;
-}
-
-.ant-modal-body {
-  background: url(/tiles/paperBackground.png);
-  border: 4px solid transparent;
-  border-image: url(/tiles/border.png) 5 round round;
+  @include navLink;
 }
 
 .ant-modal-footer,
@@ -52,4 +27,7 @@ code {
 .ant-modal-body {
   display: flex;
   justify-content: space-around;
+  background: url(/tiles/paperBackground.png);
+  border: 4px solid transparent;
+  border-image: url(/tiles/border.png) 5 round round;
 }

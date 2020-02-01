@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { openModalAC } from "../../ac/modalAC";
 import { toggleSound } from "../../ac";
-import { ActiveMenuLink } from "../activeLink";
+import { ActiveLink } from "../ActiveLink";
 import { SpellModal } from "../modalSpell";
 import { SpellBook } from "../SpellBook";
 import store from "../../store";
@@ -27,20 +27,20 @@ const Header = ({
     <header className={styles.header}>
       <ul className={styles.headerUl}>
         <li>
-          <ActiveMenuLink activeOnlyWhenExact={true} to="/" label="Home" />
+          <ActiveLink activeOnlyWhenExact={true} to="/" label="Home" />
         </li>
         <SpellBook showModalSpell={showModalSpell} />
         {showSpellModal && <SpellModal />}
         <li>
-          <ActiveMenuLink to="/score" label="Score" />
+          <ActiveLink to="/score" label="Score" />
         </li>
         {isLoggedIn === true ? (
-          <li className={styles.navLink} onClick={handleLogout}>
+          <li className="navLink" onClick={handleLogout}>
             Logout
           </li>
         ) : (
           <li>
-            <ActiveMenuLink to="/login" label="Login" />
+            <ActiveLink to="/login" label="Login" />
           </li>
         )}
         <span

@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 .homeScreen {
   height: 92vh;
   background: #eee;
@@ -9,4 +11,9 @@
 
 .playLink {
   font-size: 2rem;
+}
+
+.navLink {
+  @include navLink;
+  font-size: 4rem;
 }

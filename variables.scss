@@ -51,6 +51,7 @@ $purple: #ae003a;
   &--active {
     font-weight: bold;
     color: $purple;
+    text-transform: uppercase;
   }
 
   &:hover,
