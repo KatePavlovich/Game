@@ -30,22 +30,21 @@
 
 .simple {
   @include levelImg;
-  top: -10px;
-  right: -10px;
-  width: 24px;
-  height: 24px;
-  background: url(/tiles/feather.svg) 0 0 no-repeat;
+
+  filter: invert(36%) sepia(77%) saturate(1121%) hue-rotate(58deg)
+    brightness(92%) contrast(89%);
 }
 
 .middle {
   @include levelImg;
-  background: url(/tiles/gym.svg) 0 0 no-repeat;
+  filter: invert(73%) sepia(53%) saturate(802%) hue-rotate(345deg)
+    brightness(99%) contrast(105%);
 }
 
 .hard {
   @include levelImg;
-  right: -6px;
-  background: url(/tiles/weight.svg) 0 0 no-repeat;
+  filter: invert(34%) sepia(45%) saturate(2940%) hue-rotate(343deg)
+    brightness(99%) contrast(97%);
 }
 
 .alphabet {
