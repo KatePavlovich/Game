@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./index.css";
-import { Player } from "../../components/player";
-import { Monster } from "../../components/monster";
-import Map from "../../components/map/map";
+import { Player } from "../../components/Player";
+import { Monster } from "../../components/Monster";
+import { Map } from "../../components/Map";
 import { TasksScreen } from "../TasksScreen";
 import { makeMonsterNameThunk, makeNewMonster, movePlayer } from "../../ac";
-import Score from "../score";
-import tiles from "../../components/data/tiles.js";
-import { LifeBar } from "../../components/LifeBar/LifeBar";
+import { Score } from "../Score";
+import { tiles } from "../../components/data/tiles.js";
+import { LifeBar } from "../../components/LifeBar";
 import { addTilesAC, changeTilesThunk } from "../../ac/tilesAC";
-import ExitLevelModal from "../../components/ExitLevelModal";
+import { ExitLevelModal } from "../../components/ExitLevelModal";
 import { chooseTaskAC } from "../../ac/taskAC";
+import styles from "./LevelsMap.module.scss";
 
 class LevelsMap extends Component {
   state = {
@@ -58,15 +58,15 @@ class LevelsMap extends Component {
     ) : (
       <div>
         <LifeBar />
-        <div className="gameScreen__container">
-          <div className="map__wrapper">
+        <div className={styles.gameScreenContainer}>
+          <div className={styles.mapWrapper}>
             <Map />
             <Player />
             <Monster />
           </div>
         </div>
         <TasksScreen wasTaskChoosed={wasTaskChoosed} />
-        {monsterLife === 0 && <span className="blink" />}
+        {monsterLife === 0 && <span className={styles.blink} />}
         {isPlayerOnLevelExit && monsterLife === 0 && <ExitLevelModal />}
       </div>
     );

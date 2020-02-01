@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./spellBook.css";
+import styles from "./SpellBook.module.scss";
 
 class SpellBook extends Component {
   state = {
@@ -30,7 +30,7 @@ class SpellBook extends Component {
   render() {
     return (
       <div
-        className="spell__button"
+        className={styles.button}
         onClick={this.props.showModalSpell}
         onMouseOver={this.startBookAnimation}
         onMouseOut={this.stopBookAnimation}
@@ -42,4 +42,4 @@ class SpellBook extends Component {
   }
 }
 
-export default SpellBook;
+export { SpellBook };

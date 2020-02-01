@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { wasTaskAnsweredAC, checkCorrectAnswerAC } from "../../../ac/taskAC";
 import { withReduceLives } from "../../../helpers/reduceLivesHoc";
-import { Letter } from "./letter";
-import { LifeBar } from "../../LifeBar/LifeBar";
+import { Letter } from "./Letter";
+import { LifeBar } from "../../LifeBar";
 import {
   isAnswerCorrect,
   generateProposedLetters,
@@ -12,7 +12,7 @@ import {
 } from "../../../helperFunctions";
 import { chooseTaskAC } from "../../../ac/taskAC";
 import classNames from "classnames";
-import styles from "./findLetter.module.scss";
+import styles from "./FindLetter.module.scss";
 
 class FindLetter extends Component {
   state = {

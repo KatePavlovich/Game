@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Battle.module.scss";
-import { Monster } from "../monster";
-import { Player } from "../player";
+import { Monster } from "../Monster";
+import { Player } from "../Player";
 import { Animation } from "../Animation";
 
 const Battle = () => {

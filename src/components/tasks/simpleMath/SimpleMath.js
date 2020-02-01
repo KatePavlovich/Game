@@ -9,11 +9,11 @@ import {
   isAnswerCorrect
 } from "../../../helperFunctions";
 import { chooseTaskAC } from "../../../ac/taskAC";
-import { LifeBar } from "../../LifeBar/LifeBar";
+import { LifeBar } from "../../LifeBar";
 import * as C from "../../../constants";
 import * as S from "../../../constants/stringValues";
 import styles from "./SimpleMath.module.scss";
-import { Battle } from "../../battle";
+import { Battle } from "../../Battle";
 
 class SimpleMath extends Component {
   state = {

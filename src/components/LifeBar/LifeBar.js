@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import ProgressBar from "../../components/progressBar/progressBar";
-import styles from "./lifeBar.module.scss";
+import { ProgressBar } from "../ProgressBar";
+import styles from "./LifeBar.module.scss";
 
 const LifeBar = () => {
   const playerLife = useSelector(state => state.player.playerLife);

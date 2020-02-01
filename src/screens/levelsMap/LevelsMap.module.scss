@@ -1,10 +1,10 @@
-.gameScreen__container {
+.gameScreenContainer {
   display: grid;
   justify-content: center;
   background: url("/tiles/grass.png");
 }
 
-.map__wrapper {
+.mapWrapper {
   position: relative;
   width: 880px;
   height: 600px;

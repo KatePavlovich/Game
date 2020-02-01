@@ -1,7 +1,10 @@
 import React from "react";
+import styles from "./ProgressBar.module.scss";
 
 const Filler = props => {
-  return <div className="filler" style={{ width: `${props.percentage}%` }} />;
+  return (
+    <div className={styles.filler} style={{ width: `${props.percentage}%` }} />
+  );
 };
 
-export default Filler;
+export { Filler };

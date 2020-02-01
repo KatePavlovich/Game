@@ -15,21 +15,21 @@ code {
     monospace;
 }
 
-.nav-link {
+.navLink {
   font-size: 1em;
   text-decoration: none;
   text-transform: uppercase;
   color: #555555;
 }
 
-.nav-link--active {
+.navLink--active {
   font-weight: 900;
   text-transform: uppercase;
   color: #ae003a;
 }
 
-.nav-link:hover,
-.nav-link--active:hover {
+.navLink:hover,
+.navLink--active:hover {
   color: #ae003a;
 }
 
@@ -42,4 +42,14 @@ code {
   background: url(/tiles/paperBackground.png);
   border: 4px solid transparent;
   border-image: url(/tiles/border.png) 5 round round;
+}
+
+.ant-modal-footer,
+.ant-modal-header {
+  display: none;
+}
+
+.ant-modal-body {
+  display: flex;
+  justify-content: space-around;
 }

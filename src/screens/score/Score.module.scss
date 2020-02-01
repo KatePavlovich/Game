@@ -1,9 +1,9 @@
-.loginForm {
-  max-width: 25rem;
+.score {
+  display: grid;
+  width: 25rem;
   padding: 2rem;
   margin: 1rem auto;
-  justify-content: center;
-  font-family: 'Charm', cursive;
+  font-family: "Charm", cursive;
   text-align: center;
   background: url(/tiles/paperBackground.png);
   border: 4px solid transparent;
@@ -13,12 +13,8 @@
   border-image: url(/tiles/border.png) 5 round round;
 }
 
-.loginForm__title {
-  color: #555555;
-}
-
-.loginForm__input {
-  background: url(/tiles/paperBackground.png);
-  border: none;
-  outline: none;
+.data {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  text-align: left;
 }

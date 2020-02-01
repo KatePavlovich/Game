@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import styles from "./letter.module.scss";
+import styles from "./Letter.module.scss";
 
 const Letter = ({ letter, onClick, className }) => {
   return (

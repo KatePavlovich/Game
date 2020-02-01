@@ -4,7 +4,7 @@ import { openModalAC } from "../../ac/modalAC";
 import { toggleSound } from "../../ac";
 import { ActiveMenuLink } from "../activeLink";
 import { SpellModal } from "../modalSpell";
-import SpellBook from "../SpellBook/spellBook";
+import { SpellBook } from "../SpellBook";
 import store from "../../store";
 import { isLoggedOut } from "../../ac";
 import { withRouter } from "react-router";

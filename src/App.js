@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import Login from "./screens/login";
-import Score from "./screens/score";
-import Home from "./screens/home";
-import "./App.css";
-import { LevelsMap } from "./screens/levelsMap";
+import { Login } from "./screens/Login";
+import { Score } from "./screens/Score";
+import { Home } from "./screens/Home";
+import { LevelsMap } from "./screens/LevelsMap";
 import { SimpleMath } from "./components/tasks/simpleMath";
 import { FindLetter } from "./components/tasks/findLetter";
 import { Header } from "./components/Header";
@@ -28,4 +27,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export { App };

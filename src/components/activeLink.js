@@ -6,12 +6,13 @@ export function ActiveMenuLink({ label, to, activeOnlyWhenExact }) {
     <Route
       path={to}
       exact={activeOnlyWhenExact}
-      children={({ match }) =>
+      children={({ match }) => (
         <div>
-          <Link to={to} className={match ? "nav-link--active" : "nav-link"}>
+          <Link to={to} className={match ? "navLink--active" : "navLink"}>
             {label}
           </Link>
-        </div>}
+        </div>
+      )}
     />
   );
 }
