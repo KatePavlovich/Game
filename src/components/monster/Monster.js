@@ -19,7 +19,7 @@ class Monster extends PureComponent {
   makeMonsterHurtAnimation = () => {
     this.setState({
       timer: setInterval(() => {
-        if (this.state.walkIndex === 3) {
+        if (this.state.walkIndex === 4) {
           this.timerHandle = setTimeout(() => {
             this.stopMonsterAnimation();
             this.timerHandle = 0;
@@ -28,7 +28,7 @@ class Monster extends PureComponent {
         }
         this.setState({
           spriteLocation: `-${C.MONSTER_SPRITE_WIDTH *
-            this.state.walkIndex}px -${C.MONSTER_SPRITE_HEIGHT}px`,
+            this.state.walkIndex}px 0`,
           walkIndex: this.state.walkIndex > 4 ? 0 : this.state.walkIndex + 1
         });
       }, 100)
