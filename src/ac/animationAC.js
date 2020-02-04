@@ -71,3 +71,9 @@ export const moveAnimationThunk = sprite => dispatch => {
   let action = playOneAnimationStep(sprite, 6);
   dispatch(action);
 };
+
+export const showStaticAnimation = () => {
+  return {
+    type: C.SHOW_STATIC_ANIMATION
+  };
+};

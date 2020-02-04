@@ -32,6 +32,10 @@ const withReduceLives = WrappedComponent => {
       sound && C.failureAudio.play();
     };
 
+    const showStaticAnimationFunc = () => {
+      dispatch({ type: C.SHOW_STATIC_ANIMATION });
+    };
+
     return (
       <WrappedComponent
         {...props}
@@ -39,6 +43,7 @@ const withReduceLives = WrappedComponent => {
         reducePlayerLife={reducePlayerLife}
         monsterLife={monsterLife}
         playerLife={playerLife}
+        showStaticAnimation={showStaticAnimationFunc}
       />
     );
   };

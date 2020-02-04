@@ -15,8 +15,8 @@ const getStaticAnimationSprite = spell => {
       };
     case C.ARMOR:
       return {
-        top: 0,
-        left: 0,
+        top: `-${C.ARMOR_SPRITE_TOP_POSITION}px`,
+        left: `-${C.ARMOR_SPRITE_TOP_POSITION}px`,
         width: C.ARMOR_SPRITE_WIDTH,
         height: C.ARMOR_SPRITE_HEIGHT,
         background: `url("/tiles/health-sprite.png") no-repeat`,

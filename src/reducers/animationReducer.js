@@ -3,7 +3,8 @@ const initialState = {
   spriteLocation: "0px 0px",
   walkIndex: 0,
   showAnimation: false,
-  spriteIMG: ""
+  spriteIMG: "",
+  showStaticAnimation: false
 };
 
 const animationReducer = (state = initialState, action) => {
@@ -31,6 +32,12 @@ const animationReducer = (state = initialState, action) => {
         spriteLocation: "0px 0px",
         walkIndex: 0,
         showAnimation: false
+      };
+    }
+    case "SHOW_STATIC_ANIMATION": {
+      return {
+        ...state,
+        showStaticAnimation: !state.showStaticAnimation
       };
     }
 

@@ -3,6 +3,7 @@ import * as C from "../../constants";
 import * as S from "../../constants/stringValues";
 import { connect } from "react-redux";
 import { getStaticAnimationSprite } from "../../helpers/getStaticAnimationSprite";
+import { showStaticAnimation } from "../../ac/animationAC";
 import styles from "./StaticAnimation.module.scss";
 
 class StaticAnimation extends PureComponent {
@@ -15,8 +16,7 @@ class StaticAnimation extends PureComponent {
     height: "",
     background: "",
     backgroundPositionY: "",
-    spriteLength: "",
-    showAnimation: false
+    spriteLength: ""
   };
 
   makeAnimation = () => {
@@ -31,14 +31,14 @@ class StaticAnimation extends PureComponent {
 
   stopAnimation = () => {
     clearInterval(this.timerHandle);
-    this.setState({ showAnimation: false });
+    this.props.showStaticAnimationFunc();
   };
 
   componentDidUpdate(prevProps) {
+    const { showStaticAnimation, choosedSpell } = prevProps;
     if (
-      this.props.monsterLife < prevProps.monsterLife &&
-      (this.props.choosedSpell === C.HEALTH ||
-        this.props.choosedSpell === C.ARMOR)
+      this.props.showStaticAnimation !== showStaticAnimation &&
+      (choosedSpell === C.HEALTH || choosedSpell === C.ARMOR)
     ) {
       const {
         top,
@@ -48,7 +48,7 @@ class StaticAnimation extends PureComponent {
         background,
         backgroundPositionY,
         spriteLength
-      } = getStaticAnimationSprite(this.props.choosedSpell);
+      } = getStaticAnimationSprite(choosedSpell);
 
       this.setState({
         top,
@@ -59,8 +59,7 @@ class StaticAnimation extends PureComponent {
         spriteLocation: `-${width *
           this.state.walkIndex}px -${backgroundPositionY}px`,
         spriteLength,
-        backgroundPositionY,
-        showAnimation: true
+        backgroundPositionY
       });
 
       this.timerHandle = setInterval(this.makeAnimation, 100);
@@ -72,15 +71,8 @@ class StaticAnimation extends PureComponent {
   }
 
   render() {
-    const {
-      spriteLocation,
-      top,
-      left,
-      width,
-      height,
-      background,
-      showAnimation
-    } = this.state;
+    const { spriteLocation, top, left, width, height, background } = this.state;
+    const { showStaticAnimation } = this.props;
     return (
       <div
         className={styles.animation}
@@ -91,7 +83,7 @@ class StaticAnimation extends PureComponent {
           width: `${width}px`,
           height: `${height}px`,
           background,
-          display: showAnimation ? S.BLOCK : S.NONE
+          display: showStaticAnimation ? S.BLOCK : S.NONE
         }}
       />
     );
@@ -100,8 +92,13 @@ class StaticAnimation extends PureComponent {
 
 const mapStateToProps = state => ({
   choosedSpell: state.spell.choosedSpell,
-  playerPosition: state.player.position,
-  monsterLife: state.monster.monsterLife
+  showStaticAnimation: state.animation.showStaticAnimation
 });
 
-export default connect(mapStateToProps)(StaticAnimation);
+const mapDispatchToProps = dispatch => ({
+  showStaticAnimationFunc: () => {
+    dispatch(showStaticAnimation());
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(StaticAnimation);

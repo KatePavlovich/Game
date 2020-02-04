@@ -105,6 +105,7 @@ class SimpleMath extends Component {
       }
       this.props.checkCorrectAnswerAC(isUserAnswerCorrect);
       this.props.wasTaskAnsweredAC();
+      this.props.showStaticAnimation();
       this.setState({ userAnswer: "" });
     }
   };

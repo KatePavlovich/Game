@@ -52,7 +52,8 @@ class Monster extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.monsterLife < prevProps.monsterLife) {
+    const { monsterLife, choosedSpell } = this.props;
+    if (monsterLife < prevProps.monsterLife && choosedSpell !== C.HEALTH) {
       this.makeMonsterHurtAnimation();
     }
   }
@@ -80,7 +81,8 @@ class Monster extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  monsterLife: state.monster.monsterLife
+  monsterLife: state.monster.monsterLife,
+  choosedSpell: state.spell.choosedSpell
 });
 
 export default connect(mapStateToProps)(Monster);
