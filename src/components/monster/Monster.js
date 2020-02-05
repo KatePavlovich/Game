@@ -12,34 +12,28 @@ class Monster extends PureComponent {
 
   state = {
     spriteLocation: C.BASIC_SPRITE_LOCATION,
-    walkIndex: C.BASIC_WALKINDEX,
-    timer: null
+    walkIndex: C.BASIC_WALKINDEX
   };
 
   makeMonsterHurtAnimation = () => {
+    const { walkIndex } = this.state;
+
+    if (walkIndex === C.MONSTER_SPRITE_LENGTH) this.stopMonsterAnimation();
     this.setState({
-      timer: setInterval(() => {
-        if (this.state.walkIndex === 4) {
-          this.timerHandle = setTimeout(() => {
-            this.stopMonsterAnimation();
-            this.timerHandle = 0;
-          }, 3000);
-          return;
-        }
-        this.setState({
-          spriteLocation: `-${C.MONSTER_SPRITE_WIDTH *
-            this.state.walkIndex}px 0`,
-          walkIndex: this.state.walkIndex > 4 ? 0 : this.state.walkIndex + 1
-        });
-      }, 100)
+      spriteLocation:
+        walkIndex !== C.MONSTER_SPRITE_LENGTH
+          ? `-${C.MONSTER_SPRITE_WIDTH * walkIndex}px -${
+              C.MONSTER_SPRITE_POSITION_Y
+            }px`
+          : C.BASIC_SPRITE_LOCATION,
+      walkIndex: walkIndex === C.MONSTER_SPRITE_LENGTH ? 0 : walkIndex + 1
     });
   };
 
   stopMonsterAnimation = () => {
+    clearInterval(this.timerHandle);
     this.setState({
-      spriteLocation: C.BASIC_SPRITE_LOCATION,
-      walkIndex: C.BASIC_WALKINDEX,
-      timer: clearInterval(this.state.timer)
+      spriteLocation: C.BASIC_SPRITE_LOCATION
     });
   };
 
@@ -52,18 +46,19 @@ class Monster extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { monsterLife, choosedSpell } = this.props;
-    if (monsterLife < prevProps.monsterLife && choosedSpell !== C.HEALTH) {
-      this.makeMonsterHurtAnimation();
+    const { choosedSpell, monsterPosition, spellPosition } = this.props;
+    if (
+      prevProps.monsterPosition[0] - C.MONSTER_SPRITE_WIDTH / 2 <=
+        prevProps.spellPosition[0] &&
+      monsterPosition[0] > spellPosition[0] &&
+      choosedSpell !== C.HEALTH
+    ) {
+      this.timerHandle = setInterval(this.makeMonsterHurtAnimation, 150);
     }
   }
 
   componentWillUnmount() {
-    if (this.timerHandle) {
-      clearTimeout(this.timerHandle);
-      this.timerHandle = 0;
-    }
-    this.setState({ timer: null });
+    clearInterval(this.timerHandle);
   }
 
   render() {
@@ -82,7 +77,9 @@ class Monster extends PureComponent {
 
 const mapStateToProps = state => ({
   monsterLife: state.monster.monsterLife,
-  choosedSpell: state.spell.choosedSpell
+  choosedSpell: state.spell.choosedSpell,
+  monsterPosition: state.monster.position,
+  spellPosition: state.animation.position
 });
 
 export default connect(mapStateToProps)(Monster);

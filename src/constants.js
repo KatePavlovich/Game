@@ -54,6 +54,8 @@ export const BASIC_SPRITE_LOCATION = "0px 0px";
 export const BASIC_WALKINDEX = 0;
 export const MONSTER_SPRITE_WIDTH = 116;
 export const MONSTER_SPRITE_HEIGHT = 134;
+export const MONSTER_SPRITE_LENGTH = 4;
+export const MONSTER_SPRITE_POSITION_Y = 0;
 
 export const HEALTH_SPRITE_WIDTH = 60;
 export const HEALTH_SPRITE_HEIGHT = 60;
