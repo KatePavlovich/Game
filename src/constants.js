@@ -63,7 +63,7 @@ export const HEALTH_SPRITE_POSITION_Y = 0;
 export const HEALTH_SPRITE_LENGTH = 16;
 
 export const ARMOR_SPRITE_WIDTH = 130;
-export const ARMOR_SPRITE_HEIGHT = 130;
+export const ARMOR_SPRITE_HEIGHT = 134;
 export const ARMOR_SPRITE_POSITION_Y = 1000;
 export const ARMOR_SPRITE_LENGTH = 7;
 export const ARMOR_SPRITE_TOP_POSITION = 30;

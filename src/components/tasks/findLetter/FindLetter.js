@@ -11,6 +11,7 @@ import {
   getRandomLetter
 } from "../../../helperFunctions";
 import { chooseTaskAC } from "../../../ac/taskAC";
+import { Battle } from "../../Battle";
 import classNames from "classnames";
 import styles from "./FindLetter.module.scss";
 
@@ -93,6 +94,7 @@ class FindLetter extends Component {
     }
     this.setIfAnswerWasCorrect(letterToFind, selectedValue);
     this.props.wasTaskAnsweredAC();
+    this.props.showStaticAnimation();
   };
 
   componentWillUnmount() {
@@ -139,6 +141,7 @@ class FindLetter extends Component {
             ))}
           </div>
         </div>
+        <Battle />
       </>
     );
   }

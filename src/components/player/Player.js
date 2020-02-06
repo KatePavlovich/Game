@@ -11,10 +11,11 @@ class Player extends Component {
   }
 
   componentWillUnmount() {
-    window.addEventListener("keydown", this.handleMove);
+    window.removeEventListener("keydown", this.handleMove);
   }
+
   handleMove = e => {
-    // e.preventDefault();
+    if (this.props.dontMove) return;
     switch (e.key) {
       case "ArrowRight":
         return this.props.dispatch(movePlayerThunk("WEST"));
@@ -29,7 +30,7 @@ class Player extends Component {
   };
 
   render() {
-    const { position, spriteLocation, dontMove } = this.props;
+    const { position, spriteLocation } = this.props;
     return (
       <>
         <StaticAnimation />
@@ -40,7 +41,7 @@ class Player extends Component {
             left: `${position[0]}px`,
             backgroundPosition: spriteLocation
           }}
-          onKeyDown={!dontMove ? this.handleMove : undefined}
+          onKeyDown={this.handleMove}
           tabIndex="0"
         />
       </>

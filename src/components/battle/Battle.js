@@ -7,7 +7,7 @@ import { Animation } from "../Animation";
 const Battle = () => {
   return (
     <div className={styles.container}>
-      <Player dontMove="true" />
+      <Player dontMove />
       <Animation />
       <Monster />
     </div>

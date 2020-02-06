@@ -12,6 +12,7 @@ $purple: #ae003a;
 
 @mixin taskScreen {
   max-width: $xl;
+  margin: auto;
   padding: 1rem;
   overflow: hidden;
 }
