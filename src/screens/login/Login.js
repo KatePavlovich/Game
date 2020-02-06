@@ -38,7 +38,7 @@ class Login extends Component {
             value={name}
             autoFocus={true}
           />
-          <input type="submit" value="Send" />
+          <input className={styles.button} type="submit" value="Send" />
         </form>
       </div>
     );
