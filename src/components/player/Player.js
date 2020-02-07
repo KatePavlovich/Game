@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { movePlayerThunk } from "../../ac";
+import { movePlayerThunk, resetPlayerPosition } from "../../ac";
 import { StaticAnimation } from "../StaticAnimation";
 import styles from "./Player.module.scss";
 
 class Player extends Component {
   componentDidMount() {
-    if (this.props.dontMove) return;
+    if (this.props.dontMove) {
+      this.props.dispatch(resetPlayerPosition());
+      return;
+    }
     window.addEventListener("keydown", this.handleMove);
   }
 

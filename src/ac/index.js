@@ -83,6 +83,12 @@ export const setPlayerOnLevelStart = () => {
   };
 };
 
+export const resetPlayerPosition = () => {
+  return {
+    type: C.RESET_PLAYER_POSITION
+  };
+};
+
 export const movePlayer = (position, walkIndex, spriteLocation) => {
   return {
     type: C.MOVE_PLAYER,
