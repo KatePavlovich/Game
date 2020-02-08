@@ -78,6 +78,7 @@ class SimpleMath extends Component {
   };
 
   compareAnswers = e => {
+    e.preventDefault();
     const { answer, userAnswer } = this.state;
     const {
       reduceMonsterLife,
@@ -85,29 +86,27 @@ class SimpleMath extends Component {
       monsterLife,
       playerLife
     } = this.props;
-    if (e.key === "Enter") {
-      const isUserAnswerCorrect = isAnswerCorrect(answer, Number(userAnswer));
-      if (isUserAnswerCorrect) {
-        reduceMonsterLife();
-        if (monsterLife !== 0 || playerLife !== 0) {
-          this.timerHandle = setTimeout(() => {
-            this.generateNewQuestion();
-            this.timerHandle = 0;
-          }, 1500);
-        }
-      } else {
-        reducePlayerLife();
+    const isUserAnswerCorrect = isAnswerCorrect(answer, Number(userAnswer));
+    if (isUserAnswerCorrect) {
+      reduceMonsterLife();
+      if (monsterLife !== 0 || playerLife !== 0) {
+        this.timerHandle = setTimeout(() => {
+          this.generateNewQuestion();
+          this.timerHandle = 0;
+        }, 1500);
       }
-      if (monsterLife === 0 || playerLife === 0) {
-        this.setState({
-          redirectToBattleScreen: true
-        });
-      }
-      this.props.checkCorrectAnswerAC(isUserAnswerCorrect);
-      this.props.wasTaskAnsweredAC();
-      this.props.showStaticAnimation();
-      this.setState({ userAnswer: "" });
+    } else {
+      reducePlayerLife();
     }
+    if (monsterLife === 0 || playerLife === 0) {
+      this.setState({
+        redirectToBattleScreen: true
+      });
+    }
+    this.props.checkCorrectAnswerAC(isUserAnswerCorrect);
+    this.props.wasTaskAnsweredAC();
+    this.props.showStaticAnimation();
+    this.setState({ userAnswer: "" });
   };
 
   componentWillUnmount() {
@@ -138,15 +137,17 @@ class SimpleMath extends Component {
             <span>{number2}</span>
             <span>=?</span>
           </div>
-          <input
-            className={styles.answer}
-            type="number"
-            placeholder="type answer"
-            onKeyPress={this.compareAnswers}
-            autoFocus={true}
-            value={userAnswer}
-            onChange={this.handleChange}
-          />
+          <form onSubmit={this.compareAnswers}>
+            <input
+              className={styles.answer}
+              type="number"
+              placeholder="type answer"
+              autoFocus={true}
+              value={userAnswer}
+              onChange={this.handleChange}
+            />
+            <input className={styles.button} type="submit" value="Ответить" />
+          </form>
         </div>
         <Battle />
       </>

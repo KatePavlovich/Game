@@ -17,3 +17,9 @@
   border-image: url(/tiles/border.png) 5 round round;
   outline: $golden;
 }
+
+.button {
+  @include button;
+  margin-left: 3rem;
+  outline: transparent;
+}

@@ -5,7 +5,7 @@ $xl: 1140px;
 
 $light-gray: #eee;
 $dark-gray: #555555;
-$green: #008000;
+$green: #7aac20;
 $red: #ff0000;
 $golden: #d4af37;
 $purple: #ae003a;
@@ -69,4 +69,16 @@ $purple: #ae003a;
   height: 24px;
   background: url(/tiles/level.svg) 0 0 no-repeat;
   z-index: 1;
+}
+
+@mixin button {
+  background: url(/tiles/paperBackground.png);
+  border: 2px solid $golden;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.6rem;
+  border-style: outset;
+
+  &:hover {
+    border-style: inset;
+  }
 }
