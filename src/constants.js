@@ -39,11 +39,14 @@ export const SPRITE_BACKGROUND_SIZE = 40;
 export const MAP_WIDTH = 880;
 export const MAP_HEIGHT = 650;
 export const MOVE_PLAYER = "MOVE_PLAYER";
+
 export const CHOOSE_TASK = "CHOOSE_TASK";
 export const ANSWER_TASK = "ANSWER_TASK";
 export const CHECK_CORRECT_ANSWER = "CHECK_CORRECT_ANSWER";
 export const RESET_TASK_STATE = "RESET_TASK_STATE";
 export const SET_TASK_LEVEL = "SET_TASK_LEVEL";
+export const SHOW_TASKS_MODAL = "SHOW_TASKS_MODAL";
+export const CLOSE_TASKS_MODAL = "CLOSE_TASKS_MODAL";
 
 export const RESET_SPELL = "RESET_SPELL";
 export const MOVE_ANIMATION = "MOVE_ANIMATION";
@@ -72,6 +75,8 @@ export const ARMOR_SPRITE_TOP_POSITION = 30;
 export const CHOOSE_SPELL = "CHOOSE_SPELL";
 export const SHOW_SPELLMODAL = "SHOW_SPELLMODAL";
 export const CLOSE_SPELLMODAL = "CLOSE_SPELLMODAL";
+
+export const LEVELS_MAP = "/levelsMap";
 
 export const adjective = ["ужасный", "злобный", "сопливый"];
 export const creature = ["Огр", "Гном", "Гоблин"];

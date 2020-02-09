@@ -1,22 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setTaskLevelAC } from "../../ac/taskAC";
+import { closeTasksModalAC } from "../../ac/tasksModalAC";
 import * as S from "../../constants/stringValues";
 import { Modal } from "antd";
 import classNames from "classnames";
 import styles from "./TasksScreen.module.scss";
 
-const TasksScreen = ({ wasTaskChoosed }) => {
+const TasksScreen = () => {
+  const showModal = useSelector(state => state.tasks.showTasksModal);
   const dispatch = useDispatch();
 
   const handleClick = level => {
+    dispatch(closeTasksModalAC());
     dispatch(setTaskLevelAC(level));
   };
   return (
     <Modal
       title="Choose spell"
-      visible={!wasTaskChoosed}
+      visible={showModal}
       closable={false}
       maskClosable={false}
     >
@@ -49,7 +52,11 @@ const TasksScreen = ({ wasTaskChoosed }) => {
         <div className={classNames(styles.imgContainer, styles.math)}></div>
         <span className={styles.title}>Math</span>
       </Link>
-      <Link className={styles.link} to="/findLetter">
+      <Link
+        className={styles.link}
+        onClick={() => dispatch(closeTasksModalAC())}
+        to="/findLetter"
+      >
         <div className={classNames(styles.imgContainer, styles.alphabet)}></div>
         <span className={styles.title}>Find letter</span>
       </Link>

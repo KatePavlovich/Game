@@ -1,13 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import { openModalAC } from "../../ac/modalAC";
-import { toggleSound } from "../../ac";
+import { openModalAC } from "../../ac/spellModalAC";
+import { openTasksModalAC } from "../../ac/tasksModalAC";
+import { toggleSound, isLoggedOut } from "../../ac";
 import { ActiveLink } from "../ActiveLink";
 import { SpellModal } from "../modalSpell";
 import { SpellBook } from "../SpellBook";
+
 import store from "../../store";
-import { isLoggedOut } from "../../ac";
 import { withRouter } from "react-router";
+import * as C from "../../constants";
+import * as T from "../../constants/translation";
 import classNames from "classnames";
 import styles from "./Header.module.scss";
 
@@ -17,37 +20,55 @@ const Header = ({
   isLoggedIn,
   history,
   toggleSound,
-  sound: { sound }
+  openTasksModalAC,
+  sound: { sound },
+  ...props
 }) => {
   const handleLogout = () => {
     store.dispatch(isLoggedOut());
     history.push("/");
   };
+
+  const showTasksButton = props.location.pathname === C.LEVELS_MAP;
+
   return (
     <header className={styles.header}>
-      <ul className={styles.headerUl}>
-        <li>
-          <ActiveLink activeOnlyWhenExact={true} to="/" label="Home" />
-        </li>
-        <SpellBook showModalSpell={showModalSpell} />
-        {showSpellModal && <SpellModal />}
-        <li>
-          <ActiveLink to="/score" label="Score" />
-        </li>
-        {isLoggedIn === true ? (
-          <li className="navLink" onClick={handleLogout}>
-            Logout
+      <div className={styles.wrapper}>
+        <ActiveLink activeOnlyWhenExact={true} to="/" label="Home" />
+
+        <ul className={styles.headerUl}>
+          {showTasksButton && (
+            <li
+              className={styles.swords}
+              onClick={openTasksModalAC}
+              title={T.CHOOSE_TASK}
+            ></li>
+          )}
+          <li title={T.CHOOSE_SPELL}>
+            <SpellBook showModalSpell={showModalSpell} />
+            <SpellModal />
           </li>
-        ) : (
-          <li>
-            <ActiveLink to="/login" label="Login" />
+          <li title={T.SCORE}>
+            <ActiveLink to="/score" label="Score" />
           </li>
-        )}
-        <span
-          className={classNames(styles.sound, { [styles.soundMute]: !sound })}
-          onClick={toggleSound}
-        />
-      </ul>
+          {isLoggedIn === true ? (
+            <li className="navLink" onClick={handleLogout} title={T.LOGOUT}>
+              Logout
+            </li>
+          ) : (
+            <li title={T.LOGIN}>
+              <ActiveLink to="/login" label="Login" />
+            </li>
+          )}
+          <li
+            className={classNames(styles.sound, {
+              [styles.soundMute]: !sound
+            })}
+            onClick={toggleSound}
+            title={!sound ? T.TURN_ON_SOUND : T.TURN_OFF_SOUND}
+          ></li>
+        </ul>
+      </div>
     </header>
   );
 };
@@ -66,6 +87,9 @@ const mapDispatchToProps = dispatch => ({
   },
   toggleSound: () => {
     dispatch(toggleSound());
+  },
+  openTasksModalAC: () => {
+    dispatch(openTasksModalAC());
   }
 });
 

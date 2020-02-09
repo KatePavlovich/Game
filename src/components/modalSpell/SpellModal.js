@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { chooseSpellAC } from "../../ac/spellAC";
-import { closeModalAC } from "../../ac/modalAC";
+import { closeModalAC } from "../../ac/spellModalAC";
 import { Modal } from "antd";
 import styles from "./SpellModal.module.scss";
 import leaf from "./img/leaf-acid-3.png";

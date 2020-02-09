@@ -1,31 +1,34 @@
+import * as C from "../constants";
+
 const initialState = {
   wasTaskAnswered: false,
   wasTaskChoosed: false,
   wasAnswerCorrect: false,
-  level: ""
+  level: "",
+  showTasksModal: false
 };
 
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "CHOOSE_TASK": {
+    case C.CHOOSE_TASK: {
       return {
         ...state,
         wasTaskChoosed: !state.wasTaskChoosed
       };
     }
-    case "ANSWER_TASK": {
+    case C.ANSWER_TASK: {
       return {
         ...state,
         wasTaskAnswered: !state.wasTaskAnswered
       };
     }
-    case "CHECK_CORRECT_ANSWER": {
+    case C.CHECK_CORRECT_ANSWER: {
       return {
         ...state,
         wasAnswerCorrect: action.wasAnswerCorrect
       };
     }
-    case "RESET_TASK_STATE": {
+    case C.RESET_TASK_STATE: {
       return {
         ...state,
         wasTaskAnswered: false,
@@ -33,10 +36,22 @@ const tasksReducer = (state = initialState, action) => {
         wasAnswerCorrect: false
       };
     }
-    case "SET_TASK_LEVEL": {
+    case C.SET_TASK_LEVEL: {
       return {
         ...state,
         level: action.level
+      };
+    }
+    case C.SHOW_TASKS_MODAL: {
+      return {
+        ...state,
+        showTasksModal: true
+      };
+    }
+    case C.CLOSE_TASKS_MODAL: {
+      return {
+        ...state,
+        showTasksModal: false
       };
     }
 

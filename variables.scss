@@ -82,3 +82,12 @@ $purple: #ae003a;
     border-style: inset;
   }
 }
+
+@mixin listImg {
+  width: 30px;
+  height: 30px;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}

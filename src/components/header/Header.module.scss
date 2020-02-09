@@ -1,6 +1,7 @@
 @import "variables.scss";
 
 .header {
+  font-family: "Charm", cursive;
   background: #9e6742;
   background: -moz-linear-gradient(
     top,
@@ -25,39 +26,41 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9e6742', endColorstr='#9e6742', GradientType=0);
 }
-.headerUl {
-  display: grid;
-  max-width: 1140px;
-  margin: auto;
-  grid-template-columns: 60% repeat(4, 1fr);
-  padding: 0.2rem 2rem;
-  margin-bottom: 0;
+
+.wrapper {
+  display: flex;
   align-items: center;
+  max-width: 1140px;
+  padding: 0.2rem 2rem;
+}
+
+.headerUl {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-bottom: 0;
 }
 
 .headerUl li {
-  justify-self: end;
   list-style-type: none;
-  font-family: "Charm", cursive;
   font-size: 1rem;
-  /*     border: 30px solid transparent;
-    -moz-border-image: url(/tiles/border2.png) 0 0 25 0;
-    -webkit-border-image: url(/tiles/border2.png) 0 0 25 0;
-    -o-border-image: url(/tiles/border2.png) 0 0 25 0;
-    border-image: url(/tiles/border2.png) 0 0 25 0; */
-}
-
-.headerUl li:first-of-type {
-  justify-self: start;
 }
 
 .sound {
-  margin-left: auto;
-  width: 30px;
-  height: 30px;
+  @include listImg;
   background: url(/tiles/horn.svg) 0 0 no-repeat;
 }
 
 .soundMute {
   filter: sepia(1);
+}
+
+.swords {
+  @include listImg;
+  width: 36px;
+  height: 36px;
+  margin-top: 0.5rem;
+  background: url(/tiles/sword.svg) 0 0 no-repeat;
 }

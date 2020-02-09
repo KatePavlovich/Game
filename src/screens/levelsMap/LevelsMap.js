@@ -11,6 +11,7 @@ import { LifeBar } from "../../components/LifeBar";
 import { addTilesAC, changeTilesThunk } from "../../ac/tilesAC";
 import { ExitLevelModal } from "../../components/ExitLevelModal";
 import { chooseTaskAC } from "../../ac/taskAC";
+import { closeTasksModalAC } from "../../ac/tasksModalAC";
 import styles from "./LevelsMap.module.scss";
 
 class LevelsMap extends Component {
@@ -45,12 +46,7 @@ class LevelsMap extends Component {
   };
 
   render() {
-    const {
-      playerLife,
-      monsterLife,
-      wasTaskChoosed,
-      isPlayerOnLevelExit
-    } = this.props;
+    const { playerLife, monsterLife, isPlayerOnLevelExit } = this.props;
     return playerLife === 0 ? (
       <div>
         <Score />
@@ -65,7 +61,7 @@ class LevelsMap extends Component {
             <Monster />
           </div>
         </div>
-        <TasksScreen wasTaskChoosed={wasTaskChoosed} />
+        <TasksScreen />
         {monsterLife === 0 && <span className={styles.blink} />}
         {isPlayerOnLevelExit && monsterLife === 0 && <ExitLevelModal />}
       </div>
@@ -74,12 +70,8 @@ class LevelsMap extends Component {
 }
 
 const mapStateToProps = state => ({
-  isSpellChoosen: state.spell.isSpellChoosen,
-  choosedSpell: state.spell.choosedSpell,
   monsterLife: state.monster.monsterLife,
   playerLife: state.player.playerLife,
-  wasTaskChoosed: state.tasks.wasTaskChoosed,
-  wasAnswerCorrect: state.tasks.wasAnswerCorrect,
   isPlayerOnLevelExit: state.player.isPlayerOnLevelExit
 });
 
@@ -98,6 +90,9 @@ const mapDispatchToProps = dispatch => ({
   },
   makeNewMonster: () => {
     dispatch(makeNewMonster());
+  },
+  closeTasksModalAC: () => {
+    dispatch(closeTasksModalAC());
   }
 });
 
