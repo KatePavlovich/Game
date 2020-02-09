@@ -1,2 +1,2 @@
-import SpellModal from "./SpellModal";
+import { SpellModal } from "./SpellModal";
 export { SpellModal };

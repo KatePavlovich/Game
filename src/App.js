@@ -19,8 +19,8 @@ class App extends Component {
           <Route path="/score" component={Score} />
           <Route path="/login" component={Login} />
           <Route path="/levelsMap" component={LevelsMap} />
-          <Route path="/simpleMath" component={SimpleMath} />
-          <Route path="/findLetter" component={FindLetter} />
+          <Route path="/tasks/simpleMath" component={SimpleMath} />
+          <Route path="/tasks/findLetter" component={FindLetter} />
         </div>
       </BrowserRouter>
     );

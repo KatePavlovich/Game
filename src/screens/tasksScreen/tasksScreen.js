@@ -26,7 +26,7 @@ const TasksScreen = () => {
       <Link
         className={styles.link}
         onClick={() => handleClick(S.SIMPLE)}
-        to="/simpleMath"
+        to="/tasks/simpleMath"
       >
         <div className={styles.simple}></div>
         <div
@@ -37,7 +37,7 @@ const TasksScreen = () => {
       <Link
         className={styles.link}
         onClick={() => handleClick(S.MIDDLE)}
-        to="/simpleMath"
+        to="/tasks/simpleMath"
       >
         <div className={styles.middle}></div>
         <div className={classNames(styles.imgContainer, styles.math)}></div>
@@ -46,7 +46,7 @@ const TasksScreen = () => {
       <Link
         className={styles.link}
         onClick={() => handleClick(S.HARD)}
-        to="/simpleMath"
+        to="/tasks/simpleMath"
       >
         <div className={styles.hard}></div>
         <div className={classNames(styles.imgContainer, styles.math)}></div>
@@ -55,7 +55,7 @@ const TasksScreen = () => {
       <Link
         className={styles.link}
         onClick={() => dispatch(closeTasksModalAC())}
-        to="/findLetter"
+        to="/tasks/findLetter"
       >
         <div className={classNames(styles.imgContainer, styles.alphabet)}></div>
         <span className={styles.title}>Find letter</span>

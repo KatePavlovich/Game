@@ -26,10 +26,6 @@ export const LEAF = "leaf";
 export const HEALTH = "health";
 export const ARMOR = "armor";
 
-export const FIRE_TOOLTIP = "fire spell";
-export const HEALTH_TOOLTIP = "health spell";
-export const ARMOR_TOOLTIP = "armor spell";
-
 export const EAST = "EAST";
 export const WEST = "WEST";
 export const NORTH = "NORTH";
@@ -77,6 +73,7 @@ export const SHOW_SPELLMODAL = "SHOW_SPELLMODAL";
 export const CLOSE_SPELLMODAL = "CLOSE_SPELLMODAL";
 
 export const LEVELS_MAP = "/levelsMap";
+export const TASKS_PATH = "/tasks";
 
 export const adjective = ["ужасный", "злобный", "сопливый"];
 export const creature = ["Огр", "Гном", "Гоблин"];

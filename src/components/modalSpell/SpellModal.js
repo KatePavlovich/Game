@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { chooseSpellAC } from "../../ac/spellAC";
 import { closeModalAC } from "../../ac/spellModalAC";
 import { Modal } from "antd";
@@ -9,73 +9,66 @@ import wind from "./img/wind-blue-3.png";
 import health from "./img/heal-royal-3.png";
 import armor from "./img/protect-royal-3.png";
 import * as C from "../../constants";
+import * as T from "../../constants/translation";
 
-class SpellModal extends Component {
-  handleOk() {
-    this.props.dispatch(closeModalAC());
-  }
+const SpellModal = () => {
+  const showSpellModal = useSelector(state => state.spell.showSpellModal);
+  const dispatch = useDispatch();
 
-  setSpellToStore = e => {
-    let action = chooseSpellAC();
-    this.props.dispatch(chooseSpellAC(e.currentTarget.dataset.spell));
-    this.handleOk(!action);
+  const setSpellToStore = e => {
+    dispatch(chooseSpellAC(e.currentTarget.dataset.spell));
+    dispatch(closeModalAC());
   };
 
-  render() {
-    const { showSpellModal } = this.props;
-    return (
-      <Modal
-        title="Choose spell"
-        visible={showSpellModal}
-        closable={false}
-        maskClosable={false}
-        bodyStyle={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gridGap: "1rem",
-          justifyItems: "center"
-        }}
-      >
-        <img
-          className={styles.spellImg}
-          src={wind}
-          onClick={this.setSpellToStore}
-          alt="wind-spell"
-          data-spell={C.FIRE}
-          title={C.FIRE_TOOLTIP}
-        />
-        <img
-          className={styles.spellImg}
-          src={leaf}
-          onClick={this.setSpellToStore}
-          alt="leaf-spell"
-          data-spell={C.LEAF}
-          title={C.FIRE_TOOLTIP}
-        />
-        <img
-          className={styles.spellImg}
-          src={health}
-          onClick={this.setSpellToStore}
-          alt="health-spell"
-          data-spell={C.HEALTH}
-          title={C.HEALTH_TOOLTIP}
-        />
-        <img
-          className={styles.spellImg}
-          src={armor}
-          onClick={this.setSpellToStore}
-          alt="armor-spell"
-          data-spell={C.ARMOR}
-          title={C.ARMOR_TOOLTIP}
-        />
-      </Modal>
-    );
-  }
-}
+  const style = {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gridGap: "1rem",
+    justifyItems: "center"
+  };
 
-const mapStateToProps = state => ({
-  isSpellChoosen: state.spell.isSpellChoosen,
-  showSpellModal: state.spell.showSpellModal
-});
+  return (
+    <Modal
+      title={T.CHOOSE_SPELL}
+      visible={showSpellModal}
+      closable={false}
+      maskClosable={false}
+      bodyStyle={style}
+    >
+      <img
+        className={styles.spellImg}
+        src={wind}
+        onClick={setSpellToStore}
+        alt={T.WIND_SPELL}
+        data-spell={C.FIRE}
+        title={T.WIND_SPELL}
+      />
+      <img
+        className={styles.spellImg}
+        src={leaf}
+        onClick={setSpellToStore}
+        alt={T.GREEN_FIRE_SPELL}
+        data-spell={C.LEAF}
+        title={T.GREEN_FIRE_SPELL}
+      />
+      <img
+        className={styles.spellImg}
+        src={health}
+        onClick={setSpellToStore}
+        alt={T.HEALTH_SPELL}
+        data-spell={C.HEALTH}
+        title={T.HEALTH_SPELL}
+      />
+      <img
+        className={styles.spellImg}
+        src={armor}
+        onClick={setSpellToStore}
+        alt={T.ARMOR_SPELL}
+        data-spell={C.ARMOR}
+        title={T.ARMOR_SPELL}
+      />
+    </Modal>
+  );
+};
 
-export default connect(mapStateToProps)(SpellModal);
+export { SpellModal };

@@ -30,6 +30,7 @@ const Header = ({
   };
 
   const showTasksButton = props.location.pathname === C.LEVELS_MAP;
+  const showSpellButton = props.location.pathname.includes(C.TASKS_PATH);
 
   return (
     <header className={styles.header}>
@@ -44,10 +45,12 @@ const Header = ({
               title={T.CHOOSE_TASK}
             ></li>
           )}
-          <li title={T.CHOOSE_SPELL}>
-            <SpellBook showModalSpell={showModalSpell} />
-            <SpellModal />
-          </li>
+          {showSpellButton && (
+            <li title={T.CHOOSE_SPELL}>
+              <SpellBook showModalSpell={showModalSpell} />
+              <SpellModal />
+            </li>
+          )}
           <li title={T.SCORE}>
             <ActiveLink to="/score" label="Score" />
           </li>
