@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import * as C from "../../constants";
 import { connect } from "react-redux";
-import { makeMonsterNameThunk, getMonsterPosition } from "../../ac";
+import { makeMonsterNameThunk, getMonsterPosition } from "../../ac/monsterAC";
 import styles from "./Monster.module.scss";
 
 class Monster extends PureComponent {

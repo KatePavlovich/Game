@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { reduceMonsterLife } from "../ac";
+import { reduceMonsterLife } from "../ac/monsterAC";
 import * as C from "../constants";
 
 const getDisplayName = WrappedComponent =>

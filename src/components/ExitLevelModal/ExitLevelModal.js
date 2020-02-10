@@ -1,11 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  setPlayerOnLevelStart,
-  makeMonsterNameThunk,
-  makeNewMonster,
-  movePlayer
-} from "../../ac";
+import { setPlayerOnLevelStart, movePlayer } from "../../ac";
+import { makeMonsterNameThunk, makeNewMonster } from "../../ac/monsterAC";
 import { addTilesAC } from "../../ac/tilesAC";
 import { tiles } from "../data/tiles.js";
 import { Modal } from "antd";
