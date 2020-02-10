@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { movePlayerThunk, resetPlayerPosition } from "../../ac";
+import { movePlayerThunk, resetPlayerPosition } from "../../ac/playerAC";
 import { StaticAnimation } from "../StaticAnimation";
+import * as C from "../../constants";
 import styles from "./Player.module.scss";
 
 class Player extends Component {
@@ -20,14 +21,14 @@ class Player extends Component {
   handleMove = e => {
     if (this.props.dontMove) return;
     switch (e.key) {
-      case "ArrowRight":
-        return this.props.dispatch(movePlayerThunk("WEST"));
-      case "ArrowLeft":
-        return this.props.dispatch(movePlayerThunk("EAST"));
-      case "ArrowUp":
-        return this.props.dispatch(movePlayerThunk("NORTH"));
-      case "ArrowDown":
-        return this.props.dispatch(movePlayerThunk("SOUTH"));
+      case C.ARROW_RIGHT:
+        return this.props.dispatch(movePlayerThunk(C.WEST));
+      case C.ARROW_LEFT:
+        return this.props.dispatch(movePlayerThunk(C.EAST));
+      case C.ARROW_UP:
+        return this.props.dispatch(movePlayerThunk(C.NORTH));
+      case C.ARROW_DOWN:
+        return this.props.dispatch(movePlayerThunk(C.SOUTH));
       default:
     }
   };

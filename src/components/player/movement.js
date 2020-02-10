@@ -1,25 +1,25 @@
 import store from "../../store";
-import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from "../../constants";
+import * as C from "../../constants";
 
 export default function handleMovement(player) {
   function getNewPosition(direction) {
     const oldPos = store.getState().player.position;
     switch (direction) {
-      case "EAST":
-        return [oldPos[0] - SPRITE_SIZE, oldPos[1]];
-      case "WEST":
-        return [oldPos[0] + SPRITE_SIZE, oldPos[1]];
+      case C.EAST:
+        return [oldPos[0] - C.SPRITE_SIZE, oldPos[1]];
+      case C.WEST:
+        return [oldPos[0] + C.SPRITE_SIZE, oldPos[1]];
       default:
     }
   }
 
   function getSpriteLocation(direction, walkIndex) {
     switch (direction) {
-      case "WEST":
-        return `${SPRITE_SIZE * walkIndex}px ${SPRITE_SIZE * 0}px`;
+      case C.WEST:
+        return `${C.SPRITE_SIZE * walkIndex}px ${C.SPRITE_SIZE * 0}px`;
 
-      case "EAST":
-        return `${SPRITE_SIZE * walkIndex}px ${SPRITE_SIZE * -1}px`;
+      case C.EAST:
+        return `${C.SPRITE_SIZE * walkIndex}px ${C.SPRITE_SIZE * -1}px`;
       default:
     }
   }
@@ -31,9 +31,9 @@ export default function handleMovement(player) {
 
   function observeBoundaries(oldPos, newPos) {
     return newPos[0] >= 0 &&
-    newPos[0] <= MAP_WIDTH - SPRITE_SIZE &&
-    newPos[1] >= 0 &&
-    newPos[1] <= MAP_HEIGHT - SPRITE_SIZE
+      newPos[0] <= C.MAP_WIDTH - C.SPRITE_SIZE &&
+      newPos[1] >= 0 &&
+      newPos[1] <= C.MAP_HEIGHT - C.SPRITE_SIZE
       ? newPos
       : oldPos;
   }
@@ -42,7 +42,7 @@ export default function handleMovement(player) {
     const walkIndex = getWalkIndex();
     const oldPos = store.getState().player.position;
     store.dispatch({
-      type: "MOVE_PLAYER",
+      type: C.MOVE_PLAYER,
       payload: {
         position: observeBoundaries(oldPos, getNewPosition(direction)),
         direction,
@@ -55,10 +55,10 @@ export default function handleMovement(player) {
   function handleKeyDown(e) {
     e.preventDefault();
     switch (e.key) {
-      case "ArrowRight":
-        return dispatchMove("WEST");
-      case "ArrowLeft":
-        return dispatchMove("EAST");
+      case C.ARROW_RIGHT:
+        return dispatchMove(C.WEST);
+      case C.ARROW_LEFT:
+        return dispatchMove(C.EAST);
       default:
     }
   }

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getPlayerNameAC, isLoggedIn } from "../../ac";
+import { getPlayerNameAC, isLoggedIn } from "../../ac/playerAC";
 import { withRouter } from "react-router";
+import * as C from "../../constants";
+import * as T from "../../constants/translation";
 import styles from "./Login.module.scss";
 
 class Login extends Component {
@@ -19,7 +21,7 @@ class Login extends Component {
     this.props.setIsLoggedIn();
     this.props.getPlayerName(name);
     this.setState({ name: "" });
-    history.push("/levelsMap");
+    history.push(C.LEVELS_MAP);
   };
 
   render() {
@@ -28,17 +30,17 @@ class Login extends Component {
     return (
       <div>
         <form className={styles.loginForm} onSubmit={this.handleSubmit}>
-          <h2 className={styles.title}>Enter your name!</h2>
+          <h2 className={styles.title}>{T.ENTER_NAME}</h2>
           <input
             className={styles.input}
             type="text"
-            placeholder="name"
+            placeholder={T.ENTER_NAME}
             onChange={this.handleChange}
             required="required"
             value={name}
             autoFocus={true}
           />
-          <input className={styles.button} type="submit" value="Send" />
+          <input className={styles.button} type="submit" value={T.LOGIN} />
         </form>
       </div>
     );

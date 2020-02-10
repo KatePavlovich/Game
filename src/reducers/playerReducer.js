@@ -2,11 +2,11 @@ import * as C from "../constants";
 
 const initialState = {
   playerName: "",
-  playerLife: 100,
-  position: [0, 0],
-  spriteLocation: "0px 0px",
-  direction: "east",
-  walkIndex: 0,
+  playerLife: C.MAX_PLAYER_LIFE,
+  position: C.BASIC_PLAYER_POSITION,
+  spriteLocation: C.BASIC_SPRITE_LOCATION,
+  direction: C.EAST,
+  walkIndex: C.BASIC_WALKINDEX,
   isLoggedIn: false,
   isPlayerOnLevelExit: false,
   shouldPlayHealthAnimation: false
@@ -24,10 +24,13 @@ const playerReducer = (state = initialState, action) => {
       return { ...state, playerName: action.playerName };
     }
     case C.REDUCE_PLAYER_LIFE: {
-      return { ...state, playerLife: state.playerLife - 20 };
+      return {
+        ...state,
+        playerLife: state.playerLife - C.LIFE_TO_REDUCE_WITH_SPELL
+      };
     }
     case C.RESTORE_PLAYER_LIFE: {
-      return { ...state, playerLife: 100 };
+      return { ...state, playerLife: C.MAX_PLAYER_LIFE };
     }
     case C.SHOULD_PLAY_HEALTH_ANIMATION: {
       return {
@@ -58,10 +61,10 @@ const playerReducer = (state = initialState, action) => {
     case C.RESET_PLAYER_POSITION: {
       return {
         ...state,
-        position: [0, 0],
-        spriteLocation: "0px 0px",
-        direction: "east",
-        walkIndex: 0
+        position: C.BASIC_PLAYER_POSITION,
+        spriteLocation: C.BASIC_SPRITE_LOCATION,
+        direction: C.EAST,
+        walkIndex: C.BASIC_WALKINDEX
       };
     }
 

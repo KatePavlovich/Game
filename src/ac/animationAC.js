@@ -1,6 +1,6 @@
 import store from "../store";
 import * as C from "../constants";
-import { restorePlayerLife } from "./index";
+import { restorePlayerLife } from "./playerAC";
 
 export const moveAnimation = (
   position,

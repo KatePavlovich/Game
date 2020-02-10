@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setPlayerOnLevelStart, movePlayer } from "../../ac";
+import { setPlayerOnLevelStart, movePlayer } from "../../ac/playerAC";
 import { makeMonsterNameThunk, makeNewMonster } from "../../ac/monsterAC";
 import { addTilesAC } from "../../ac/tilesAC";
 import { tiles } from "../data/tiles.js";

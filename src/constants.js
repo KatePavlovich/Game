@@ -16,6 +16,9 @@ export const TOGGLE_SOUND = "TOGGLE_SOUND";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
+export const MAX_PLAYER_LIFE = 100;
+export const BASIC_PLAYER_POSITION = [0, 0];
+
 export const LIFE_TO_REDUCE_WITH_SPELL = 20;
 export const LIFE_TO_REDUCE_WITHOUT_SPELL = 10;
 export const SPRITE_SIZE = 67;
@@ -30,6 +33,11 @@ export const EAST = "EAST";
 export const WEST = "WEST";
 export const NORTH = "NORTH";
 export const SOUTH = "SOUTH";
+
+export const ARROW_RIGHT = "ArrowRight";
+export const ARROW_LEFT = "ArrowLeft";
+export const ARROW_UP = "ArrowUp";
+export const ARROW_DOWN = "ArrowDown";
 
 export const SPRITE_BACKGROUND_SIZE = 40;
 export const MAP_WIDTH = 880;
