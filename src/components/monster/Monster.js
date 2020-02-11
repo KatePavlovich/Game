@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import * as C from "../../constants";
 import { connect } from "react-redux";
 import { makeMonsterNameThunk, getMonsterPosition } from "../../ac/monsterAC";
+import { setMonsterPosition } from "../../helpers/setMonsterPosition";
 import styles from "./Monster.module.scss";
 
 class Monster extends PureComponent {
@@ -12,7 +13,8 @@ class Monster extends PureComponent {
 
   state = {
     spriteLocation: C.BASIC_SPRITE_LOCATION,
-    walkIndex: C.BASIC_WALKINDEX
+    walkIndex: C.BASIC_WALKINDEX,
+    position: C.BASIC_PLAYER_POSITION
   };
 
   makeMonsterHurtAnimation = () => {
@@ -38,6 +40,7 @@ class Monster extends PureComponent {
   };
 
   componentDidMount() {
+    this.setState({ position: setMonsterPosition(this.props.map) });
     const { left, top } = this.monsterRef.current.getBoundingClientRect();
     const position = [Math.round(left), Math.round(top)];
 
@@ -62,12 +65,14 @@ class Monster extends PureComponent {
   }
 
   render() {
-    const { spriteLocation } = this.state;
+    const { spriteLocation, position } = this.state;
     return (
       <div
         className={styles.monster}
         style={{
-          backgroundPosition: spriteLocation
+          backgroundPosition: spriteLocation,
+          right: `${position[0]}px`,
+          top: `${position[1]}px`
         }}
         ref={this.monsterRef}
       />

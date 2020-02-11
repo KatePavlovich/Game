@@ -62,6 +62,7 @@ export const movePlayer = (position, walkIndex, spriteLocation) => {
 
 export const movePlayerThunk = direction => dispatch => {
   const tiles = store.getState().map.tiles;
+  const monsterPosition = store.getState().monster.position;
   const oldWalkIndex = store.getState().player.walkIndex;
   const walkIndex = F.getWalkIndex(oldWalkIndex);
   const oldPos = store.getState().player.position;
@@ -69,7 +70,12 @@ export const movePlayerThunk = direction => dispatch => {
 
   let position = oldPos;
   if (F.observeBoundaries(newPos) && F.observeImpassable(newPos, tiles)) {
-    position = F.getNewPosition(oldPos, direction);
+    position = F.getNewPosition(oldPos, direction, false);
+  }
+  if (F.hitMonster(monsterPosition, newPos)) {
+    dispatch(reducePlayerLife());
+    position = F.getNewPositionAfterHitMonster(oldPos, direction);
+    C.hitMonstrSound.play();
   }
   if (F.observeExit(newPos)) {
     dispatch(setPlayerOnLevelExit());

@@ -83,6 +83,9 @@ export const CLOSE_SPELLMODAL = "CLOSE_SPELLMODAL";
 export const LEVELS_MAP = "/levelsMap";
 export const TASKS_PATH = "/tasks";
 
+export const GRASS_MAP = "GRASS_MAP";
+export const TASK_MAP = "TASK_MAP";
+
 export const adjective = ["ужасный", "злобный", "сопливый"];
 export const creature = ["Огр", "Гном", "Гоблин"];
 export const monsterName = ["Том", "Макс", "Дима"];
@@ -101,6 +104,10 @@ export const winAudio = new Audio(
 );
 export const bangSound = new Audio(
   "https://freesound.org/data/previews/33/33245_65091-lq.mp3"
+);
+
+export const hitMonstrSound = new Audio(
+  "https://freesound.org/data/previews/409/409346_7662331-lq.mp3"
 );
 
 export const SIMPLE_SIGNS = ["+", "-"];

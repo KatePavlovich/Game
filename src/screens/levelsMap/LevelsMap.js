@@ -13,6 +13,7 @@ import { addTilesAC, changeTilesThunk } from "../../ac/tilesAC";
 import { ExitLevelModal } from "../../components/ExitLevelModal";
 import { chooseTaskAC } from "../../ac/taskAC";
 import { closeTasksModalAC } from "../../ac/tasksModalAC";
+import * as C from "../../constants";
 import styles from "./LevelsMap.module.scss";
 
 class LevelsMap extends Component {
@@ -59,7 +60,7 @@ class LevelsMap extends Component {
           <div className={styles.mapWrapper}>
             <Map />
             <Player />
-            <Monster />
+            <Monster map={C.GRASS_MAP} />
           </div>
         </div>
         <TasksScreen />

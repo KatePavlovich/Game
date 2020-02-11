@@ -15,7 +15,6 @@ export const getSpriteLocation = (direction, walkIndex) => {
 };
 
 export const getNewPosition = (oldPos, direction) => {
-  // const oldPos = store.getState().player.position;
   switch (direction) {
     case C.EAST:
       return [oldPos[0] - C.SPRITE_BACKGROUND_SIZE, oldPos[1]];
@@ -25,6 +24,20 @@ export const getNewPosition = (oldPos, direction) => {
       return [oldPos[0], oldPos[1] - C.SPRITE_BACKGROUND_SIZE];
     case C.SOUTH:
       return [oldPos[0], oldPos[1] + C.SPRITE_BACKGROUND_SIZE];
+    default:
+  }
+};
+
+export const getNewPositionAfterHitMonster = (oldPos, direction) => {
+  switch (direction) {
+    case C.EAST:
+      return [oldPos[0] + C.SPRITE_BACKGROUND_SIZE, oldPos[1]];
+    case C.WEST:
+      return [oldPos[0] - C.SPRITE_BACKGROUND_SIZE, oldPos[1]];
+    case C.NORTH:
+      return [oldPos[0], oldPos[1] + C.SPRITE_BACKGROUND_SIZE];
+    case C.SOUTH:
+      return [oldPos[0], oldPos[1] - C.SPRITE_BACKGROUND_SIZE];
     default:
   }
 };
@@ -53,4 +66,21 @@ export const observeExit = newPos => {
 
 export const getWalkIndex = oldWalkIndex => {
   return oldWalkIndex >= 3 ? 0 : oldWalkIndex + 1;
+};
+
+const roundToTheNearestTen = num => Math.ceil(num / 10) * 10;
+
+export const hitMonster = (monsterPosition, newPos) => {
+  const [positionX, positionY] = monsterPosition;
+  const monsterPositionOnMapX = roundToTheNearestTen(
+    positionX - (window.screen.width - C.MAP_WIDTH) / 2 - C.MONSTER_SPRITE_WIDTH
+  );
+  const monsterPositionOnMapY = roundToTheNearestTen(
+    positionY + C.MONSTER_SPRITE_HEIGHT / 2
+  );
+  const [playerPositionX, playerPositionY] = newPos;
+  return (
+    playerPositionX - C.SPRITE_BACKGROUND_SIZE >= monsterPositionOnMapX &&
+    playerPositionY >= monsterPositionOnMapY
+  );
 };
