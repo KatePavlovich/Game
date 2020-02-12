@@ -10,8 +10,8 @@ class StaticAnimation extends PureComponent {
   state = {
     spriteLocation: C.BASIC_SPRITE_LOCATION,
     walkIndex: C.BASIC_WALKINDEX,
-    top: "0px",
-    left: "0px",
+    top: 0,
+    left: 0,
     width: "",
     height: "",
     background: "",

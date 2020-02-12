@@ -34,6 +34,7 @@ const withReduceLives = WrappedComponent => {
 
     const showStaticAnimationFunc = () => {
       dispatch({ type: C.SHOW_STATIC_ANIMATION });
+      dispatch({ type: C.RESET_SPELL });
     };
 
     return (
