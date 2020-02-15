@@ -19,6 +19,9 @@ const SpellModal = () => {
     dispatch(chooseSpellAC(e.currentTarget.dataset.spell));
     dispatch(closeModalAC());
   };
+  const cancelModal = () => {
+    dispatch(closeModalAC());
+  };
 
   const style = {
     display: "grid",
@@ -32,8 +35,8 @@ const SpellModal = () => {
       title={T.CHOOSE_SPELL}
       visible={showSpellModal}
       closable={false}
-      maskClosable={false}
       bodyStyle={style}
+      onCancel={cancelModal}
     >
       <img
         className={styles.spellImg}
