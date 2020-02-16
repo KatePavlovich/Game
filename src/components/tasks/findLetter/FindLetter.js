@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { wasTaskAnsweredAC, checkCorrectAnswerAC } from "../../../ac/taskAC";
+import {
+  wasTaskAnsweredAC,
+  checkCorrectAnswerAC,
+  chooseTaskAC
+} from "../../../ac/taskAC";
 import { withReduceLives } from "../../../helpers/reduceLivesHoc";
 import { Letter } from "./Letter";
 import { LifeBar } from "../../LifeBar";
@@ -10,8 +14,8 @@ import {
   generateProposedLetters,
   getRandomLetter
 } from "../../../helperFunctions";
-import { chooseTaskAC } from "../../../ac/taskAC";
 import { Battle } from "../../Battle";
+import * as C from "../../../constants";
 import classNames from "classnames";
 import styles from "./FindLetter.module.scss";
 
@@ -48,6 +52,15 @@ class FindLetter extends Component {
     this.props.chooseTaskAC();
   };
 
+  componentDidUpdate(prevProps) {
+    const { monsterLife, playerLife } = prevProps;
+    if (monsterLife === 0 || playerLife === 0) {
+      this.setState({
+        redirectToBattleScreen: true
+      });
+    }
+  }
+
   setIfAnswerWasCorrect = (correctAnswer, userAnswer) => {
     this.props.checkCorrectAnswerAC(isAnswerCorrect(correctAnswer, userAnswer));
   };
@@ -68,7 +81,8 @@ class FindLetter extends Component {
       reduceMonsterLife,
       reducePlayerLife,
       monsterLife,
-      playerLife
+      playerLife,
+      choosedSpell
     } = this.props;
     const selectedValue = e.currentTarget.children[0].dataset.letter;
     if (isAnswerCorrect(letterToFind, selectedValue)) {
@@ -76,6 +90,9 @@ class FindLetter extends Component {
         validation: "correct"
       });
       reduceMonsterLife();
+      if (choosedSpell === C.HEALTH) {
+        this.props.showStaticAnimation();
+      }
       if (monsterLife !== 0 || playerLife !== 0) {
         this.timerHandle = setTimeout(() => {
           this.cleanQuestion();
@@ -85,16 +102,14 @@ class FindLetter extends Component {
       }
     } else {
       this.setState({ validation: "error" });
+      if (choosedSpell === C.ARMOR) {
+        this.props.showStaticAnimation();
+        return;
+      }
       reducePlayerLife();
-    }
-    if (monsterLife === 0 || playerLife === 0) {
-      this.setState({
-        redirectToBattleScreen: true
-      });
     }
     this.setIfAnswerWasCorrect(letterToFind, selectedValue);
     this.props.wasTaskAnsweredAC();
-    this.props.showStaticAnimation();
   };
 
   componentWillUnmount() {
@@ -148,7 +163,8 @@ class FindLetter extends Component {
 }
 
 const mapStateToProps = state => ({
-  wasTaskAnswered: state.tasks.wasTaskAnswered
+  wasTaskAnswered: state.tasks.wasTaskAnswered,
+  choosedSpell: state.spell.choosedSpell
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { chooseSpellAC } from "../../ac/spellAC";
+import { chooseSpellAC, resetSpell } from "../../ac/spellAC";
 import { closeModalAC } from "../../ac/spellModalAC";
 import { Modal } from "antd";
 import styles from "./SpellModal.module.scss";
@@ -21,6 +21,7 @@ const SpellModal = () => {
   };
   const cancelModal = () => {
     dispatch(closeModalAC());
+    dispatch(resetSpell());
   };
 
   const style = {

@@ -12,6 +12,7 @@ import { chooseTaskAC } from "../../../ac/taskAC";
 import { LifeBar } from "../../LifeBar";
 import * as C from "../../../constants";
 import * as S from "../../../constants/stringValues";
+import * as T from "../../../constants/translation";
 import styles from "./SimpleMath.module.scss";
 import { Battle } from "../../Battle";
 
@@ -77,6 +78,15 @@ class SimpleMath extends Component {
     this.setState({ userAnswer: e.target.value });
   };
 
+  componentDidUpdate(prevProps) {
+    const { monsterLife, playerLife } = prevProps;
+    if (monsterLife === 0 || playerLife === 0) {
+      this.setState({
+        redirectToBattleScreen: true
+      });
+    }
+  }
+
   compareAnswers = e => {
     e.preventDefault();
     const { answer, userAnswer } = this.state;
@@ -84,28 +94,31 @@ class SimpleMath extends Component {
       reduceMonsterLife,
       reducePlayerLife,
       monsterLife,
-      playerLife
+      playerLife,
+      choosedSpell
     } = this.props;
     const isUserAnswerCorrect = isAnswerCorrect(answer, Number(userAnswer));
     if (isUserAnswerCorrect) {
       reduceMonsterLife();
-      if (monsterLife !== 0 || playerLife !== 0) {
+      if (choosedSpell === C.HEALTH) {
+        this.props.showStaticAnimation();
+      }
+      if (monsterLife > 0 || playerLife > 0) {
         this.timerHandle = setTimeout(() => {
           this.generateNewQuestion();
           this.timerHandle = 0;
         }, 1500);
       }
     } else {
+      if (choosedSpell === C.ARMOR) {
+        this.props.showStaticAnimation();
+        this.setState({ userAnswer: "" });
+        return;
+      }
       reducePlayerLife();
-    }
-    if (monsterLife === 0 || playerLife === 0) {
-      this.setState({
-        redirectToBattleScreen: true
-      });
     }
     this.props.checkCorrectAnswerAC(isUserAnswerCorrect);
     this.props.wasTaskAnsweredAC();
-    this.props.showStaticAnimation();
     this.setState({ userAnswer: "" });
   };
 
@@ -146,7 +159,7 @@ class SimpleMath extends Component {
               value={userAnswer}
               onChange={this.handleChange}
             />
-            <input className={styles.button} type="submit" value="Ответить" />
+            <input className={styles.button} type="submit" value={T.ANSWER} />
           </form>
         </div>
         <Battle />
@@ -157,7 +170,8 @@ class SimpleMath extends Component {
 
 const mapStateToProps = state => ({
   wasTaskAnswered: state.tasks.wasTaskAnswered,
-  level: state.tasks.level
+  level: state.tasks.level,
+  choosedSpell: state.spell.choosedSpell
 });
 
 const mapDispatchToProps = dispatch => ({

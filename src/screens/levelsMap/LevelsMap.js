@@ -13,6 +13,7 @@ import { addTilesAC, changeTilesThunk } from "../../ac/tilesAC";
 import { ExitLevelModal } from "../../components/ExitLevelModal";
 import { chooseTaskAC } from "../../ac/taskAC";
 import { closeTasksModalAC } from "../../ac/tasksModalAC";
+import { resetAnimation } from "../../ac/animationAC";
 import * as C from "../../constants";
 import styles from "./LevelsMap.module.scss";
 
@@ -27,6 +28,7 @@ class LevelsMap extends Component {
     this.props.addTilesAC(tiles);
     this.props.movePlayer([0, 0], 0, "0px 0px");
     this.props.chooseTaskAC();
+    this.props.resetAnimation();
 
     if (!this.props.isPlayerOnLevelExit) {
       this.props.makeMonsterNameThunk();
@@ -95,6 +97,9 @@ const mapDispatchToProps = dispatch => ({
   },
   closeTasksModalAC: () => {
     dispatch(closeTasksModalAC());
+  },
+  resetAnimation: () => {
+    dispatch(resetAnimation());
   }
 });
 

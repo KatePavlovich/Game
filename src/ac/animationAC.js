@@ -17,10 +17,11 @@ export const moveAnimation = (
   };
 };
 
-export const resetAnimation = positionY => {
+export const resetAnimation = (positionY = 0) => {
   return {
     type: C.RESET_ANIMATION,
-    position: [0, positionY]
+    position: [0, positionY],
+    spriteIMG: ""
   };
 };
 

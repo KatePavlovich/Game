@@ -10,3 +10,5 @@ export const WIND_SPELL = "Заклинание ветра";
 export const GREEN_FIRE_SPELL = "Заклинание огня";
 export const HEALTH_SPELL = "Восстановление здоровья";
 export const ARMOR_SPELL = "Защита";
+
+export const ANSWER = "Ответить";

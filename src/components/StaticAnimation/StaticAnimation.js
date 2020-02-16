@@ -4,6 +4,7 @@ import * as S from "../../constants/stringValues";
 import { connect } from "react-redux";
 import { getStaticAnimationSprite } from "../../helpers/getStaticAnimationSprite";
 import { showStaticAnimation } from "../../ac/animationAC";
+import { resetSpell } from "../../ac/spellAC";
 import styles from "./StaticAnimation.module.scss";
 
 class StaticAnimation extends PureComponent {
@@ -19,6 +20,32 @@ class StaticAnimation extends PureComponent {
     spriteLength: ""
   };
 
+  prepareAndPlayAnimation = choosedSpell => {
+    const {
+      top,
+      left,
+      width,
+      height,
+      background,
+      backgroundPositionY,
+      spriteLength
+    } = getStaticAnimationSprite(choosedSpell);
+
+    this.setState({
+      top,
+      left,
+      width,
+      height,
+      background,
+      spriteLocation: `-${width *
+        this.state.walkIndex}px -${backgroundPositionY}px`,
+      spriteLength,
+      backgroundPositionY
+    });
+
+    this.timerHandle = setInterval(this.makeAnimation, 100);
+  };
+
   makeAnimation = () => {
     const { spriteLength, backgroundPositionY, width, walkIndex } = this.state;
 
@@ -32,37 +59,16 @@ class StaticAnimation extends PureComponent {
   stopAnimation = () => {
     clearInterval(this.timerHandle);
     this.props.showStaticAnimationFunc();
+    this.props.resetSpell();
   };
 
   componentDidUpdate(prevProps) {
     const { showStaticAnimation, choosedSpell } = prevProps;
     if (
       this.props.showStaticAnimation !== showStaticAnimation &&
-      (choosedSpell === C.HEALTH || choosedSpell === C.ARMOR)
+      this.props.showStaticAnimation === true
     ) {
-      const {
-        top,
-        left,
-        width,
-        height,
-        background,
-        backgroundPositionY,
-        spriteLength
-      } = getStaticAnimationSprite(choosedSpell);
-
-      this.setState({
-        top,
-        left,
-        width,
-        height,
-        background,
-        spriteLocation: `-${width *
-          this.state.walkIndex}px -${backgroundPositionY}px`,
-        spriteLength,
-        backgroundPositionY
-      });
-
-      this.timerHandle = setInterval(this.makeAnimation, 100);
+      this.prepareAndPlayAnimation(choosedSpell);
     }
   }
 
@@ -92,12 +98,16 @@ class StaticAnimation extends PureComponent {
 
 const mapStateToProps = state => ({
   choosedSpell: state.spell.choosedSpell,
-  showStaticAnimation: state.animation.showStaticAnimation
+  showStaticAnimation: state.animation.showStaticAnimation,
+  wasAnswerCorrect: state.tasks.wasAnswerCorrect
 });
 
 const mapDispatchToProps = dispatch => ({
   showStaticAnimationFunc: () => {
     dispatch(showStaticAnimation());
+  },
+  resetSpell: () => {
+    dispatch(resetSpell());
   }
 });
 
