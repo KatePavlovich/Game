@@ -5,7 +5,11 @@ import { Monster } from "../../components/Monster";
 import { Map } from "../../components/Map";
 import { TasksScreen } from "../TasksScreen";
 import { movePlayer } from "../../ac/playerAC";
-import { makeMonsterNameThunk, makeNewMonster } from "../../ac/monsterAC";
+import {
+  makeMonsterNameThunk,
+  makeNewMonster,
+  setMonsterPositionOnMap
+} from "../../ac/monsterAC";
 import { Score } from "../Score";
 import { tiles } from "../../components/data/tiles.js";
 import { LifeBar } from "../../components/LifeBar";
@@ -26,9 +30,14 @@ class LevelsMap extends Component {
 
   componentDidMount() {
     this.props.addTilesAC(tiles);
-    this.props.movePlayer([0, 0], 0, "0px 0px");
+    this.props.movePlayer(
+      C.BASIC_PLAYER_POSITION,
+      C.BASIC_WALKINDEX,
+      C.BASIC_SPRITE_LOCATION
+    );
     this.props.chooseTaskAC();
     this.props.resetAnimation();
+    this.props.setMonsterPositionOnMap();
 
     if (!this.props.isPlayerOnLevelExit) {
       this.props.makeMonsterNameThunk();
@@ -100,6 +109,9 @@ const mapDispatchToProps = dispatch => ({
   },
   resetAnimation: () => {
     dispatch(resetAnimation());
+  },
+  setMonsterPositionOnMap: () => {
+    dispatch(setMonsterPositionOnMap());
   }
 });
 

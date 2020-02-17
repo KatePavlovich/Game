@@ -1,6 +1,9 @@
 import * as C from "../constants";
 import { adjective, creature, monsterName } from "../constants";
 import { getRandomValueFromArray } from "../helperFunctions";
+import { countMonsterPositionOnMap } from "../helpers/countMonsterPositionOnMap";
+import { countMonsterPositionInPx } from "../helpers/countMonsterPositionInPx";
+import store from "../store";
 
 const getMonsterNameAC = monsterName => {
   return {
@@ -36,5 +39,15 @@ export const makeNewMonster = (monsterLife, monsterName) => {
     type: C.MAKE_NEW_MONSTER,
     monsterLife,
     monsterName
+  };
+};
+
+export const setMonsterPositionOnMap = () => {
+  const tiles = store.getState().map.tiles;
+  const monsterPositionOnMap = countMonsterPositionOnMap(tiles);
+  const positionInPx = countMonsterPositionInPx(monsterPositionOnMap);
+  return {
+    type: C.SET_MONSTER_POSITION_IN_PX,
+    positionInPx
   };
 };

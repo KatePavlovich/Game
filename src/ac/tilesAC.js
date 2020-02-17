@@ -1,16 +1,16 @@
-import { ADD_TILES, CHANGE_TILES } from "../constants";
+import * as C from "../constants";
 import store from "../store";
 
 export const addTilesAC = tiles => {
   return {
-    type: ADD_TILES,
+    type: C.ADD_TILES,
     tiles
   };
 };
 
 export const changeTilesAC = tiles => {
   return {
-    type: CHANGE_TILES,
+    type: C.CHANGE_TILES,
     tiles
   };
 };

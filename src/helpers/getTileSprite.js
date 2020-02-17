@@ -8,6 +8,7 @@ const getTileSprite = type => {
       return "prison";
     case 3:
       return "road-top";
+    case 13:
     case 4:
       return "road-bottom";
     case 5:

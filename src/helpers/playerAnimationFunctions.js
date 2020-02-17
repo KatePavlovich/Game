@@ -68,19 +68,10 @@ export const getWalkIndex = oldWalkIndex => {
   return oldWalkIndex >= 3 ? 0 : oldWalkIndex + 1;
 };
 
-const roundToTheNearestTen = num => Math.ceil(num / 10) * 10;
-
 export const hitMonster = (monsterPosition, newPos) => {
-  const [positionX, positionY] = monsterPosition;
-  const monsterPositionOnMapX = roundToTheNearestTen(
-    positionX - (window.screen.width - C.MAP_WIDTH) / 2 - C.MONSTER_SPRITE_WIDTH
-  );
-  const monsterPositionOnMapY = roundToTheNearestTen(
-    positionY + C.MONSTER_SPRITE_HEIGHT / 2
-  );
+  const [monsterPositionX, monsterPositionY] = monsterPosition;
   const [playerPositionX, playerPositionY] = newPos;
   return (
-    playerPositionX - C.SPRITE_BACKGROUND_SIZE >= monsterPositionOnMapX &&
-    playerPositionY >= monsterPositionOnMapY
+    playerPositionX >= monsterPositionX && playerPositionY >= monsterPositionY
   );
 };

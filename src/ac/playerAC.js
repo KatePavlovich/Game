@@ -62,7 +62,7 @@ export const movePlayer = (position, walkIndex, spriteLocation) => {
 
 export const movePlayerThunk = direction => dispatch => {
   const tiles = store.getState().map.tiles;
-  const monsterPosition = store.getState().monster.position;
+  const monsterPosition = store.getState().monster.positionInPx;
   const oldWalkIndex = store.getState().player.walkIndex;
   const walkIndex = F.getWalkIndex(oldWalkIndex);
   const oldPos = store.getState().player.position;

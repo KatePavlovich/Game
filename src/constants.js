@@ -11,11 +11,13 @@ export const SET_PLAYER_ON_LEVEL_START = "SET_PLAYER_ON_LEVEL_START";
 export const RESET_PLAYER_POSITION = "RESET_PLAYER_POSITION";
 export const ADD_TILES = "ADD_TILES";
 export const CHANGE_TILES = "CHANGE_TILES";
+export const SET_MONSTER_POSITION_IN_PX = "SET_MONSTER_POSITION_IN_PX";
 export const TOGGLE_SOUND = "TOGGLE_SOUND";
 
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
+export const ENEMY_ON_MAP = 13;
 export const MAX_PLAYER_LIFE = 100;
 export const BASIC_PLAYER_POSITION = [0, 0];
 
