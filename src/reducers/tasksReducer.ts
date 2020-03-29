@@ -8,7 +8,9 @@ const initialState = {
   showTasksModal: false
 };
 
-const tasksReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const tasksReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case C.CHOOSE_TASK: {
       return {

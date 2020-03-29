@@ -11,7 +11,7 @@ import {
   setMonsterPositionOnMap
 } from "../../ac/monsterAC";
 import { Score } from "../Score";
-import { tiles } from "../../components/data/tiles.js";
+import { tiles } from "../../components/data/tiles.tsx";
 import { LifeBar } from "../../components/LifeBar";
 import { addTilesAC, changeTilesThunk } from "../../ac/tilesAC";
 import { ExitLevelModal } from "../../components/ExitLevelModal";
@@ -55,7 +55,7 @@ class LevelsMap extends Component {
 
   nextLevel = () => {
     this.state.bangSound.play();
-    this.props.dispatch(changeTilesThunk());
+    //this.props.dispatch(changeTilesThunk());
   };
 
   render() {

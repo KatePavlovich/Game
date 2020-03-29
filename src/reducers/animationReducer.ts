@@ -1,3 +1,5 @@
+import * as C from "../constants";
+
 const initialState = {
   position: [0, 0],
   spriteLocation: "0px 0px",
@@ -7,15 +9,20 @@ const initialState = {
   showStaticAnimation: false
 };
 
-const animationReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const animationReducer = (
+  state = initialState,
+  action: any
+): InitialStateType => {
   switch (action.type) {
-    case "GET_ANIMATION_INITIAL_POSITION": {
+    case C.GET_ANIMATION_INITIAL_POSITION: {
       return {
         ...state,
         position: [...action.position]
       };
     }
-    case "MOVE_ANIMATION": {
+    case C.MOVE_ANIMATION: {
       return {
         ...state,
         position: [...action.position],
@@ -25,7 +32,7 @@ const animationReducer = (state = initialState, action) => {
         showAnimation: true
       };
     }
-    case "RESET_ANIMATION": {
+    case C.RESET_ANIMATION: {
       return {
         ...state,
         position: [...action.position],
@@ -34,7 +41,7 @@ const animationReducer = (state = initialState, action) => {
         showAnimation: false
       };
     }
-    case "SHOW_STATIC_ANIMATION": {
+    case C.SHOW_STATIC_ANIMATION: {
       return {
         ...state,
         showStaticAnimation: !state.showStaticAnimation

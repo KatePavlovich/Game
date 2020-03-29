@@ -1,2 +1,2 @@
-import Monster from "./Monster";
+import Monster from "./Monster.tsx";
 export { Monster };

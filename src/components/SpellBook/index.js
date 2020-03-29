@@ -1,2 +1,2 @@
-import { SpellBook } from "./SpellBook";
+import { SpellBook } from "./SpellBook.tsx";
 export { SpellBook };

@@ -1,7 +1,13 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
 
-const ActiveLink = ({ label, to, activeOnlyWhenExact }) => {
+type ActiveLinkProps = {
+  label: string;
+  to: string;
+  activeOnlyWhenExact: boolean;
+};
+
+const ActiveLink = ({ label, to, activeOnlyWhenExact }: ActiveLinkProps) => {
   return (
     <Route
       path={to}

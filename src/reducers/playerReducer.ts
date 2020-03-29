@@ -12,7 +12,9 @@ const initialState = {
   shouldPlayHealthAnimation: false
 };
 
-const playerReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const playerReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case C.LOGIN: {
       return { ...state, isLoggedIn: true };

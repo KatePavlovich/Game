@@ -3,10 +3,52 @@ import { connect } from "react-redux";
 import { setPlayerOnLevelStart, movePlayer } from "../../ac/playerAC";
 import { makeMonsterNameThunk, makeNewMonster } from "../../ac/monsterAC";
 import { addTilesAC } from "../../ac/tilesAC";
-import { tiles } from "../data/tiles.js";
+import { tiles } from "../data/tiles";
 import { Modal } from "antd";
 import { Link } from "react-router-dom";
 import styles from "./ExitLevelModal.module.scss";
+import { AppStateType } from "../../reducers";
+
+type mapStateToPropsTypes = {
+  isPlayerOnLevelExit: boolean;
+};
+
+type mapDispatchToPropsTypes = {
+  setPlayerOnLevelStart: () => void;
+  addTiles: (tiles: number[][]) => void;
+  movePlayer: (
+    position: number[],
+    walkIndex: number,
+    spriteLOcation: string
+  ) => {
+    type: String;
+    position: number[];
+    walkIndex: Number;
+    spriteLocation: String;
+  };
+  makeMonsterName: () => void;
+  makeNewMonster: (
+    monsterLife: Number,
+    monsterName: String
+  ) => {
+    type: String;
+    monsterLife: Number;
+    monsterName: String;
+  };
+};
+
+type ExitLevelModalProps = {
+  isPlayerOnLevelExit: boolean;
+  setPlayerOnLevelStart: () => void;
+  addTiles: (tiles: number[][]) => void;
+  movePlayer: (
+    position: number[],
+    walkIndex: number,
+    spriteLOcation: string
+  ) => void;
+  makeMonsterName: () => void;
+  makeNewMonster: () => void;
+};
 
 const ExitLevelModal = ({
   isPlayerOnLevelExit,
@@ -15,7 +57,7 @@ const ExitLevelModal = ({
   movePlayer,
   makeMonsterName,
   makeNewMonster
-}) => {
+}: ExitLevelModalProps) => {
   const startNewBattle = () => {
     addTiles(tiles);
     movePlayer([0, 0], 0, "0px 0px");
@@ -53,14 +95,14 @@ const ExitLevelModal = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType) => ({
   isPlayerOnLevelExit: state.player.isPlayerOnLevelExit
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: any) => ({
   setPlayerOnLevelStart: () => dispatch(setPlayerOnLevelStart()),
-  addTiles: tiles => dispatch(addTilesAC(tiles)),
-  movePlayer: (position, walkIndex, spriteLOcation) =>
+  addTiles: (tiles: number[][]) => dispatch(addTilesAC(tiles)),
+  movePlayer: (position: number[], walkIndex: number, spriteLOcation: string) =>
     dispatch(movePlayer(position, walkIndex, spriteLOcation)),
   makeMonsterName: () => dispatch(makeMonsterNameThunk()),
   makeNewMonster: () => dispatch(makeNewMonster())

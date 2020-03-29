@@ -1,2 +1,2 @@
-import { Score } from "./Score";
+import { Score } from "./Score.tsx";
 export { Score };

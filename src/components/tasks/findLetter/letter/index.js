@@ -1,3 +1,3 @@
-import { Letter } from "./Letter";
+import { Letter } from "./Letter.tsx";
 
 export { Letter };

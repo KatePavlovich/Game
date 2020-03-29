@@ -1,7 +1,18 @@
 import React, { Component } from "react";
+import * as C from "../../constants";
 import styles from "./SpellBook.module.scss";
 
-class SpellBook extends Component {
+type SpellBookProps = {
+  showModalSpell: any;
+};
+
+type SpellBookState = {
+  spriteLocation: string;
+  walkIndex: number;
+  timer: any;
+};
+
+class SpellBook extends Component<SpellBookProps, SpellBookState> {
   state = {
     spriteLocation: "0px 0px",
     walkIndex: 0,
@@ -9,22 +20,23 @@ class SpellBook extends Component {
   };
 
   startBookAnimation = () => {
+    const { walkIndex } = this.state;
     this.setState({
       timer: setInterval(() => {
         this.setState({
-          spriteLocation: `-${64 * this.state.walkIndex}px 0px`,
-          walkIndex: this.state.walkIndex >= 8 ? 0 : this.state.walkIndex + 1
+          spriteLocation: `-${C.SPELL_SPRITE_WIDTH * walkIndex}px 0px`,
+          walkIndex: walkIndex >= C.SPELL_SPRITE_LENGTH ? 0 : walkIndex + 1
         });
       }, 100)
     });
   };
 
   stopBookAnimation = () => {
-    this.setState({
+    this.setState(state => ({
       spriteLocation: "0px 0px",
       walkIndex: 0,
-      timer: clearInterval(this.state.timer)
-    });
+      timer: clearInterval(state.timer)
+    }));
   };
 
   render() {

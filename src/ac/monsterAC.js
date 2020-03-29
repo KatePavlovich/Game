@@ -3,7 +3,7 @@ import { adjective, creature, monsterName } from "../constants";
 import { getRandomValueFromArray } from "../helperFunctions";
 import { countMonsterPositionOnMap } from "../helpers/countMonsterPositionOnMap";
 import { countMonsterPositionInPx } from "../helpers/countMonsterPositionInPx";
-import store from "../store";
+import store from "../store.ts";
 
 const getMonsterNameAC = monsterName => {
   return {

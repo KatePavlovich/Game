@@ -7,7 +7,12 @@ const initialState = {
   positionInPx: [0, 0]
 };
 
-const monsterReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const monsterReducer = (
+  state = initialState,
+  action: any
+): InitialStateType => {
   switch (action.type) {
     case C.GET_MONSTER_NAME: {
       return {

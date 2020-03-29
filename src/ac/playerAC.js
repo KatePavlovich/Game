@@ -1,5 +1,5 @@
 import * as C from "../constants";
-import store from "../store";
+import store from "../store.ts";
 import * as F from "../helpers/playerAnimationFunctions";
 
 export const isLoggedIn = () => {

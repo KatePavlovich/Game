@@ -21,6 +21,9 @@ export const ENEMY_ON_MAP = 13;
 export const MAX_PLAYER_LIFE = 100;
 export const BASIC_PLAYER_POSITION = [0, 0];
 
+export const SPELL_SPRITE_WIDTH = 64;
+export const SPELL_SPRITE_LENGTH = 8;
+
 export const LIFE_TO_REDUCE_WITH_SPELL = 20;
 export const LIFE_TO_REDUCE_WITHOUT_SPELL = 10;
 export const SPRITE_SIZE = 67;

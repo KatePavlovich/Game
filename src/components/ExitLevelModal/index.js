@@ -1,2 +1,2 @@
-import ExitLevelModal from "./ExitLevelModal";
+import ExitLevelModal from "./ExitLevelModal.tsx";
 export { ExitLevelModal };

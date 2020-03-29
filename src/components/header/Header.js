@@ -8,7 +8,7 @@ import { ActiveLink } from "../ActiveLink";
 import { SpellModal } from "../modalSpell";
 import { SpellBook } from "../SpellBook";
 
-import store from "../../store";
+import store from "../../store.ts";
 import { withRouter } from "react-router";
 import * as C from "../../constants";
 import * as T from "../../constants/translation";

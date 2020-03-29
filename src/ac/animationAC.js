@@ -1,4 +1,4 @@
-import store from "../store";
+import store from "../store.ts";
 import * as C from "../constants";
 import { restorePlayerLife } from "./playerAC";
 

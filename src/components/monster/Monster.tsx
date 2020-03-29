@@ -1,15 +1,39 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, createRef } from "react";
 import * as C from "../../constants";
 import { connect } from "react-redux";
+import { AppStateType } from "../../reducers";
 import { makeMonsterNameThunk, getMonsterPosition } from "../../ac/monsterAC";
 import { setMonsterPosition } from "../../helpers/setMonsterPosition";
 import styles from "./Monster.module.scss";
 
-class Monster extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.monsterRef = React.createRef();
-  }
+type PropsType = {
+  map: string;
+  makeMonsterName: () => void;
+  getMonsterPosition: (position: number[]) => void;
+  choosedSpell: string;
+  monsterPosition: number[];
+  spellPosition: number[];
+};
+
+type StateType = {
+  spriteLocation: string;
+  walkIndex: number;
+  position: number[] | undefined;
+};
+
+// type mapStateToPropsTypes = {
+//   monsterLife: number;
+//   choosedSpell: string;
+//   monsterPosition: number[];
+//   spellPosition: number[];
+// };
+
+class Monster extends PureComponent<PropsType, StateType> {
+  private monsterRef = createRef<HTMLDivElement>();
+  private timerHandler: ReturnType<typeof setInterval> = setInterval(
+    () => "",
+    150
+  );
 
   state = {
     spriteLocation: C.BASIC_SPRITE_LOCATION,
@@ -33,22 +57,26 @@ class Monster extends PureComponent {
   };
 
   stopMonsterAnimation = () => {
-    clearInterval(this.timerHandle);
+    clearInterval(this.timerHandler);
     this.setState({
       spriteLocation: C.BASIC_SPRITE_LOCATION
     });
   };
 
   componentDidMount() {
+    const { makeMonsterName, getMonsterPosition } = this.props;
     this.setState({ position: setMonsterPosition(this.props.map) });
-    const { left, top } = this.monsterRef.current.getBoundingClientRect();
-    const position = [Math.round(left), Math.round(top)];
-
-    this.props.dispatch(makeMonsterNameThunk());
-    this.props.dispatch(getMonsterPosition(position));
+    let position = [0, 0];
+    const node = this.monsterRef.current;
+    if (node) {
+      const { left, top } = node.getBoundingClientRect();
+      position = [Math.round(left), Math.round(top)];
+    }
+    makeMonsterName();
+    getMonsterPosition(position);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: PropsType) {
     const { choosedSpell, monsterPosition, spellPosition } = this.props;
     if (
       prevProps.monsterPosition[0] - C.MONSTER_SPRITE_WIDTH / 2 <=
@@ -56,12 +84,12 @@ class Monster extends PureComponent {
       monsterPosition[0] > spellPosition[0] &&
       choosedSpell !== C.HEALTH
     ) {
-      this.timerHandle = setInterval(this.makeMonsterHurtAnimation, 150);
+      this.timerHandler = setInterval(this.makeMonsterHurtAnimation, 150);
     }
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerHandle);
+    clearInterval(this.timerHandler);
   }
 
   render() {
@@ -80,11 +108,17 @@ class Monster extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType) => ({
   monsterLife: state.monster.monsterLife,
   choosedSpell: state.spell.choosedSpell,
   monsterPosition: state.monster.position,
   spellPosition: state.animation.position
 });
 
-export default connect(mapStateToProps)(Monster);
+const mapDispatchToProps = (dispatch: any) => ({
+  getMonsterPosition: (position: number[]) =>
+    dispatch(getMonsterPosition(position)),
+  makeMonsterName: () => dispatch(makeMonsterNameThunk())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Monster);

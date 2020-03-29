@@ -1,2 +1,2 @@
-import { Battle } from "./Battle";
+import { Battle } from "./Battle.tsx";
 export { Battle };

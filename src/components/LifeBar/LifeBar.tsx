@@ -2,12 +2,21 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { ProgressBar } from "../ProgressBar";
 import styles from "./LifeBar.module.scss";
+import { AppStateType } from "../../reducers";
 
 const LifeBar = () => {
-  const playerLife = useSelector(state => state.player.playerLife);
-  const monsterLife = useSelector(state => state.monster.monsterLife);
-  const monsterName = useSelector(state => state.monster.monsterName);
-  const playerName = useSelector(state => state.player.playerName);
+  const playerLife = useSelector<AppStateType, number>(
+    state => state.player.playerLife
+  );
+  const monsterLife = useSelector<AppStateType, number>(
+    state => state.monster.monsterLife
+  );
+  const monsterName = useSelector<AppStateType, string>(
+    state => state.monster.monsterName
+  );
+  const playerName = useSelector<AppStateType, string>(
+    state => state.player.playerName
+  );
 
   return (
     <header className={styles.header}>

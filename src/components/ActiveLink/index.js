@@ -1,2 +1,2 @@
-import { ActiveLink } from "./ActiveLink";
+import { ActiveLink } from "./ActiveLink.tsx";
 export { ActiveLink };

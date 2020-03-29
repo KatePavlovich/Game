@@ -1,32 +1,38 @@
-const initialState = {
+import { InitialStateType, SpellType } from "../store/spell/types";
+import * as C from "../constants";
+
+const initialState: InitialStateType = {
   isSpellChoosen: false,
   choosedSpell: "",
   showSpellModal: false
 };
 
-const spellReducer = (state = initialState, action) => {
+const spellReducer = (
+  state = initialState,
+  action: SpellType
+): InitialStateType => {
   switch (action.type) {
-    case "CHOOSE_SPELL": {
+    case C.CHOOSE_SPELL: {
       return {
         ...state,
         isSpellChoosen: !state.isSpellChoosen,
         choosedSpell: action.choosedSpell
       };
     }
-    case "SHOW_SPELLMODAL": {
+    case C.SHOW_SPELLMODAL: {
       return {
         ...state,
         isSpellChoosen: false,
         showSpellModal: true
       };
     }
-    case "CLOSE_SPELLMODAL": {
+    case C.CLOSE_SPELLMODAL: {
       return {
         ...state,
         showSpellModal: false
       };
     }
-    case "RESET_SPELL": {
+    case C.RESET_SPELL: {
       return {
         ...state,
         isSpellChoosen: false,

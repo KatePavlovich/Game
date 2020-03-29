@@ -4,7 +4,11 @@ import { SPRITE_BACKGROUND_SIZE } from "../../constants";
 import classNames from "classnames";
 import styles from "./Map.module.scss";
 
-const MapTile = ({ tile }) => {
+type MapTileProps = {
+  tile: number;
+};
+
+const MapTile = ({ tile }: MapTileProps) => {
   return (
     <div
       className={classNames(styles.tile, styles[`${getTileSprite(tile)}`])}
