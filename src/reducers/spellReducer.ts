@@ -4,7 +4,7 @@ import * as C from "../constants";
 const initialState: InitialStateType = {
   isSpellChoosen: false,
   choosedSpell: "",
-  showSpellModal: false
+  showSpellModal: false,
 };
 
 const spellReducer = (
@@ -16,20 +16,20 @@ const spellReducer = (
       return {
         ...state,
         isSpellChoosen: !state.isSpellChoosen,
-        choosedSpell: action.choosedSpell
+        choosedSpell: action.choosedSpell,
       };
     }
     case C.SHOW_SPELLMODAL: {
       return {
         ...state,
         isSpellChoosen: false,
-        showSpellModal: true
+        showSpellModal: true,
       };
     }
     case C.CLOSE_SPELLMODAL: {
       return {
         ...state,
-        showSpellModal: false
+        showSpellModal: false,
       };
     }
     case C.RESET_SPELL: {
@@ -37,7 +37,7 @@ const spellReducer = (
         ...state,
         isSpellChoosen: false,
         choosedSpell: "",
-        showSpellModal: false
+        showSpellModal: false,
       };
     }
 

@@ -1,0 +1,42 @@
+@import "variables.scss";
+
+.taskScreen {
+  @include taskScreen;
+}
+
+.questionContainer {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.questionTitle {
+  margin: 0 0 2rem 1rem;
+}
+
+.question {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}
+
+.speechButton {
+  width: 60px;
+  height: 60px;
+  justify-self: end;
+}
+
+.answerVariant {
+  font-size: 6rem;
+}
+
+.correct.correct {
+  border-color: $green;
+}
+
+.error.error {
+  border-color: $red;
+}
+
+.questionLetter {
+  line-height: 10rem;
+}

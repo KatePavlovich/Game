@@ -17,10 +17,10 @@ class StaticAnimation extends PureComponent {
     height: "",
     background: "",
     backgroundPositionY: "",
-    spriteLength: ""
+    spriteLength: "",
   };
 
-  prepareAndPlayAnimation = choosedSpell => {
+  prepareAndPlayAnimation = async (choosedSpell) => {
     const {
       top,
       left,
@@ -28,8 +28,8 @@ class StaticAnimation extends PureComponent {
       height,
       background,
       backgroundPositionY,
-      spriteLength
-    } = getStaticAnimationSprite(choosedSpell);
+      spriteLength,
+    } = await getStaticAnimationSprite(choosedSpell);
 
     this.setState({
       top,
@@ -37,10 +37,11 @@ class StaticAnimation extends PureComponent {
       width,
       height,
       background,
-      spriteLocation: `-${width *
-        this.state.walkIndex}px -${backgroundPositionY}px`,
+      spriteLocation: `-${
+        width * this.state.walkIndex
+      }px -${backgroundPositionY}px`,
       spriteLength,
-      backgroundPositionY
+      backgroundPositionY,
     });
 
     this.timerHandle = setInterval(this.makeAnimation, 100);
@@ -52,7 +53,7 @@ class StaticAnimation extends PureComponent {
     if (walkIndex === spriteLength) this.stopAnimation();
     this.setState({
       spriteLocation: `-${width * walkIndex}px -${backgroundPositionY}px`,
-      walkIndex: walkIndex > spriteLength ? 0 : walkIndex + 1
+      walkIndex: walkIndex > spriteLength ? 0 : walkIndex + 1,
     });
   };
 
@@ -89,26 +90,26 @@ class StaticAnimation extends PureComponent {
           width: `${width}px`,
           height: `${height}px`,
           background,
-          display: showStaticAnimation ? S.BLOCK : S.NONE
+          display: showStaticAnimation ? S.BLOCK : S.NONE,
         }}
       />
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   choosedSpell: state.spell.choosedSpell,
   showStaticAnimation: state.animation.showStaticAnimation,
-  wasAnswerCorrect: state.tasks.wasAnswerCorrect
+  wasAnswerCorrect: state.tasks.wasAnswerCorrect,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   showStaticAnimationFunc: () => {
     dispatch(showStaticAnimation());
   },
   resetSpell: () => {
     dispatch(resetSpell());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StaticAnimation);

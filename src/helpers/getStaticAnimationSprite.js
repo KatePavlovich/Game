@@ -1,6 +1,6 @@
 import * as C from "../constants";
 
-const getStaticAnimationSprite = spell => {
+const getStaticAnimationSprite = (spell) => {
   if (!spell) return;
   switch (spell) {
     case C.HEALTH:
@@ -11,7 +11,7 @@ const getStaticAnimationSprite = spell => {
         height: C.HEALTH_SPRITE_HEIGHT,
         background: `url("/tiles/health-sprite.png") no-repeat`,
         backgroundPositionY: 0,
-        spriteLength: C.HEALTH_SPRITE_LENGTH
+        spriteLength: C.HEALTH_SPRITE_LENGTH,
       };
     case C.ARMOR:
       return {
@@ -21,7 +21,7 @@ const getStaticAnimationSprite = spell => {
         height: C.ARMOR_SPRITE_HEIGHT,
         background: `url("/tiles/health-sprite.png") no-repeat`,
         backgroundPositionY: C.ARMOR_SPRITE_POSITION_Y,
-        spriteLength: C.ARMOR_SPRITE_LENGTH
+        spriteLength: C.ARMOR_SPRITE_LENGTH,
       };
     default:
   }

@@ -9,10 +9,10 @@ import classNames from "classnames";
 import styles from "./TasksScreen.module.scss";
 
 const TasksScreen = () => {
-  const showModal = useSelector(state => state.tasks.showTasksModal);
+  const showModal = useSelector((state) => state.tasks.showTasksModal);
   const dispatch = useDispatch();
 
-  const handleClick = level => {
+  const handleClick = (level) => {
     dispatch(closeTasksModalAC());
     dispatch(setTaskLevelAC(level));
   };
@@ -59,6 +59,14 @@ const TasksScreen = () => {
       >
         <div className={classNames(styles.imgContainer, styles.alphabet)}></div>
         <span className={styles.title}>Find letter</span>
+      </Link>
+      <Link
+        className={styles.link}
+        onClick={() => dispatch(closeTasksModalAC())}
+        to="/tasks/nameLetter"
+      >
+        <div className={classNames(styles.imgContainer, styles.alphabet)}></div>
+        <span className={styles.title}>Name letter</span>
       </Link>
     </Modal>
   );

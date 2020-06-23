@@ -7,6 +7,7 @@ import { Home } from "./screens/Home";
 import { LevelsMap } from "./screens/LevelsMap";
 import { SimpleMath } from "./components/tasks/simpleMath";
 import { FindLetter } from "./components/tasks/findLetter";
+import { NameLetter } from "./components/tasks/nameLetter";
 import { Header } from "./components/Header";
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path="/levelsMap" component={LevelsMap} />
           <Route path="/tasks/simpleMath" component={SimpleMath} />
           <Route path="/tasks/findLetter" component={FindLetter} />
+          <Route path="/tasks/nameLetter" component={NameLetter} />
         </div>
       </BrowserRouter>
     );
